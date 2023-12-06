@@ -72,6 +72,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'turixcam.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = ['http://turixcam.com', 'https://turixcam.com']
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
