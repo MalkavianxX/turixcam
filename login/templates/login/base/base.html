@@ -179,15 +179,15 @@
                 <div class="navbar-collapse collapse" id="navbarCollapse">
                     <ul class="navbar-nav navbar-nav-scroll nav-pills-primary-soft text-center ms-auto p-2 p-xl-0">
                         <!-- Nav item Hotel -->
-                        <li class="nav-item"> <a class="nav-link active" href="index.html"><i
+                        <li class="nav-item"> <a class="nav-link active" href="{% url 'render_init_page' %}"><i
                                     class="fa-solid fa-hotel me-2"></i>Experiencias</a> </li>
 
                         <!-- Nav item Flight -->
-                        <li class="nav-item"> <a class="nav-link" href="index-flight.html"><i
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'render_init_page' %}"><i
                                     class="fa-solid fa-plane me-2"></i>Explora</a> </li>
 
                         <!-- Nav item Tour -->
-                        <li class="nav-item"> <a class="nav-link" href="index-tour.html"><i
+                        <li class="nav-item"> <a class="nav-link" href="{% url 'render_init_page' %}"><i
                                     class="fa-solid fa-globe-americas me-2"></i>Eventos</a> </li>
 
                     </ul>
@@ -493,29 +493,29 @@ Footer END -->
         <ul class="navbar-nav">
             <!-- Nav item Home -->
             <li class="nav-item">
-                <a class="nav-link active" href="index.html"><i class="bi bi-house-door fa-fw"></i>
-                    <span class="mb-0 nav-text">Home</span>
+                <a class="nav-link active" href="{% url 'render_init_page' %}"><i class="bi bi-house-door fa-fw"></i>
+                    <span class="mb-0 nav-text">Inicio</span>
                 </a>
             </li>
 
             <!-- Nav item My Trips -->
             <li class="nav-item">
-                <a class="nav-link" href="account-bookings.html"><i class="bi bi-briefcase fa-fw"></i>
-                    <span class="mb-0 nav-text">My Trips</span>
+                <a class="nav-link" href="{% url 'render_detalle_lugar' %}"><i class="bi bi-briefcase fa-fw"></i>
+                    <span class="mb-0 nav-text">Mis camaras</span>
                 </a>
             </li>
 
             <!-- Nav item Offer -->
             <li class="nav-item">
-                <a class="nav-link" href="offer-detail.html"><i class="bi bi-percent fa-fw"></i>
-                    <span class="mb-0 nav-text">Offer</span>
+                <a class="nav-link" href="#"><i class="bi bi-percent fa-fw"></i>
+                    <span class="mb-0 nav-text">Ofertas</span>
                 </a>
             </li>
 
             <!-- Nav item Account -->
             <li class="nav-item">
-                <a class="nav-link" href="account-profile.html"><i class="bi bi-person-circle fa-fw"></i>
-                    <span class="mb-0 nav-text">Account</span>
+                <a class="nav-link" href="#"><i class="bi bi-person-circle fa-fw"></i>
+                    <span class="mb-0 nav-text">Mi cuenta</span>
                 </a>
             </li>
         </ul>
