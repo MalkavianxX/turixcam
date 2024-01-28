@@ -1,0 +1,327 @@
+{% extends 'login/base/base.html' %}{% load static %}
+
+{% block title %}
+<title>Turixcam - Camaras en vivo </title>
+{% endblock %}
+
+{% block description %}
+<!-- Meta Tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Webestica.com">
+<meta name="description" content="Turixcam - Camras en vivo">
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+    body {
+        background-image: url("{% static 'login/assets/images/fondos/zacatlan.jpg' %}");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+    }
+    header {
+        background-color: rgba(0, 0, 0, 0.164) !important;
+    }
+    .titulo-trans {
+
+        background: -webkit-linear-gradient(left, lightgreen, skyblue, orange, red);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: start;
+        font-size: 5rem;
+    }
+    .nav-control-letra{
+        color: white !important;
+    }
+    .navbar-mobile-control{
+        background-color: rgba(0, 0, 0, 0.349) !important;
+        color: white !important;
+    }
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+</style>
+<main>
+
+
+	<!-- =======================
+	Search START -->
+	<section class="py-3 py-sm-0">
+		<div class="container">
+            <h1 class="titulo-trans text-center">Vamos a turixtear</h1>
+			<!-- Offcanvas button for search -->
+			<button class="btn btn-outline-light d-sm-none w-100 mb-0 text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditsearch" aria-controls="offcanvasEditsearch"><i class="bi bi-pencil-square me-2"></i>Abrir buscador</button>
+	
+			<!-- Search with offcanvas START -->
+			<div class="offcanvas-sm offcanvas-top " tabindex="-1" id="offcanvasEditsearch" aria-labelledby="offcanvasEditsearchLabel">
+				<div class="offcanvas-header">
+					<h5 class="offcanvas-title" id="offcanvasEditsearchLabel">Buscador de lugares</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasEditsearch" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body p-2">
+					<div class=" p-4 rounded w-100">
+					<!-- Booking from START -->
+					<form class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4" style="background-color: rgba(0, 0, 0, 0.512) !important;">
+						<div class="row g-4 align-items-center">
+							<!-- Location -->
+							<div class="col-lg-4">
+								<div class="form-control-border form-control-transparent form-fs-md d-flex">
+									<!-- Icon -->
+									<i class="text-success bi bi-geo-alt fs-3 me-2 mt-2"></i>
+									<!-- Select input -->
+									<div class="flex-grow-1">
+										<label class="form-label">Estado</label>
+										<select class="form-select js-choice" data-search-enabled="true">
+											<option selected value="">Todos</option>
+                                            <option  class="" value="">Hidalgo</option>
+                                            <option  class="" value="">Puebla</option>
+
+											
+										</select>
+									</div>
+								</div>
+							</div>
+						<!-- Location -->
+						<div class="col-lg-4">
+							<div class="form-control-border form-control-transparent form-fs-md d-flex">
+								<!-- Icon -->
+								<i class="bi text-info bi-geo-alt fs-3 me-2 mt-2"></i>
+								<!-- Select input -->
+								<div class="flex-grow-1">
+									<label class="form-label">Municipio</label>
+									<select class="form-select js-choice " style="background-color: black !important;" data-search-enabled="true">
+										<option selected class="" value="">Todos</option>
+                                        <option  class="" value="">Huasca de Ocampo</option>
+                                        <option  class="" value="">Huauchinango</option>
+                                        <option  class="" value="">Zacatlan</option>
+
+					
+									</select>
+								</div>
+							</div>
+						</div>
+					
+	
+						<!-- Location -->
+						<div class="col-lg-4">
+							<div class="form-control-border form-control-transparent form-fs-md d-flex">
+								<!-- Icon -->
+								<i class="text-danger bi bi-geo-alt fs-3 me-2 mt-2"></i>
+								<!-- Select input -->
+								<div class="flex-grow-1">
+									<label class="form-label">Lugares</label>
+									<select class="form-select js-choice" data-search-enabled="true">
+										<option selected value="">Todos</option>
+                                        <option  class="" value="">Cascadas </option>
+                                        <option  class="" value="">Puente colgante </option>
+                                        <option  class="" value="">Centro </option>
+
+									</select>
+								</div>
+							</div>
+						</div>
+						</div>
+						<!-- Button -->
+						<div class="btn-position-md-middle">
+							<a data-bs-dismiss="offcanvas" data-bs-target="#offcanvasEditsearch" aria-label="Close" class="icon-lg btn btn-round btn-outline-warning mb-0" href="#"><i class="text-light bi bi-search fa-fw"></i></a>
+						</div>
+					</form>
+					<!-- Booking from END -->
+					</div>
+				</div> 
+			</div>
+			<!-- Search with offcanvas END -->
+		</div>
+	</section>
+	<!-- =======================
+	Search END -->
+
+    <section class="pt-0 pt-md-5 mt-xl-0 mt-5">
+        <div class="container-fluid" style="background-color: rgba(0, 0, 0, 0.512) !important;">
+            <!-- Title -->
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h2 class="mb-0"></h2>
+                </div>
+            </div>
+    
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="card card-img-scale overflow-hidden bg-transparent">
+                        <div class="card-img-scale-wrapper rounded-3">
+                            <!-- Card Image -->
+                            <img src="https://turixcam-images.b-cdn.net/Huasca/huasca.jpg" class="card-img" alt="">
+                            <!-- Overlay -->
+                            <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
+                                <!-- Card overlay top -->
+                                <div class="d-flex justify-content-between fs-5">
+                                    <span class="badge text-bg-dark">Hidalgo</span>
+                                    <span class="badge text-bg-white "><i class="fa-solid fa-sun text-warning me-2"></i>25°</span>
+                                </div>
+                                <!-- Card overlay bottom -->
+                                <div class="w-100 mt-auto">
+                                    <!-- Card category -->
+                                    <span class="badge text-bg-white fs-5 ">Huasca de Ocampo</span>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <!-- Card body -->
+                        <div class="card-body px-2">
+                            <!-- Title -->
+                            <h5 class="card-title text-center"><a href="{% url 'view_detail_camara' %}" class="stretched-link">Cascada colgante</a></h5>
+                            <!-- Content -->
+            
+                        </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                                <!-- Card START -->
+                                <div class="card card-img-scale overflow-hidden bg-transparent">
+                                    <div class="card-img-scale-wrapper rounded-3">
+                                        <!-- Card Image -->
+                                        <img src="https://turixcam-images.b-cdn.net/HUAUCHINANGO.png" class="card-img" alt="">
+                                        <!-- Overlay -->
+                                        <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
+                                            <!-- Card overlay top -->
+                                            <div class="d-flex justify-content-between fs-5">
+                                                <span class="badge text-bg-dark">Puebla</span>
+                                                <span class="badge text-bg-white"><i class="fa-solid fa-sun text-warning me-2"></i></i>25°</span>
+                                            </div>
+                                            <!-- Card overlay bottom -->
+                                            <div class="w-100 mt-auto">
+                                                <!-- Card category -->
+                                                <span class="badge text-bg-white fs-5">Zacatlan </span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    
+                                    <!-- Card body -->
+                                    <div class="card-body px-2">
+                                        <!-- Title -->
+                                        <h4 class="card-title text-center"><a href="{% url 'view_detail_camara' %}" class="stretched-link">Reserva natural cascada</a></h4>
+            
+                                    </div>
+                                </div>
+                                <!-- Card END -->
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="card card-img-scale overflow-hidden bg-transparent">
+                        <div class="card-img-scale-wrapper rounded-3">
+                            <!-- Card Image -->
+                            <img src="https://turixcam-images.b-cdn.net/Huauchinango/huachinango.png" style="filter: brightness(0.80);" class="card-img" alt="">
+                            <!-- Overlay -->
+                            <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
+                                <!-- Card overlay top -->
+                                <div class="d-flex justify-content-between fs-5">
+                                    <span class="badge text-bg-dark">Puebla</span>
+                                    <span class="badge text-bg-white"><i class="fa-solid fa-cloud-rain text-info me-2"></i>15°</span>
+                                </div>
+                                <!-- Card overlay bottom -->
+                                <div class="w-100 mt-auto">
+                                    <!-- Card category -->
+                                    <span class="badge text-bg-white fs-5">Huauchinango</span>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <!-- Card body -->
+                        <div class="card-body px-2">
+                            <!-- Title -->
+                            <h5 class="card-title text-center"><a href="{% url 'view_detail_camara' %}" class="stretched-link">Huauchinango centro</a></h5>
+                            <!-- Content -->
+            
+                        </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                                <!-- Card START -->
+                                <div class="card card-img-scale overflow-hidden bg-transparent">
+                                    <div class="card-img-scale-wrapper rounded-3">
+                                        <!-- Card Image -->
+                                        <img src="https://turixcam-images.b-cdn.net/Valqurico/valquirico.jpg" class="card-img" alt="">
+                                        <!-- Overlay -->
+                                        <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
+                                            <!-- Card overlay top -->
+                                            <div class="d-flex justify-content-between fs-5">
+                                                <span class="badge text-bg-dark">Puebla</span>
+                                                <span class="badge text-bg-white"><i class="fa-solid fa-cloud text-info me-2"></i>19°</span>
+                                            </div>
+                                            <!-- Card overlay bottom -->
+                                            <div class="w-100 mt-auto">
+                                                <!-- Card category -->
+                                                <span class="badge text-bg-white fs-5">Valquirico</span>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    
+                                    <!-- Card body -->
+                                    <div class="card-body px-2">
+                                        <!-- Title -->
+                                        <h5 class="card-title text-center "><a href="{% url 'view_detail_camara' %}" class="stretched-link">Valquirico centro</a></h5>
+                                        <!-- Content -->
+                         
+                                    </div>
+                                </div>
+                                <!-- Card END -->
+                  </div>
+            
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            
+        </div>
+          <!-- Swiper -->
+
+    </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    breakpoints: {
+        640: {
+            slidesPerView: 1,
+            spaceBetween: 20
+        },
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 30
+        }
+    }
+});
+
+
+
+</script>
+
+{% endblock %}

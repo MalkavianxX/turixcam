@@ -104,23 +104,15 @@
     {% block header %}
 
     <!-- Header START -->
-    <header class="navbar-light header-sticky">
+    <header class="navbar-light header-sticky nav-control ">
         <!-- Logo Nav START -->
-        <nav class="navbar navbar-expand-xl">
+        <nav class="navbar navbar-expand-xl ">
             <div class="container">
-                <!-- Logo START -->
-                <a class="navbar-brand" href="{% url 'render_init_page' %}">
-                    <img class="light-mode-item navbar-brand-item" src="{% static 'login/assets/images/logo.png' %} "
-                        alt="logo">
-                    <img class="dark-mode-item navbar-brand-item"
-                        src="{% static 'login/assets/images/logo-light.png' %} " alt="logo">
-                </a>
-                <!-- Logo END -->
+
 
                 <!-- Responsive navbar toggler -->
-                <button class="navbar-toggler ms-auto ms-sm-0 p-0 p-sm-2" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-animation">
                         <span></span>
                         <span></span>
@@ -128,68 +120,41 @@
                     </span>
                     <span class="d-none d-sm-inline-block small">Menu</span>
                 </button>
+                <!-- Logo START -->
+                <a class="navbar-brand" href="{% url 'render_init_page' %}">
+                    <img class="light-mode-item " width="60px" src="{% static 'login/assets/images/logox.png' %} "
+                        alt="logo">
+                    <img class="dark-mode-item navbar-brand-item"
+                        src="{% static 'login/assets/images/logo-light.png' %} " alt="logo">
+                </a>
+                <!-- Logo END -->
 
-                <!-- Responsive category toggler -->
-                <button class="navbar-toggler ms-sm-auto mx-3 me-md-0 p-0 p-sm-2" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#navbarCategoryCollapse"
-                    aria-controls="navbarCategoryCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="bi bi-grid-3x3-gap-fill fa-fw"></i><span
-                        class="d-none d-sm-inline-block small">Secciones</span>
-                </button>
 
                 <!-- Main navbar START -->
                 <div class="navbar-collapse collapse" id="navbarCollapse">
                     <ul class="navbar-nav navbar-nav-scroll me-auto">
-
-             
-
                         <!-- Nav item Pages -->
-                        <li class="nav-item dropdown" >
-                            <a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">Buscar destinos</a>
-                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
-
-                                <li> <a class="dropdown-item" href="#form_buscar_destino">Buscar aquí</a></li>
-       
-                            </ul>
-                        </li>
-
-                        <!-- Nav item Account -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="accounntMenu" data-bs-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">Mejores lugares</a>
-                            <ul class="dropdown-menu" aria-labelledby="accounntMenu">
-                                <!-- Dropdown submenu -->
-                                <li> <a class="dropdown-item" href="#">Preferidos</a> </li>
-                                <li> <a class="dropdown-item" href="#">Recien agregados</a> </li>
-
-                   
-               
-
-                                <li> <a class="dropdown-item" href="#">Master Admin</a> </li>
+                            <a class="nav-link dropdown-toggle nav-control-letra" href="#" id="pagesMenu"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Buscar destinos</a>
+                            <ul class="dropdown-menu" aria-labelledby="pagesMenu">
+                                <li> <a class="dropdown-item " href="{% url 'view_init_page' %}">Buscar aquí</a></li>
                             </ul>
                         </li>
-
-
                     </ul>
                 </div>
                 <!-- Main navbar END -->
-
                 <!-- Nav category menu START -->
                 <div class="navbar-collapse collapse" id="navbarCollapse">
                     <ul class="navbar-nav navbar-nav-scroll nav-pills-primary-soft text-center ms-auto p-2 p-xl-0">
                         <!-- Nav item Hotel -->
-                        <li class="nav-item"> <a class="nav-link active" href="{% url 'render_init_page' %}"><i
-                                    class="fa-solid fa-hotel me-2"></i>Experiencias</a> </li>
+                        <li class="nav-item"> <a class="nav-link active nav-control-letra"
+                                href="{% url 'render_init_page' %}"><i
+                                    class="fa-solid fa-location-dot me-2"></i>Lugares</a> </li>
 
                         <!-- Nav item Flight -->
-                        <li class="nav-item"> <a class="nav-link" href="{% url 'render_init_page' %}"><i
-                                    class="fa-solid fa-plane me-2"></i>Explora</a> </li>
-
-                        <!-- Nav item Tour -->
-                        <li class="nav-item"> <a class="nav-link" href="{% url 'render_init_page' %}"><i
-                                    class="fa-solid fa-globe-americas me-2"></i>Eventos</a> </li>
-
+                        <li class="nav-item"> <a class="nav-link nav-control-letra" href="{% url 'view_init_page' %}"><i
+                                    class="fa-solid fa-camera me-2"></i>Camaras</a> </li>
                     </ul>
                 </div>
                 <!-- Nav category menu END -->
@@ -200,7 +165,8 @@
                     <!-- Notification dropdown START -->
                     <li class="nav-item dropdown ms-0 ms-md-3">
                         <!-- Notification button -->
-                        <a class="nav-notification btn btn-light p-0 mb-0" href="#" role="button"
+                        <a style="color: black;background-color: transparent;"
+                            class="nav-notification btn btn-dark nav-control-letra p-0 mb-0" href="#" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                             <i class="bi bi-bell fa-fw"></i>
                         </a>
@@ -227,14 +193,15 @@
                                             <a href="#"
                                                 class="list-group-item list-group-item-action rounded notif-unread border-0 mb-1 p-3">
                                                 <h6 class="mb-2">Muy pronto la ignauguracion ✈️</h6>
-                                                <p class="mb-0 small">No te pierdas nuestra gran apertura con camaras en todo el país</p>
+                                                <p class="mb-0 small">No te pierdas nuestra gran apertura con camaras en
+                                                    todo el país</p>
                                             </a>
                                         </li>
                                         <!-- Notification item -->
                                         <li>
                                             <a href="#"
                                                 class="list-group-item list-group-item-action rounded border-0 mb-1 p-3">
-                                                <h6 class="mb-2">Muy pronto, carnval de Huauchinango 
+                                                <h6 class="mb-2">Muy pronto, carnval de Huauchinango
                                                 </h6>
                                                 <span>10 de febrero al 14 de febrero</span>
                                             </a>
@@ -251,13 +218,14 @@
 
                     <!-- Profile dropdown START -->
                     <li class="nav-item ms-3 dropdown">
-                        <!-- Avatar -->
-                        <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button"
-                            data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img class="avatar-img rounded-2" src="{% static 'login/assets/images/logo-icon.svg' %} "
-                                alt="avatar">
+                        <a id="profileDropdown" style="color: black;background-color: transparent;"
+                            class="nav-notification nav-control-letra btn btn-dark p-0 mb-0" href="#" role="button"
+                            data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false"
+                            data-bs-auto-close="outside">
+                            <i class="fa-solid fa-user"></i>
                         </a>
+                        <!-- Avatar -->
+
 
                         <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
                             aria-labelledby="profileDropdown">
@@ -265,18 +233,18 @@
                             <li class="px-3 mb-3">
                                 <div class="d-flex align-items-center">
                                     <!-- Avatar -->
-                                    <div class="avatar me-3">
-                                        <img class="avatar-img rounded-circle shadow"
+                                    <a class="avatar me-3" href="{% url 'view_user_profile' %}">
+                                        <img class="avatar-img rounded-circle shadow"  href="{% url 'view_user_profile' %}"
                                             src="{% static 'login/assets/images/logo-icon.svg' %} " alt="avatar">
-                                    </div>
+                                    </a>
                                     <div>
-                                        <a class="h6 mt-2 mt-sm-0" href="#">Invitado</a>
-                                        <p class="small m-0">turixcam.com</p>
+                                        <a class="h6 mt-2 mt-sm-0" href="{% url 'view_user_login' %}">Registrate</a>
+                                        <p class="small m-0">Turixta</p>
                                     </div>
                                 </div>
                             </li>
 
-    
+
 
                             <!-- Dark mode options START -->
                             <li>
@@ -489,33 +457,35 @@ Footer END -->
     <div class="back-top"></div>
 
     <!-- Navbar mobile START -->
-    <div class="navbar navbar-mobile">
+    <div class="navbar navbar-mobile navbar-mobile-control" style="background-color: rgba(255, 255, 255, 0.807);">
         <ul class="navbar-nav">
             <!-- Nav item Home -->
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'render_init_page' %}"><i class="bi bi-house-door fa-fw"></i>
+                <a class="nav-link " id="nav_mobile_inicio" href="{% url 'render_init_page' %}"><i
+                        class="bi bi-house-door fa-fw"></i>
                     <span class="mb-0 nav-text">Inicio</span>
                 </a>
             </li>
 
             <!-- Nav item My Trips -->
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'render_detalle_lugar' %}"><i class="bi bi-briefcase fa-fw"></i>
-                    <span class="mb-0 nav-text">Mis camaras</span>
+                <a class="nav-link" id="nav_mobile_camaras" href="{% url 'view_init_page' %}"><i
+                        class="bi bi-camera fa-fw"></i>
+                    <span class="mb-0 nav-text">Cámaras</span>
                 </a>
             </li>
 
             <!-- Nav item Offer -->
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="bi bi-percent fa-fw"></i>
-                    <span class="mb-0 nav-text">Ofertas</span>
+                <a class="nav-link" id="nav_mobile_lugares" href="#"><i class="bi bi-cursor fa-fw"></i>
+                    <span class="mb-0 nav-text">Lugares</span>
                 </a>
             </li>
 
             <!-- Nav item Account -->
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="bi bi-person-circle fa-fw"></i>
-                    <span class="mb-0 nav-text">Mi cuenta</span>
+                <a class="nav-link " id="nav_mobile_perfil" href="#"><i class="bi bi-person-circle fa-fw"></i>
+                    <span class="mb-0 nav-text">Perfil</span>
                 </a>
             </li>
         </ul>

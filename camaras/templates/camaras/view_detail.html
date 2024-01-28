@@ -1,0 +1,789 @@
+{% extends 'login/base/base.html' %}{% load static %}
+
+{% block title %}
+<title>Turixcam - Camaras en vivo </title>
+{% endblock %}
+
+{% block description %}
+<!-- Meta Tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Webestica.com">
+<meta name="description" content="Turixcam - Camras en vivo">
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+    body {
+        background-image: url("https://turixcam-images.b-cdn.net/HUAUCHINANGO.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+    }
+
+    header {
+        background-color: rgba(0, 0, 0, 0.164) !important;
+    }
+
+    .titulo-trans {
+
+        background: -webkit-linear-gradient(left, lightgreen, skyblue, orange, red);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: start;
+        font-size: 5rem;
+    }
+
+    .nav-control-letra {
+        color: white !important;
+    }
+
+    .navbar-mobile-control {
+        background-color: rgba(0, 0, 0, 0.349) !important;
+        color: white !important;
+    }
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .titulo-trans {
+
+        background: -webkit-linear-gradient(Bottom, rgba(213, 213, 213, 0.847), rgba(255, 255, 255, 0.841));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: start;
+    }
+</style>
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+
+
+
+    <!-- =======================
+	Image gallery START -->
+    <section class="card-grid pt-0">
+        <div class="container">
+            <div class="row ">
+                <!-- Image -->
+                <div class="col-12 d-flex justify-content-center" style="border-radius: 15px;">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/P_K2fLOIRTw?si=dJ8xmNaJWoaPyMs9?autoplay=1&mute=1"
+                            frameborder="1"
+                            allow=" autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+                            allowfullscreen title="En vivo Huauchinango centro" allow='autoplay' frameborder="0"
+                            allowfullscreen></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- =======================
+	Image gallery END -->
+    <!-- =======================
+	Main Title START -->
+    <section class="py-0 pt-sm-5 mb-5">
+        <div class="container position-relative "
+            style="background-color: rgba(0, 0, 0, 0.399); border-radius: 15px 15px 0 0;">
+            <!-- Title and button START -->
+            <div class="row ">
+                <div class="col-12 text-center">
+                    <!-- Meta -->
+                    <div class="d-lg-flex justify-content-lg-between mb-1">
+                        <!-- Title -->
+                        <div class="mb-2  mb-lg-0">
+                            <h1 class="fs-2">Centro de Huauchinango, Puebla </h1>
+                            <!-- Location -->
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <ul class="list-inline text-end">
+                            <!-- Heart icon -->
+                            <li class="list-inline-item">
+                                <a href="#" class="btn btn-sm btn-outline-danger px-2"><i
+                                        class="fa-solid fa-fw fa-heart"></i></a>
+                            </li>
+                            <!-- Share icon -->
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Title and button END -->
+
+        </div>
+    </section>
+    <!-- =======================
+	Main Title END -->
+
+
+    <!-- =======================
+	About hotel START -->
+    <section class="pt-0">
+        <div class="container " style="background-color: rgba(0, 0, 0, 0.399);" data-sticky-container>
+
+            <div class="row g-4 g-xl-5">
+                <!-- Content START -->
+                <div class="col-xl-7 order-1">
+                    <div class="vstack gap-5">
+
+                        <!-- About hotel START -->
+                        <div class="card bg-transparent">
+                            <!-- Card header -->
+                            <div class="card-header border-bottom bg-transparent px-0 pt-0">
+                                <h3 class="mb-0">Acerca de este lugar</h3>
+                            </div>
+
+                            <!-- Card body START -->
+                            <div class="card-body pt-4 p-0">
+                                <h5 class="fw-light mb-4">Principales caracteristicas</h5>
+
+                                <!-- Highlights Icons -->
+                                <div class="hstack gap-3 mb-3">
+                                    <div class="icon-lg bg-success h5 rounded-2" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Free wifi">
+                                        <i class="fa-solid fa-wifi"></i>
+                                    </div>
+                                    <div class="icon-lg bg-info h5 rounded-2" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Swimming Pool">
+                                        <i class="fa-solid fa-swimming-pool"></i>
+                                    </div>
+                                    <div class="icon-lg text-light h5 rounded-2" style="background-color: #fd7e14;"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Central AC">
+                                        <i class="fa-solid fa-snowflake"></i>
+                                    </div>
+                                    <div class="icon-lg bg-danger h5 rounded-2" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Free Service">
+                                        <i class="fa-solid fa-concierge-bell"></i>
+                                    </div>
+                                </div>
+
+                                <p class="mb-3 text-light"> Es un hermoso Pueblo Mágico ubicado en el centro de la
+                                    Sierra poblana.
+                                    Este lugar es ideal para el turismo de aventura y naturaleza, ya que puedes
+                                    disfrutar de actividades como ciclismo de montaña, paseos en lancha, pesca, safari
+                                    fotográfico y senderismo. </p>
+
+                                <div class="collapse" id="collapseContent">
+                                    <p class="my-3 text-light">Huauchinango está rodeado de ríos y cascadas, y está
+                                        lleno de
+                                        azaleas, conservando un encanto colonial. El colorido zócalo está perfumado por
+                                        azaleas, orquídeas y el aroma de cacahuate tostado. Aquí, las mujeres en trajes
+                                        típicos venden los productos típicos de la localidad.</p>
+                                </div>
+                                <a class="p-0 mb-4 mt-2 btn-more text-light d-flex align-items-center collapsed"
+                                    data-bs-toggle="collapse" href="#collapseContent" role="button"
+                                    aria-expanded="false" aria-controls="collapseContent">
+                                    Ver <span class="see-more ms-1">más</span><span class="see-less ms-1">menos</span><i
+                                        class="fa-solid fa-angle-down ms-2"></i>
+                                </a>
+
+                                <!-- List -->
+                                <h5 class="fw-light mb-2">Etiquetas</h5>
+                                <ul class="list-group list-group-borderless mb-0">
+                                    <li class="list-group-item text-light h6 fw-light d-flex mb-0"><i
+                                            class="bi bi-patch-check-fill text-success me-2"></i>Pueblo Mágico desde
+                                        2015.</li>
+                                    <li class="list-group-item text-light h6 fw-light d-flex mb-0"><i
+                                            class="bi bi-patch-check-fill text-info me-2"></i>Cerro del Madroño: Para
+                                        senderismo y vistas panorámicas.</li>
+                                    <li class="list-group-item  h6 fw-light d-flex mb-0"><i
+                                            class="bi bi-patch-check-fill  me-2" style="color: #fd7e14;"></i>Presa de
+                                        Nexapa: Ideal
+                                        para paseos en lancha.</li>
+                                    <li class="list-group-item text-light h6 fw-light d-flex mb-0"><i
+                                            class="bi bi-patch-check-fill text-danger me-2 "></i>Conserva un encanto
+                                        colonial. </li>
+                                </ul>
+                            </div>
+                            <!-- Card body END -->
+                        </div>
+                        <!-- About hotel START -->
+
+
+
+                        <!-- Room START -->
+                        <div class="card bg-transparent" id="room-options">
+
+
+
+                        </div>
+                        <!-- Room END -->
+
+                        <!-- Customer Review START -->
+                        <div class="card bg-transparent">
+                            <!-- Card header -->
+                            <div class="card-header border-bottom bg-transparent px-0 pt-0">
+                                <h3 class="card-title mb-0">Comentarios</h3>
+                            </div>
+
+                            <!-- Card body START -->
+                            <div class="card-body pt-4 p-0">
+                                <!-- Progress bar and rating START -->
+                                <div class="card  p-4 mb-4" style="background-color: rgba(0, 0, 0, 0.399);">
+                                    <div class="row g-4 align-items-center">
+                                        <!-- Rating info -->
+                                        <div class="col-md-4">
+                                            <div class="text-center">
+                                                <!-- Info -->
+                                                <h2 class="mb-0">4.5</h2>
+                                                <p class="mb-2">Basado en 23 opiniones</p>
+                                                <!-- Star -->
+                                                <ul class="list-inline mb-0">
+                                                    <li class="list-inline-item me-0"><i
+                                                            class="fa-solid fa-star text-warning"></i></li>
+                                                    <li class="list-inline-item me-0"><i
+                                                            class="fa-solid fa-star text-warning"></i></li>
+                                                    <li class="list-inline-item me-0"><i
+                                                            class="fa-solid fa-star text-warning"></i></li>
+                                                    <li class="list-inline-item me-0"><i
+                                                            class="fa-solid fa-star text-warning"></i></li>
+                                                    <li class="list-inline-item me-0"><i
+                                                            class="fa-solid fa-star-half-alt text-warning"></i></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <!-- Progress-bar START -->
+                                        <div class="col-md-8">
+                                            <div class="card-body p-0">
+                                                <div class="row gx-3 g-2 align-items-center">
+                                                    <!-- Progress bar and Rating -->
+                                                    <div class="col-9 col-sm-10">
+                                                        <!-- Progress item -->
+                                                        <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                style="width: 95%" aria-valuenow="95" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Percentage -->
+                                                    <div class="col-3 col-sm-2 text-end">
+                                                        <span class="h6 fw-light mb-0">75%</span>
+                                                    </div>
+
+                                                    <!-- Progress bar and Rating -->
+                                                    <div class="col-9 col-sm-10">
+                                                        <!-- Progress item -->
+                                                        <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                style="width: 35%" aria-valuenow="75" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Percentage -->
+                                                    <div class="col-3 col-sm-2 text-end">
+                                                        <span class="h6 fw-light mb-0">10%</span>
+                                                    </div>
+
+                                                    <!-- Progress bar and Rating -->
+                                                    <div class="col-9 col-sm-10">
+                                                        <!-- Progress item -->
+                                                        <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                style="width: 30%" aria-valuenow="6" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Percentage -->
+                                                    <div class="col-3 col-sm-2 text-end">
+                                                        <span class="h6 fw-light mb-0">9%</span>
+                                                    </div>
+
+                                                    <!-- Progress bar and Rating -->
+                                                    <div class="col-9 col-sm-10">
+                                                        <!-- Progress item -->
+                                                        <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Percentage -->
+                                                    <div class="col-3 col-sm-2 text-end">
+                                                        <span class="h6 fw-light mb-0">3%</span>
+                                                    </div>
+
+                                                    <!-- Progress bar and Rating -->
+                                                    <div class="col-9 col-sm-10">
+                                                        <!-- Progress item -->
+                                                        <div class="progress progress-sm bg-warning bg-opacity-15">
+                                                            <div class="progress-bar bg-warning" role="progressbar"
+                                                                style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+                                                                aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Percentage -->
+                                                    <div class="col-3 col-sm-2 text-end">
+                                                        <span class="h6 fw-light mb-0">3%</span>
+                                                    </div>
+                                                </div> <!-- Row END -->
+                                            </div>
+                                        </div>
+                                        <!-- Progress-bar END -->
+
+                                    </div>
+                                </div>
+                                <!-- Progress bar and rating END -->
+
+
+
+
+
+
+                            </div>
+                            <!-- Card body END -->
+                        </div>
+                        <!-- Customer Review END -->
+
+
+                    </div>
+                </div>
+                <!-- Content END -->
+
+                <!-- Right side content START -->
+                <aside class="col-xl-5 order-xl-2">
+                    <div data-sticky data-margin-top="100" data-sticky-for="1199">
+                        <div class="mb-4  ">
+                            <h3 class="mb-lg-3 ">Clima</h3>
+
+                            <div class="card shadow rounded-3 overflow-hidden">
+                                <a class="weatherwidget-io" href="https://forecast7.com/es/20d18n98d06/huauchinango/"
+                                    data-label_1="HUAUCHINANGO" data-label_2="Pronostico"
+                                    data-theme="weather_one">HUAUCHINANGO Pronostico</a>
+                                <script>
+                                    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+                                </script>
+                            </div>
+                        </div>
+
+
+                        <!-- Best deal START -->
+
+                        <!-- Best deal END -->
+                        <div class="mb-4 mt-4">
+                            <h3 class="mblg-3">Alojamiento</h3>
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                                            <div class="card-img-scale-wrapper rounded-3">
+                                                <!-- Card Image -->
+                                                <img src="https://turixcam-images.b-cdn.net/Huauchinango/hoteles/hotel%20cortez.png"
+                                                    class="card-img" alt="">
+                                                <!-- Overlay -->
+                                                <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
+                                                    <!-- Card overlay top -->
+                                                    <div class="d-flex justify-content-end ">
+                                                        <div
+                                                            class="d-flex justify-content-between badge fs-6 text-bg-white ">
+                                                            <i class="fa-solid fa-star text-warning "></i>
+                                                            <i class="fa-solid fa-star text-warning "></i>
+                                                            <i class="fa-solid fa-star text-warning "></i>
+                                                            <i class="fa-solid fa-star text-warning "></i>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- Card overlay bottom -->
+                                                    <div class="w-100 mt-auto text-start">
+                                                        <!-- Card category -->
+                                                        <span class="badge text-bg-white bg-opacity-50 fs-5 ">Hotal
+                                                            Villa del
+                                                            Cortéz</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <!-- Card START -->
+                                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                                            <div class="card-img-scale-wrapper rounded-3">
+                                                <!-- Card Image -->
+                                                <img src="https://turixcam-images.b-cdn.net/Huauchinango/hoteles/hotal%20meson.jpg"
+                                                    class="card-img" alt="">
+                                                <!-- Overlay -->
+                                                <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
+                                                    <!-- Card overlay top -->
+                                                    <div class="d-flex justify-content-end fs-5">
+                                                        <div class="d-flex justify-content-between ">
+                                                            <div
+                                                                class="d-flex justify-content-between badge fs-6 text-bg-white ">
+                                                                <i class="fa-solid fa-star text-warning "></i>
+                                                                <i class="fa-solid fa-star text-warning "></i>
+                                                                <i class="fa-solid fa-star text-warning "></i>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <!-- Card overlay bottom -->
+                                                    <div class="w-100 mt-auto text-start">
+                                                        <!-- Card category -->
+                                                        <span class="badge text-bg-white bg-opacity-50 fs-5">Hotel del
+                                                            Mesón </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- Card END -->
+                                    </div>
+
+
+
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+
+
+                        </div>
+                    </div>
+            </div>
+            </aside>
+            <!-- Right side content END -->
+        </div> <!-- Row END -->
+        </div>
+    </section>
+    <!-- =======================
+	About hotel END -->
+    <section>
+        <div class="container">
+            <h1 class="titulo-trans mb-3">Explora más lugares </h1>
+
+        </div>
+        <div class="container " style="background-color: rgba(0, 0, 0, 0.399); border-radius: 15px;">
+            <div class="swiper mySwipermore">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                            <!-- Image and overlay -->
+
+
+                            <div class="card-img-scale-wrapper ">
+                                <!-- Image -->
+                                <img src="{% static 'login/assets/images/category/hotel/04.jpg' %} "
+                                    class="card-img border-top" alt="hotel image">
+                                <!-- Badge -->
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                            class="bi bi-geo-alt me-2"></i>Puebla</div>
+                                </div>
+                                <div id="tiempo" class="position-absolute  top-0 end-0 ">
+                                    <div class="badge text-bg-warning fs-5  stretched-link text-center"
+                                        style="border-radius: 0 0 0 25px !important;">26° <i
+                                            class="fa-regular fa-sun me-2"></i> </div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div class="card-body px-2 border-bottom bg-white-offs">
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="#" class="stretched-link">La
+                                        estrella</a></h5>
+                                <!-- Price and rating -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">Muy pronto <small class="fw-light"></small>
+                                    </h6>
+                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- Card START -->
+                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                            <!-- Image and overlay -->
+                            <div class="card-img-scale-wrapper ">
+                                <!-- Image -->
+                                <img src="{% static 'login/assets/images/category/hotel/03.jpg' %} "
+                                    class="card-img  border-top" alt="hotel image">
+                                <!-- Badge -->
+                                <div id="tiempo" class="position-absolute  top-0 end-0 ">
+                                    <div class="badge  fs-5  stretched-link text-center"
+                                        style="border-radius: 0 0 0 25px !important; background: linear-gradient(to right, #2b90cf, rgb(0, 149, 255))">
+                                        16° <i class="bi bi-cloud-drizzle me-2"></i> </div>
+                                </div>
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                            class="bi bi-geo-alt me-2"></i>Oaxaca</div>
+                                </div>
+
+                            </div>
+
+                            <!-- Card body -->
+                            <div class="card-body bg-white-offs border-bottom px-2">
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="" class="stretched-link">Centro</a>
+                                </h5>
+                                <!-- Price and rating -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">Muy pronto <small class="fw-light"></small>
+                                    </h6>
+                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- Card START -->
+                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                            <!-- Image and overlay -->
+                            <div class="card-img-scale-wrapper ">
+                                <!-- Image -->
+                                <img src="{% static 'login/assets/images/category/hotel/02.jpg' %} "
+                                    class="card-img border-top" alt="hotel image">
+                                <!-- Badge -->
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                            class="bi bi-geo-alt me-2"></i>Verazcruz</div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div class="card-body px-2  bg-white-offs  border-bottom">
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="#" class="stretched-link">Playa de
+                                        Casitas</a></h5>
+                                <!-- Price and rating -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">Muy pronto <small class="fw-light"></small>
+                                    </h6>
+                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- Card START -->
+                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                            <!-- Image and overlay -->
+                            <div class="card-img-scale-wrapper ">
+                                <!-- Image -->
+                                <img src="{% static 'login/assets/images/category/hotel/bitmap.webp' %} "
+                                    class="card-img border-top" alt="Huauchinango">
+                                <!-- Badge -->
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                            class="bi bi-geo-alt me-2"></i>Huauchinango</div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div class="card-body px-2 border-bottom bg-white-offs">
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="{% url 'view_detail_camara' %}"
+                                        class="stretched-link">Centro
+                                        - Desfile</a></h5>
+                                <!-- Price and rating -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">$0 <small class="fw-light">/ vista gratuita</small>
+                                    </h6>
+                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                            <!-- Image and overlay -->
+                            <div class="card-img-scale-wrapper">
+                                <!-- Image -->
+                                <img src="{% static 'login/assets/images/category/hotel/04.jpg' %} "
+                                    class="card-img border-top" alt="hotel image">
+                                <!-- Badge -->
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                            class="bi bi-geo-alt me-2"></i>Puebla</div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div class="card-body px-2 border-bottom bg-white-offs">
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="#" class="stretched-link">La
+                                        estrella</a></h5>
+                                <!-- Price and rating -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">Muy pronto <small class="fw-light"></small>
+                                    </h6>
+                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- Card START -->
+                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                            <!-- Image and overlay -->
+                            <div class="card-img-scale-wrapper ">
+                                <!-- Image -->
+                                <img src="{% static 'login/assets/images/category/hotel/03.jpg' %} "
+                                    class="card-img  border-top" alt="hotel image">
+                                <!-- Badge -->
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                            class="bi bi-geo-alt me-2"></i>Oaxaca</div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div class="card-body bg-white-offs border-bottom px-2">
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="#" class="stretched-link">Centro</a>
+                                </h5>
+                                <!-- Price and rating -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">Muy pronto <small class="fw-light"></small>
+                                    </h6>
+                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- Card START -->
+                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                            <!-- Image and overlay -->
+                            <div class="card-img-scale-wrapper ">
+                                <!-- Image -->
+                                <img src="{% static 'login/assets/images/category/hotel/02.jpg' %} "
+                                    class="card-img border-top" alt="hotel image">
+                                <!-- Badge -->
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                            class="bi bi-geo-alt me-2"></i>Verazcruz</div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div class="card-body px-2  bg-white-offs  border-bottom">
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="#" class="stretched-link">Playa de
+                                        Casitas</a></h5>
+                                <!-- Price and rating -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">Muy pronto <small class="fw-light"></small>
+                                    </h6>
+                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+                    <div class="swiper-slide">
+                        <!-- Card START -->
+                        <div class="card card-img-scale overflow-hidden bg-transparent">
+                            <!-- Image and overlay -->
+                            <div class="card-img-scale-wrapper ">
+
+                                <!-- Image -->
+                                <img src="{% static 'login/assets/images/category/hotel/bitmap.webp' %} "
+                                    class="card-img border-top" alt="Huauchinango">
+                                <!-- Badge -->
+                                <div class="position-absolute bottom-0 start-0 p-3">
+                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                            class="bi bi-geo-alt me-2"></i>Huauchinango</div>
+                                </div>
+                            </div>
+
+                            <!-- Card body -->
+                            <div class="card-body px-2 border-bottom bg-white-offs">
+                                <!-- Title -->
+                                <h5 class="card-title"><a href="{% url 'view_detail_camara' %}"
+                                        class="stretched-link">Centro
+                                        - Desfile</a></h5>
+                                <!-- Price and rating -->
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="text-success mb-0">$0 <small class="fw-light">/ vista gratuita</small>
+                                    </h6>
+                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i> </h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Card END -->
+                    </div>
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+
+    });
+    var swipermore = new Swiper(".mySwipermore", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 20
+            },
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            }
+        }
+    });
+
+
+</script>
+{% endblock %}
