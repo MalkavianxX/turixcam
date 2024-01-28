@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from colorthief import ColorThief
+
 # Create your views here.
 def render_init_page(request):
     return render(request, 'login/init/inicio.html')
