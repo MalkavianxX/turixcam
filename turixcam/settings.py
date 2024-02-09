@@ -25,6 +25,14 @@ SECRET_KEY = 'django-insecure-7@-@+wzqd+*@34%3)6=%*p(er_c(sn$arx+e%pj$jzr*fkfrye
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# settings.py
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -164,6 +172,7 @@ LOGIN_URL = 'view_user_login'
 SOCIALACCOUNT_LOGIN_ON_GET = True
 ACCOUNT_ADAPTER = 'login.myadapter.MyAccountAdapter'
 SOCIALACCOUNT_AUTO_SIGNUP = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
 
 
 SOCIALACCOUNT_PROVIDERS = {
