@@ -4,9 +4,9 @@ from camaras.models import Lugar
 from django_bunny.storage import BunnyStorage
 
 class CustomUser(AbstractUser):
-    foto_portada = models.ImageField(storage=BunnyStorage(),upload_to='fotos_portada/')
+    foto_portada = models.ImageField(storage=BunnyStorage(),upload_to='fotos_portada/',null=True,blank=True)
  
-    foto_perfil = models.ImageField(storage=BunnyStorage(), upload_to='fotos_perfil/')
+    foto_perfil = models.ImageField(storage=BunnyStorage(), upload_to='fotos_perfil/',null=True,blank=True)
     custom_avatar_uploaded = models.BooleanField(default=False)
     horas = models.FloatField(default=0.0)
     fecha = models.DateField(auto_now_add=True)

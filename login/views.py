@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+from django.contrib.auth import logout,authenticate, login
 from login.models import CustomUser, Favorito, Guardado  # Importa tu modelo personalizado
 from django.contrib.auth.hashers import make_password
 from allauth.socialaccount.models import SocialAccount
@@ -29,7 +29,7 @@ def get_user_profile(user):
     elif user.socialaccount_set.exists():
         avatar_url = user.socialaccount_set.all().first().get_avatar_url
     else:
-        avatar_url = user.foto_perfil.url  # Esto será la URL de la imagen predeterminada
+        avatar_url = 'https://turixcam-images.b-cdn.net/Backgrounds/fotodefault.jpg'
     if  user.foto_portada:
         portada = user.foto_portada.url
     else:
@@ -150,3 +150,36 @@ def function_update_password(request):
         return JsonResponse({'message': 'Contraseña actualizada exitosamente'})
     else:
         return JsonResponse({'error': 'Método no permitido'}, status=405)    
+    
+
+
+
+def function_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'status': 'ok'}, status=200)
+        else:
+            return JsonResponse({'error': 'Usuario o contraseña incorrectos'}, status=400)
+    else:
+        return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+
+def function_signup(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if CustomUser.objects.filter(email=email).exists():
+            return JsonResponse({'error': 'Ya existe un usuario con ese correo electrónico'}, status=400)
+        
+        user = CustomUser.objects.create_user(username=email, email=email, password=password,first_name = "Usuario001AAA ❤️", last_name = "Turixta especial")
+        user.save()
+
+        return JsonResponse({'status': 'ok'}, status=200)
+    else:
+        return JsonResponse({'error': 'Método no permitido'}, status=405)

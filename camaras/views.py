@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from login.models import (
     CustomUser,
@@ -69,18 +69,28 @@ def get_puntuaciones(lugar):
 
 def view_detail_camara(request):
     lugar = Lugar.objects.get(pk=1)
-    user = request.user
-    comentarios,media =  get_all_coments(lugar)
-
-    context = {
-        "lugar": lugar,
-        "es_favorito": get_clase_favorito(user, lugar, Favorito),
-        "es_guardado": get_clase_guardado(user, lugar, Guardado),
-        "comentarios": comentarios,
-        "total_comentarios": comentarios.count(),
-        "media":media,
-        "puntuaciones":get_puntuaciones(lugar),
-    }
+    user = request.user   
+    comentarios,media =  get_all_coments(lugar)     
+    if request.user.is_authenticated:
+        context = {
+            "lugar": lugar,
+            "es_favorito": get_clase_favorito(user, lugar, Favorito),
+            "es_guardado": get_clase_guardado(user, lugar, Guardado),
+            "comentarios": comentarios,
+            "total_comentarios": comentarios.count(),
+            "media":media,
+            "puntuaciones":get_puntuaciones(lugar),
+        }
+    else:
+        context = {
+            "lugar": lugar,
+            "es_favorito": "btn-outline-danger",
+            "es_guardado": "btn-outline-warning",
+            "comentarios": comentarios,
+            "total_comentarios": comentarios.count(),
+            "media":media,
+            "puntuaciones":get_puntuaciones(lugar),
+        }           
     return render(request, "camaras/view_detail.html", context)
 
 
@@ -90,11 +100,11 @@ def addFavorite(request):
     if request.method == "POST":
         user = request.user
         if request.user.is_authenticated:
-            lugar_id = request.POST.get("id_lugar")
+            lugar_id = request.POST.get("id_lugar") 
             try:
                 lugar = Lugar.objects.get(pk=lugar_id)
             except Lugar.DoesNotExist:
-                return JsonResponse({"message": "El lugar no existe."}, status=400)
+                return JsonResponse({"error": "El lugar no existe."}, status=400)
 
             if Favorito.objects.filter(usuario=user, lugar=lugar).exists():
                 Favorito.objects.get(usuario=user, lugar=lugar).delete()
@@ -103,9 +113,9 @@ def addFavorite(request):
                 Favorito.objects.create(usuario=user, lugar=lugar)
                 return JsonResponse({'message': 'Lugar agregado.',"add":"btn-danger","del":"btn-outline-danger"}, status=200)
         else:
-            return JsonResponse({"message": "El usuario no está autenticado."}, status=400)
+            return JsonResponse({"error": "El usuario no está autenticado."}, status=400)
     else:
-        return JsonResponse({"message": "Fallo de método, se esperaba una solicitud POST."}, status=405)
+        return JsonResponse({"error": "Fallo de método, se esperaba una solicitud POST."}, status=405)
 
 @login_required
 def addGuardado(request):
@@ -147,6 +157,7 @@ def addComentario(request):
             Comentario.objects.create(user=user, lugar=lugar, text=text, puntuacion=float(puntuacion))
             return JsonResponse({'message': 'Comentario agregado.'}, status=200)
         else:
+            return redirect('login')
             return JsonResponse({"message": "El usuario no está autenticado."}, status=400)
     else:
         return JsonResponse({"message": "Fallo de método, se esperaba una solicitud POST."}, status=405)

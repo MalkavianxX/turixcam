@@ -75,13 +75,13 @@ Main Content START -->
                                             <!-- Email -->
                                             <div class="mb-3">
                                                 <label class="form-label text-light">Correo </label>
-                                                <input type="email" class="form-control" />
+                                                <input id="sup_email" type="email" class="form-control" />
                                             </div>
                                             <!-- Password -->
                                             <div class="mb-3 position-relative">
                                                 <label class="form-label text-light">Contraseña </label>
                                                 <input class="form-control fakepassword" type="password"
-                                                    id="psw-input" />
+                                                    id="sup_pass" />
                                                 <span
                                                     class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3">
                                                     <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
@@ -98,7 +98,7 @@ Main Content START -->
                                             </div>
                                             <!-- Button -->
                                             <div>
-                                                <button  type="submit" class="btn btn-success w-100 mb-2">
+                                                <button  id="sup_btn" type="submit" class="btn btn-success w-100 mb-2">
                                                     Registrate
                                                 </button>
                                             </div>
@@ -143,6 +143,51 @@ Main Content END -->
 
     <!-- ThemeFunctions -->
     <script src="{% static 'login/assets/js/functions.js'%} "></script>
+    <script>
+            function getCSRFToken() {
+    const name = 'csrftoken=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+
+    return null;
+}
+        document.getElementById('sup_btn').addEventListener('click', function(event) {
+    event.preventDefault();
+    const csrftoken = getCSRFToken();
+
+    let formData = new FormData();
+    formData.append('email', document.getElementById('sup_email').value);
+    formData.append('password', document.getElementById('sup_pass').value);
+
+    fetch('fun_signup', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': csrftoken  // Asegúrate de tener disponible el token CSRF
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'ok') {
+            window.location.href = '/profile'
+        } else {
+            // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
+            alert(data.error);
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+
+    </script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 
 <head>
     {% load static %}
-{% load socialaccount %}
+    {% load socialaccount %}
 
     <title>Turixcam - Inicia sesión</title>
 
@@ -74,35 +74,39 @@ Main Content START -->
                                         <form class="mt-4 text-start">
                                             <!-- Email -->
                                             <div class="mb-3">
-                                                <label class="form-label text-light">Correo o usuario</label>
-                                                <input type="email" class="form-control" />
+                                                <label class="form-label text-light">Correo</label>
+                                                <input type="email" id="login_user" class="form-control" />
                                             </div>
                                             <!-- Password -->
+                                            {% csrf_token %}
                                             <div class="mb-3 position-relative">
                                                 <label class="form-label text-light">Contraseña
                                                 </label>
                                                 <input class="form-control fakepassword" type="password"
-                                                    id="psw-input" />
+                                                    id="login_pass" />
                                                 <span
                                                     class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3">
                                                     <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
                                                 </span>
                                             </div>
                                             <!-- Remember me -->
-                                            <div class="mb-3 text-center">
-                                                <div class="mb-2">
-                                                    <input type="checkbox" class="form-check-input" style="color: #fd7e14;"
-                                                        id="rememberCheck" />
+                                            <div class="mb-3 ">
+                                                <div class="mb-2 text-start">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        style="color: #fd7e14;" id="rememberCheck" />
                                                     <label class="form-check-label text-light"
                                                         for="rememberCheck">Recuerdame
                                                     </label>
                                                 </div>
-                                                <a href="{% url 'view_user_recovery_password' %}" style="color: #fd7e14">
+                                                <a href="{% url 'view_user_recovery_password' %}" class="text-center"
+                                                    style="color: #fd7e14">
                                                     ¿Olvidaste tu contraseña?</a>
                                             </div>
                                             <!-- Button -->
                                             <div>
-                                                <button type="submit" style="background-color: #fd7d14bd; color: white;" class="btn  w-100 mb-0">
+                                                <button type="submit" id="login_btn_login"
+                                                    style="background-color: #fd7d14bd; color: white;"
+                                                    class="btn  w-100 mb-0">
                                                     Inicar sesión
                                                 </button>
                                             </div>
@@ -119,7 +123,8 @@ Main Content START -->
                                             </div>
                                             <!-- Google and facebook button -->
                                             <div class="vstack gap-3">
-                                                <a href="{% provider_login_url 'google' %}" target="_blank" class="btn btn-light mb-0"><i
+                                                <a href="{% provider_login_url 'google' %}" target="_blank"
+                                                    class="btn btn-light mb-0"><i
                                                         class="fab fa-fw fa-google text-google-icon me-2"></i>
                                                     Google</a>
                                                 <a href="#" class="btn btn-light mb-0"><i
@@ -135,14 +140,14 @@ Main Content START -->
                     </div>
                 </div>
             </div>
-            <textarea name="" id="" cols="30" rows="10">{{request.user.is_authenticated}}</textarea>
         </section>
-        
+
         <!-- =======================
             
 Main Content END -->
-<script src="//accounts.google.com/gsi/client" async></script>
-<div id="g_id_onload" data-client_id="123-secret.apps.googleusercontent.com" data-login_uri="{% url 'google_login_by_token' %}" > </div>
+        <script src="//accounts.google.com/gsi/client" async></script>
+        <div id="g_id_onload" data-client_id="123-secret.apps.googleusercontent.com"
+            data-login_uri="{% url 'google_login_by_token' %}"> </div>
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
 
@@ -155,5 +160,52 @@ Main Content END -->
     <!-- ThemeFunctions -->
     <script src="{% static 'login/assets/js/functions.js'%} "></script>
 </body>
+
+<script>
+    function getCSRFToken() {
+    const name = 'csrftoken=';
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i].trim();
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+
+    return null;
+}
+    document.getElementById('login_btn_login').addEventListener('click', function (event) {
+        event.preventDefault();
+        const csrftoken = getCSRFToken();
+
+        let formData = new FormData();
+        formData.append('username', document.getElementById('login_user').value);
+        formData.append('password', document.getElementById('login_pass').value);
+
+        fetch('fun_login', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrftoken  // Asegúrate de tener disponible el token CSRF
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    // Inicio de sesión exitoso, redirige o actualiza la página si es necesario
+                    window.location.href = '/profile'
+                } else {
+                    // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
+                    alert(data.error);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+
+</script>
 
 </html>

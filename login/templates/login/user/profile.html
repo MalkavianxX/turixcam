@@ -128,7 +128,7 @@
                         </div>
                         <div class="col-lg-6 col-12 text-center">
                             <div class="wrapper text-center  ms-3 text-light">
-                                <h4 class="text-light">{{request.user.first_name}} {{request.user.last_name}}</h4>
+                                <h4 class="text-light " >{{request.user.first_name}} {{request.user.last_name}}</h4>
                                 <p>0 horas</p>
 
                             </div>
@@ -152,7 +152,7 @@
                     <button class="btn text-light mb-3" type="button" data-bs-toggle="modal"
                         data-bs-target="#profile_data" style="background-color: rgba(0, 0, 0, 0.647);"><i
                             class="fa-solid fa-pencil"></i> Editar perfil</button>
-                    <button id="open-app" class="btn text-light mb-3 d-lg-none d-md-none d-block" type="button"
+                    <button id="btn_sm_portada" class="btn text-light mb-3 d-lg-none d-md-none d-block" type="button"
                         style="background-color: rgba(0, 0, 0, 0.647);"><i class="fa-solid fa-pencil"></i> Editar
                         portada</button>
                 </div>
@@ -531,11 +531,7 @@
 
 
 <script>
-document.getElementById('open-app').addEventListener('click', function(e) {
-    e.preventDefault();
-    // Intenta abrir la aplicación usando el esquema de URL personalizado
-    window.location.href = 'TurixCamApp://';
-});
+
 
 function loadAlert(title = undefined, tiempo = 2000) {
     let timerInterval;

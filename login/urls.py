@@ -20,7 +20,8 @@ urlpatterns = [
     path('up_picture',views.function_update_profile_picture, name="function_update_profile_picture"),
     path('up_info',views.function_update_info_profile, name="function_update_info_profile"),
     path('up_password',views.function_update_password, name="function_update_password"),
-
+    path('fun_login',views.function_login, name="function_login"),
+    path('fun_signup',views.function_signup, name="function_signup"),
     
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

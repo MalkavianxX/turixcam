@@ -17,11 +17,18 @@
 
 <style>
     body {
-        background-image: url("https://turixcam-images.b-cdn.net/Backgrounds/huauchinango.jpg");
-        background-repeat: no-repeat;
-        background-position: top;
-        background-size: cover;
+        margin: 0;
+        height: 100%;
 
+    }
+
+    #myVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: 0 !important;
     }
 
     header {
@@ -90,6 +97,9 @@
     }
 </style>
 <!-- **************** MAIN CONTENT START **************** -->
+<video autoplay muted loop id="myVideo">
+    <source src="https://turixcam-images.b-cdn.net/videos/Secuencia%2002.mp4" type="video/mp4">
+</video>
 <main>
     {% csrf_token %}
 
@@ -117,9 +127,8 @@
 	Image gallery END -->
     <!-- =======================
 	Main Title START -->
-    <section class="py-0 pt-sm-5 mb-5" >
-        <div class="container position-relative "
-            >
+    <section class="py-0 pt-sm-5 mb-5">
+        <div class="container position-relative ">
             <!-- Title and button START -->
             <div class="row ">
                 <div class="col-12 text-center">
@@ -162,7 +171,7 @@
     <!-- =======================
 	About hotel START -->
     <section class="pt-0">
-        <div class="container " style="background-color: rgba(0, 0, 0, 0.399);" >
+        <div class="container " style="background-color: rgba(0, 0, 0, 0.399);">
 
             <div class="row g-4 g-xl-5">
                 <!-- Content START -->
@@ -328,43 +337,53 @@
                                             placeholder="Este lugar me parece ..." rows="3"></textarea>
                                     </div>
                                     <!-- Button -->
+                                    {% if request.user.is_authenticated %}
                                     <button type="submit" id="comen_btn" class="btn btn-lg btn-primary mb-0">Comentar <i
                                             class="bi fa-fw bi-arrow-right ms-2"></i></button>
+                                    {% else %}
+                                   
+                                    <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        data-bs-custom-class="custom-tooltip" data-bs-title="Debes iniciar sesión."
+                                         id="comen_btn" class="btn btn-lg btn-primary mb-0">Comentar <i
+                                            class="bi fa-fw bi-arrow-right ms-2"></i></button>
+                                    {%endif %}
                                 </form>
                                 <!-- Leave review END -->
                                 <div class="" style="background-color: rgba(0, 0, 0, 0.399); border-radius: 15px;">
-                                <!-- Review item START -->
-                                {% for item in comentarios %}
+                                    <!-- Review item START -->
+                                    {% for item in comentarios %}
 
-                                <div class="d-md-flex my-4 w-100 " >
-                                    <!-- Avatar -->
-                                    <div class="mt-3 ms-2 avatar avatar-lg me-3 flex-shrink-0">
-                                        <img class="avatar-img rounded-circle" src="{{item.user.avatar_url}}"
-                                            alt="avatar">
-                                    </div>
-                                    <!-- Text -->
-                                    <div class="w-100 mt-3 ms-2">
-                                        <div class="d-flex  justify-content-between mt-1 mt-md-0">
-                                            <div class="">
-                                                <h6 class="me-3 mb-0">{{item.user.first_name}} </h6>
-                                                <!-- Info -->
-                                                <ul class="nav nav-divider small mb-2">
-                                                    <li class="nav-item">{{item.fecha}}</li>
-                                                    <li class="nav-item"></li>
-                                                </ul>
-                                            </div>
-                                            <!-- Review star -->
-                                            <div class="icon-md rounded text-bg-warning fs-6">{{item.puntuacion}}</div>
+                                    <div class="d-md-flex my-4 w-100 mb-3">
+                                        <!-- Avatar -->
+                                        <div class="mt-3 ms-2 avatar avatar-lg me-3 flex-shrink-0">
+                                            <img class="avatar-img rounded-circle" src="{{item.user.avatar_url}}"
+                                                alt="avatar">
                                         </div>
+                                        <!-- Text -->
+                                        <div class="w-100 mt-3 ms-2">
+                                            <div class="d-flex  justify-content-between mt-1 mt-md-0">
+                                                <div class="">
+                                                    <h6 class="me-3 mb-0">{{item.user.first_name}} </h6>
+                                                    <!-- Info -->
+                                                    <ul class="nav nav-divider small mb-2">
+                                                        <li class="nav-item">{{item.fecha}}</li>
+                                                        <li class="nav-item"></li>
+                                                    </ul>
+                                                </div>
+                                                <!-- Review star -->
+                                                <div class="icon-md rounded text-bg-warning fs-6">{{item.puntuacion}}
+                                                </div>
+                                            </div>
 
-                                        <p class="mb-2">{{item.text}}</p>
+                                            <p class="mb-2">{{item.text}}</p>
 
 
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Divider -->
-                                <hr>
-                                {% endfor %}
+                                    <!-- Divider -->
+                                    <hr class="mb-3">
+                                    <div class="mb-3"></div>
+                                    {% endfor %}
                                 </div>
                                 <!-- Button -->
                                 <div class="text-center">

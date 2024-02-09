@@ -125,7 +125,7 @@ document.getElementById('comen_btn').addEventListener('click', function(e) {
             'X-CSRFToken': token,
         },
         body: formData,
-    })
+    }) 
     .then(response => response.json())
     .then(data => {
         console.log(data);
