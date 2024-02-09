@@ -51,8 +51,14 @@ def get_saved_profile(user):
     guardados = Guardado.objects.filter(usuario=user).order_by('-fecha')
     return guardados
 
+@login_required
 def view_user_profile(request):
-    return redirect ("https://www.facebook.com/")
+    context = get_user_profile(request.user)
+    context['favoritos'] = get_favorites_profile(request.user)
+    context['guardados'] = get_saved_profile(request.user)
+
+
+    return render(request, 'login/user/profile.html',context)
 
 
 def view_user_login(request):
