@@ -16,14 +16,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/aos/aos.css' %} ">
 <link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/choices/css/choices.min.css' %} ">
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
 
 <style>
     header {
         background-color: rgba(0, 0, 0, 0.164) !important;
     }
+
     #map {
         height: 100%;
-      }
+    }
+
     .titulo-trans {
 
         background: -webkit-linear-gradient(left, lightgreen, skyblue, orange, red);
@@ -78,7 +81,7 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        background-image: url("https://turixcam-images.b-cdn.net/Backgrounds/zacatlan.jpg");
+        background-image: url("{{portada}}");
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: cover;
@@ -103,53 +106,55 @@
 
                 <div class="card-img-scale-wrapper z-1">
                     <!-- Image -->
-                    <img id="portada" style="aspect-ratio: 2 !important;" src="https://turixcam-images.b-cdn.net/Backgrounds/zacatlan.jpg "
+
+                    <img id="portada" style="aspect-ratio: 2 !important;" src="{{portada}}"
                         class=" border-top" alt="hotel image">
                     <!-- Badge -->
-                    <div class="d-lg-block d-md-block d-none position-absolute bottom-0 end-0 p-2 d-block">
-                        <button class="btn text-light" style="background-color: rgba(0, 0, 0, 0.647);">
-                            <i class="fa-solid fa-pencil me-2"></i> Cambiar foto de portada
-                        </button>
-
-                    </div>
-
-                    <div class="d-lg-none d-md-none  position-absolute bottom-0 end-0 p-2 d-block">
-                        <button class="btn text-light" style="background-color: rgba(0, 0, 0, 0.647);">
-                            <i class="fa-solid fa-pencil me-2"></i>
-                        </button>
-
-                    </div>
                 </div>
-
-
             </div>
-            <div class="row position-relative z-index-9" style=" margin-top: -4rem; border-radius: 15px;">
+            <div class="row position-relative " style=" margin-top: -4rem; border-radius: 15px;">
                 <div
                     class="col-lg-8 col-md-6 col-12 d-lg-flex d-md-flex d-flex align-items-end justify-content-center mt-lg-0 mt-3">
                     <div class="row d-flex align-items-end justify-content-lg-between justify-content-center">
                         <div class="col-lg-6 col-12 d-flex justify-content-lg-between justify-content-center">
                             <a href="#" class="">
-                                <img src="https://turixcam-images.b-cdn.net/Backgrounds/edna.jpg" width="250px"
+
+                                <img src="{{ avatar_url }}" id="btn_picture_profile" width="250px"
                                     class="rounded-circle border " alt="">
+
+
+
                             </a>
                         </div>
                         <div class="col-lg-6 col-12 text-center">
                             <div class="wrapper text-center  ms-3 text-light">
-                                <h4 class="text-light">Victor Manuel Hernandez Gonzales</h4>
+                                <h4 class="text-light">{{request.user.first_name}} {{request.user.last_name}}</h4>
                                 <p>0 horas</p>
 
                             </div>
 
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-4 d-lg-flex d-md-flex d-none justify-content-end">
+                    <div class="">
+                        <button class="btn text-light" type="button" id="btn_portada"
+                            style="background-color: rgba(0, 0, 0, 0.647);cursor: pointer;z-index: 2;">
+                            <i class="fa-solid fa-pencil me-2"></i> Cambiar foto de portada
+                        </button>
 
+                    </div>
 
 
                 </div>
                 <div
-                    class="col-lg-12 col-md-6 col-12 d-flex align-items-end justify-content-lg-end justify-content-center mt-lg-0 mt-3">
-                    <button class="btn text-light mb-3" style="background-color: rgba(0, 0, 0, 0.647);"><i
+                    class="col-lg-12 col-md-6 col-12 d-flex align-items-end justify-content-lg-end justify-content-between mt-lg-0 mt-3">
+                    <button class="btn text-light mb-3" type="button" data-bs-toggle="modal"
+                        data-bs-target="#profile_data" style="background-color: rgba(0, 0, 0, 0.647);"><i
                             class="fa-solid fa-pencil"></i> Editar perfil</button>
+                    <button id="btn_sm_portada" class="btn text-light mb-3 d-lg-none d-md-none d-block" type="button"
+                        style="background-color: rgba(0, 0, 0, 0.647);"><i class="fa-solid fa-pencil"></i> Editar
+                        portada</button>
                 </div>
                 <hr>
                 <div class="container ">
@@ -173,7 +178,6 @@
                                         aria-selected="false" role="tab" tabindex="-1"> <i
                                             class="fa-solid fa-location-crosshairs fa-fw me-2"></i></a>
                                 </li>
-
                             </ul>
                         </div>
                         <!-- Tabs END -->
@@ -185,25 +189,26 @@
                                 <!-- Tab content item START -->
                                 <div class="tab-pane fade" id="tab-1-1" role="tabpanel">
                                     <div class="row me-3 mt-3 d-flex justify-content-center">
+                                        {% for itemf in favoritos %}
                                         <div class="col-lg-4 col-md-6 col-12">
                                             <div class="card card-img-scale overflow-hidden bg-transparent"
                                                 style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
                                                 <div class="card-img-scale-wrapper rounded-3">
                                                     <!-- Card Image -->
-                                                    <img src="https://turixcam-images.b-cdn.net/HUAUCHINANGO.png"
+                                                    <img src="{{itemf.lugar.imagen_picture.url}}"
                                                         class="card-img" alt="">
                                                     <!-- Overlay -->
                                                     <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
                                                         <!-- Card overlay top -->
                                                         <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">Puebla</span>
+                                                            <span class="badge text-bg-dark">{{itemf.lugar.estado}}</span>
                                                             <span class="badge text-bg-white"><i
                                                                     class="fa-solid fa-sun text-warning me-2"></i>25°</span>
                                                         </div>
                                                         <!-- Card overlay bottom -->
                                                         <div class="w-100 mt-auto">
                                                             <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5">Zacatlan </span>
+                                                            <span class="badge text-bg-white fs-5">{{itemf.lugar.municipio}} </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -212,108 +217,12 @@
                                                 <div class="card-body px-2">
                                                     <!-- Title -->
                                                     <h4 class="card-title text-center"><a href="/camaras/detalle"
-                                                            class="stretched-link">Reserva natural cascada</a></h4>
+                                                            class="stretched-link">{{itemf.lugar.titulo}}</a></h4>
 
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="card card-img-scale overflow-hidden bg-transparent"
-                                                style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
-                                                <div class="card-img-scale-wrapper rounded-3">
-                                                    <!-- Card Image -->
-                                                    <img src="https://turixcam-images.b-cdn.net/HUAUCHINANGO.png"
-                                                        class="card-img" alt="">
-                                                    <!-- Overlay -->
-                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
-                                                        <!-- Card overlay top -->
-                                                        <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">Puebla</span>
-                                                            <span class="badge text-bg-white"><i
-                                                                    class="fa-solid fa-sun text-warning me-2"></i>25°</span>
-                                                        </div>
-                                                        <!-- Card overlay bottom -->
-                                                        <div class="w-100 mt-auto">
-                                                            <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5">Zacatlan </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Card body -->
-                                                <div class="card-body px-2">
-                                                    <!-- Title -->
-                                                    <h4 class="card-title text-center"><a href="/camaras/detalle"
-                                                            class="stretched-link">Reserva natural cascada</a></h4>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-2 col-12">
-                                            <div class="card card-img-scale overflow-hidden bg-transparent"
-                                                style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
-                                                <div class="card-img-scale-wrapper rounded-3">
-                                                    <!-- Card Image -->
-                                                    <img src="https://turixcam-images.b-cdn.net/HUAUCHINANGO.png"
-                                                        class="card-img" alt="">
-                                                    <!-- Overlay -->
-                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
-                                                        <!-- Card overlay top -->
-                                                        <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">Puebla</span>
-                                                            <span class="badge text-bg-white"><i
-                                                                    class="fa-solid fa-sun text-warning me-2"></i>25°</span>
-                                                        </div>
-                                                        <!-- Card overlay bottom -->
-                                                        <div class="w-100 mt-auto">
-                                                            <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5">Zacatlan </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Card body -->
-                                                <div class="card-body px-2">
-                                                    <!-- Title -->
-                                                    <h4 class="card-title text-center"><a href="/camaras/detalle"
-                                                            class="stretched-link">Reserva natural cascada</a></h4>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4 col-md-2 col-12">
-                                            <div class="card card-img-scale overflow-hidden bg-transparent"
-                                                style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
-                                                <div class="card-img-scale-wrapper rounded-3">
-                                                    <!-- Card Image -->
-                                                    <img src="https://turixcam-images.b-cdn.net/HUAUCHINANGO.png"
-                                                        class="card-img" alt="">
-                                                    <!-- Overlay -->
-                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
-                                                        <!-- Card overlay top -->
-                                                        <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">Puebla</span>
-                                                            <span class="badge text-bg-white"><i
-                                                                    class="fa-solid fa-sun text-warning me-2"></i>25°</span>
-                                                        </div>
-                                                        <!-- Card overlay bottom -->
-                                                        <div class="w-100 mt-auto">
-                                                            <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5">Zacatlan </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Card body -->
-                                                <div class="card-body px-2">
-                                                    <!-- Title -->
-                                                    <h4 class="card-title text-center text-light"><a
-                                                            href="/camaras/detalle" class="stretched-link">Reserva
-                                                            natural cascada</a></h4>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 <!-- Tab content item END -->
@@ -321,70 +230,41 @@
                                 <!-- Tab content item START -->
                                 <div class="tab-pane fade" id="tab-1-2" role="tabpanel">
                                     <div class="row mt-3 d-flex justify-content-center">
+                                        {% for items in guardados %}
                                         <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="card card-img-scale overflow-hidden bg-transparent">
+                                            <div class="card card-img-scale overflow-hidden bg-transparent"
+                                                style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
                                                 <div class="card-img-scale-wrapper rounded-3">
                                                     <!-- Card Image -->
-                                                    <img src="https://turixcam-images.b-cdn.net/Valqurico/valquirico.jpg"
+                                                    <img src="{{items.lugar.imagen_picture.url}}"
                                                         class="card-img" alt="">
                                                     <!-- Overlay -->
-                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
+                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
                                                         <!-- Card overlay top -->
                                                         <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">Puebla</span>
+                                                            <span class="badge text-bg-dark">{{items.lugar.estado}}</span>
                                                             <span class="badge text-bg-white"><i
-                                                                    class="fa-solid fa-cloud text-info me-2"></i>19°</span>
+                                                                    class="fa-solid fa-sun text-warning me-2"></i>25°</span>
                                                         </div>
                                                         <!-- Card overlay bottom -->
                                                         <div class="w-100 mt-auto">
                                                             <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5">Valquirico</span>
+                                                            <span class="badge text-bg-white fs-5">{{items.lugar.municipio}} </span>
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                        
                                                 <!-- Card body -->
                                                 <div class="card-body px-2">
                                                     <!-- Title -->
-                                                    <h5 class="card-title text-center "><a href="/camaras/detalle"
-                                                            class="stretched-link">Valquirico centro</a></h5>
-                                                    <!-- Content -->
-
+                                                    <h4 class="card-title text-center"><a href="/camaras/detalle"
+                                                            class="stretched-link">{{items.lugar.titulo}}</a></h4>
+                                        
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="card card-img-scale overflow-hidden bg-transparent">
-                                                <div class="card-img-scale-wrapper rounded-3">
-                                                    <!-- Card Image -->
-                                                    <img src="https://turixcam-images.b-cdn.net/Valqurico/valquirico.jpg"
-                                                        class="card-img" alt="">
-                                                    <!-- Overlay -->
-                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
-                                                        <!-- Card overlay top -->
-                                                        <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">Puebla</span>
-                                                            <span class="badge text-bg-white"><i
-                                                                    class="fa-solid fa-cloud text-info me-2"></i>19°</span>
-                                                        </div>
-                                                        <!-- Card overlay bottom -->
-                                                        <div class="w-100 mt-auto">
-                                                            <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5">Valquirico</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        {% endfor %}
 
-                                                <!-- Card body -->
-                                                <div class="card-body px-2">
-                                                    <!-- Title -->
-                                                    <h5 class="card-title text-center "><a href="/camaras/detalle"
-                                                            class="stretched-link">Valquirico centro</a></h5>
-                                                    <!-- Content -->
-
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- Tab content item END -->
@@ -396,32 +276,36 @@
                                             <div class="card card-img-scale overflow-hidden bg-transparent">
                                                 <div class="card-img-scale-wrapper rounded-3">
                                                     <!-- Card Image -->
-                                                    <img src="https://turixcam-images.b-cdn.net/Huasca/huasca.jpg" class="card-img" alt="">
+                                                    <img src="https://turixcam-images.b-cdn.net/Huasca/huasca.jpg"
+                                                        class="card-img" alt="">
                                                     <!-- Overlay -->
                                                     <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
                                                         <!-- Card overlay top -->
                                                         <div class="d-flex justify-content-between fs-5">
                                                             <span class="badge text-bg-dark">Hidalgo</span>
-                                                            <span class="badge text-bg-white "><i class="fa-solid fa-sun text-warning me-2"></i>25°</span>
+                                                            <span class="badge text-bg-white "><i
+                                                                    class="fa-solid fa-sun text-warning me-2"></i>25°</span>
                                                         </div>
                                                         <!-- Card overlay bottom -->
                                                         <div class="w-100 mt-auto">
                                                             <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5 ">Huasca de Ocampo</span>
+                                                            <span class="badge text-bg-white fs-5 ">Huasca de
+                                                                Ocampo</span>
                                                         </div>
                                                     </div>
-                                                </div> 
-                                                
+                                                </div>
+
                                                 <!-- Card body -->
                                                 <div class="card-body px-2">
                                                     <!-- Title -->
-                                                    <h5 class="card-title text-center"><a href="/camaras/detalle" class="stretched-link">Cascada colgante</a></h5>
+                                                    <h5 class="card-title text-center"><a href="/camaras/detalle"
+                                                            class="stretched-link">Cascada colgante</a></h5>
                                                     <!-- Content -->
-                                    
+
                                                 </div>
                                             </div>
                                         </div>
-                                     
+
                                     </div>
                                 </div>
                                 <!-- Tab content item END -->
@@ -443,7 +327,7 @@
 
                 <!-- Help -->
                 <div class="col-md-6 col-xxl-4">
-                    <div class="bg-body d-flex rounded-3 h-100 p-4">
+                    <div class=" d-flex rounded-3 h-100 p-4">
                         <h3><i class="fa-solid fa-hand-holding-heart"></i></h3>
                         <div class="ms-3">
                             <h5>24x7 Soporte</h5>
@@ -454,7 +338,7 @@
 
                 <!-- Trust -->
                 <div class="col-md-6 col-xxl-4">
-                    <div class="bg-body d-flex rounded-3 h-100 p-4">
+                    <div class="d-flex rounded-3 h-100 p-4">
                         <h3><i class="fa-solid fa-hand-holding-usd"></i></h3>
                         <div class="ms-3">
                             <h5>Pagos confiables</h5>
@@ -483,46 +367,357 @@
             </div>
         </div>
     </section>
+    <!-- Modal -->
+    <div class="modal fade" id="profile_data" tabindex="-1" aria-labelledby="profile_data" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content" style="background-color: #191b1d !important;">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="profile_dataLabel" style="color: white;">Mi perfil</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" style="background-color: white;"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs nav-bottom-line nav-justified nav-responsive  rounded-top z-index-9 position-relative pt-2 pb-0 px-4"
+                        role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link mb-0 fs-5  active" style="color: #018001;" data-bs-toggle="tab"
+                                href="#profile_info" aria-selected="false" role="tab" tabindex="-1"><i
+                                    class="fa-solid fa-user fa-fw me-2"></i></a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link mb-0 fs-5 " style="color: #0c98ff;" data-bs-toggle="tab" href="#security"
+                                aria-selected="false" role="tab" tabindex="-1"><i
+                                    class="fa-solid fa-lock fa-fw me-2"></i></a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link mb-0 fs-5 " style="color: #fe7514;" data-bs-toggle="tab" href="#contact"
+                                aria-selected="false" role="tab" tabindex="-1"> <i
+                                    class="fa-solid fa-gears fa-fw me-2"></i></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="nav-tabContent">
+
+                        <!-- Tab content item START -->
+                        <div class="tab-pane fade active show" id="profile_info" role="tabpanel">
+                            <form id="form-userinfo" class="needs-validation" novalidate>
+                                <div class="mb-3 me-3 mt-3">
+                                    <label for="exampleInputEmail1" class="form-label">Nombre de usuario</label>
+                                    <input type="text" required value="{{request.user.username}}" class="form-control"
+                                        id="userinfo-nameuser" aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">Puedes utilizarlo para iniciar sesión.
+                                    </div>
+                                    <div class="valid-feedback">Campo completado</div>
+                                    <div class="invalid-feedback">Verifica este campo.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Nombre</label>
+                                    <input required type="text" value="{{request.user.first_name}}" class="form-control"
+                                        id="userinfo-name">
+                                    <div class="valid-feedback">Campo completado</div>
+                                    <div class="invalid-feedback">Verifica este campo.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Apellidos</label>
+                                    <input required type="text" value="{{request.user.last_name}}" class="form-control"
+                                        id="userinfo-lastname">
+                                    <div class="valid-feedback">Campo completado</div>
+                                    <div class="invalid-feedback">Verifica este campo.</div>
+                                </div>
+                                <div class="mb-5">
+                                    <label for="exampleInputPassword1" class="form-label">Correo</label>
+                                    <input required type="email" value="{{request.user.email}}" class="form-control"
+                                        id="userinfo-email">
+                                    <div class="valid-feedback">Campo completado</div>
+                                    <div class="invalid-feedback">Verifica este campo.</div>
+                                </div>
+                                <div class="d-grid gap-2 mt-4 mb-3">
+                                    <button class="btn " id="userinfo-btn"
+                                        style="background-color: #026b02; color: white;"
+                                        type="submit">Actualizar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Tab content item END -->
+
+                        <!-- Tab content item START -->
+                        <div class="tab-pane fade" id="security" role="tabpanel">
+                            {% if is_socialaccount %}
+                            <p class="text-secondary mt-5">Haz iniciado sesión con Google, para cambiar tu contraseña
+                                debes hacerlo en tu cuenta de Google.</p>
+                            {% else %}
+                            <form id="form-pass" class="needs-validation" novalidate>
+                                <div class="mb-3 me-3 mt-3">
+                                    <label for="exampleInputEmail1" class="form-label">Contraseña</label>
+                                    <input type="text" value="********" readonly
+                                        class="form-control text-secondary is-valid" aria-describedby="emailHelp">
+                                    <div id="emailHelp" class="form-text">Ni siquiera nosotros tenemos acceso a tu
+                                        contraseña.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Nueva contraseña</label>
+                                    <input type="password" value="" class="form-control" id="pass-firstpass" required
+                                        minlength="8">
+                                    <div class="valid-feedback">Contraseña válida.</div>
+                                    <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Repite contraseña</label>
+                                    <input type="password" value="" class="form-control" id="pass-secondpass" required
+                                        minlength="8">
+                                    <div class="valid-feedback">Contraseña válida.</div>
+                                    <div class="invalid-feedback">La contraseña debe tener al menos 8 caracteres.</div>
+                                </div>
+                                <div class="d-grid gap-2 mt-4 mb-3">
+                                    <button class="btn" style="background-color: #1487d9; color: white;" id="pass-btn"
+                                        type="submit">Actualizar contraseña</button>
+                                </div>
+                            </form>
+                            {% endif %}
+
+
+                        </div>
+                        <!-- Tab content item END -->
+
+                        <!-- Tab content item START -->
+                        <div class="tab-pane fade" id="contact" role="tabpanel">
+                            <h5 class="mt-3 mb-3">Contactanos</h5>
+                            <form id="form-contacto" class="needs-validation" novalidate>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="contact-motivo" placeholder="Motivo"
+                                        required>
+                                    <label for="floatingInput">Motivo</label>
+                                    <div class="valid-feedback">Campo completado.</div>
+                                    <div class="invalid-feedback">Este campo no puede estar vacío.</div>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" placeholder="Leave a comment here"
+                                        id="contact-descripcion" style="height: 100px" required></textarea>
+                                    <label for="floatingTextarea2">Descripción</label>
+                                    <div class="valid-feedback">Campo completado.</div>
+                                    <div class="invalid-feedback">Este campo no puede estar vacío.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFileMultiple" class="form-label">Agregar imágenes</label>
+                                    <input class="form-control" type="file" id="contact-images" multiple
+                                        accept="image/*" required>
+                                    <div class="valid-feedback">Imágenes seleccionadas.</div>
+                                    <div class="invalid-feedback">Por favor, selecciona al menos una imagen.</div>
+                                </div>
+                                <div class="d-grid gap-2 mt-4 mb-3">
+                                    <button class="btn" style="background-color: #d36415; color: white;"
+                                        id="contact-btn" type="submit">Enviar</button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- Tab content item END -->
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </main>
 
 <!-- **************** MAIN CONTENT END **************** -->
 
+<input type="file" id="portada-input" style="display: none;">
+<input type="file" id="picture-input" style="display: none;">
 
+{% csrf_token %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
-    defer></script>
+
+
+<script>
+function loadAlert(title = undefined, tiempo = 2000) {
+    let timerInterval;
+    Swal.fire({
+    title: title,
+    html: "Quedan <b></b> segundos.",
+    timer: tiempo,
+    timerProgressBar: true,
+    didOpen: () => {
+        Swal.showLoading();
+        const timer = Swal.getPopup().querySelector("b");
+        timerInterval = setInterval(() => {
+        timer.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+        }, 1000);
+    },
+    willClose: () => {
+        clearInterval(timerInterval);
+        location.reload(); 
+    }
+    }).then((result) => {
+    /* Read more about handling dismissals below */
+    if (result.dismiss === Swal.DismissReason.timer) {
+        console.log("I was closed by the timer");
+    }
+    });
+}
+function successAlert(title = undefined) {
+    Swal.fire({
+        title: title,
+        icon: 'success',
+        confirmButtonText: 'Listo',
+        customClass: {
+            confirmButton: 'btn btn-soft-primary',
+        },
+
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            location.reload();
+            
+        } else if (result.isDenied) {
+            Swal.fire('Ocurrio un error, intenta más tarde', '', 'info')
+        }
+    })
+} 
+
+    function getCSRFToken() {
+        const name = 'csrftoken=';
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(';');
+
+        for (let i = 0; i < cookieArray.length; i++) {
+            let cookie = cookieArray[i].trim();
+            if (cookie.indexOf(name) === 0) {
+                return cookie.substring(name.length, cookie.length);
+            }
+        }
+
+        return null;
+    }
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        directionsService.route(
+            {
+                origin: { lat: 20.1446, lng: -98.1638 }, // Coordenadas de Huauchinango centro
+                destination: { lat: 20.1338, lng: -98.3932 }, // Coordenadas de Huasca de Ocampo
+                travelMode: google.maps.TravelMode.DRIVING,
+            },
+            (response, status) => {
+                if (status === "OK") {
+                    directionsRenderer.setDirections(response);
+                } else {
+                    window.alert("Directions request failed due to " + status);
+                }
+            }
+        );
+    }
+    document.getElementById("btn_sm_portada").addEventListener("click", function () {
+        document.getElementById('portada-input').click();
+
+    });
+    document.getElementById("btn_portada").addEventListener("click", function () {
+        document.getElementById('portada-input').click();
+
+    });
+    document.getElementById("btn_picture_profile").addEventListener("click", function () {
+        document.getElementById('picture-input').click();
+
+    });
+    document.getElementById("picture-input").addEventListener("change", function () {
+        
+        let formData = new FormData();
+        const csrfToken = getCSRFToken();
+
+        formData.append('image', this.files[0]);
+        loadAlert("Subiendo foto de perfil",2500);
+        fetch('/up_picture', {  // Reemplaza esto con la ruta a tu vista
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken  // Asegúrate de tener disponible el token CSRF
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.message === 'Todo salió bien, la imagen se ha guardado correctamente.') {
+                    location.reload()
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+    document.getElementById('portada-input').addEventListener('change', function () {
+        let formData = new FormData();
+        const csrfToken = getCSRFToken();
+
+        formData.append('image', this.files[0]);
+        loadAlert("Subiendo portada", 3000);
+        fetch('/up_wallpaper', {  // Reemplaza esto con la ruta a tu vista
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken  // Asegúrate de tener disponible el token CSRF
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.message === 'Todo salió bien, la imagen se ha guardado correctamente.') {
+                    
+                    location.reload();  // Recarga la página
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('form-contacto');
+    var motivoInput = document.getElementById('contact-motivo');
+    var descripcionInput = document.getElementById('contact-descripcion');
+    var imagesInput = document.getElementById('contact-images');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        console.log("hola");
+        if (!validateForm()) {
+            return;
+        }
+
+        // Envía el formulario si la validación es exitosa
+;
+        successAlert("Mensaje enviado correctamente")
+        form.submit()
+    });
+
+    function validateForm() {
+        var isValid = true;
+
+        // Validar el campo "Motivo"
+        if (!motivoInput.value.trim()) {
+            motivoInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            motivoInput.classList.remove('is-invalid');
+            motivoInput.classList.add('is-valid');
+        }
+
+        // Validar el campo "Descripción"
+        if (!descripcionInput.value.trim()) {
+            descripcionInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            descripcionInput.classList.remove('is-invalid');
+            descripcionInput.classList.add('is-valid');
+        }
+
+        // Validar el campo de imágenes
+        if (imagesInput.files.length === 0) {
+            imagesInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            imagesInput.classList.remove('is-invalid');
+            imagesInput.classList.add('is-valid');
+        }
+
+        return isValid;
+    }
+});
 
 </script>
 
-<script>
-    function initMap() {
-      const directionsService = new google.maps.DirectionsService();
-      const directionsRenderer = new google.maps.DirectionsRenderer();
-      const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 7,
-        center: { lat: 20.1446, lng: -98.1638 }, // Coordenadas de Huauchinango centro
-      });
-      directionsRenderer.setMap(map);
-
-      calculateAndDisplayRoute(directionsService, directionsRenderer);
-    }
-
-    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-      directionsService.route(
-        {
-          origin: { lat: 20.1446, lng: -98.1638 }, // Coordenadas de Huauchinango centro
-          destination: { lat: 20.1338, lng: -98.3932 }, // Coordenadas de Huasca de Ocampo
-          travelMode: google.maps.TravelMode.DRIVING,
-        },
-        (response, status) => {
-          if (status === "OK") {
-            directionsRenderer.setDirections(response);
-          } else {
-            window.alert("Directions request failed due to " + status);
-          }
-        }
-      );
-    }
-  </script>
+<script src="{% static 'login/assets/js/profilevalidate.js' %}  "></script>
 {% endblock %}

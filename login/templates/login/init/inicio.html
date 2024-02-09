@@ -14,7 +14,6 @@
 
 {% block content %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<link rel="stylesheet" type="text/css" href="{% static 'assets/vendor/tiny-slider/tiny-slider.css' %} ">
 <style>
     .swiper {
         width: 100%;
@@ -114,6 +113,27 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+    .sep-sm-6{
+        margin-top: unset;
+    }
+    .titulo-sm{
+        font-size: 3.7rem;
+    }
+    .logo-sm{
+        width: 50% !important;
+    }
+    @media screen and (max-width: 600px) {
+
+    .sep-sm-6 {
+        margin-top: 11rem;
+    }
+    .titulo-sm{
+        font-size: -webkit-xxx-large;
+    }
+    .logo-sm{
+        width: 100% !important;
+    }
+}
 </style>
 <script>
     window.onload = function () {
@@ -135,16 +155,16 @@
 
 
     <section class=" d-flex justify-content-center align-items-center mt-xl-0 mt-5 " style="height: 80vh; margin-bottom: 10vh;">
-        <div class="container">
+        <div class="container sep-sm-6">
             <!-- Content and Image START -->
             <div class="row ">
                 <!-- Content -->
                 <div class="col-lg-7 align-self-start justify-content-center text-center  ">
                     <!-- Title -->
 
-                    <img width="50%" src="{% static 'login/assets/images/logo.png' %} " class="img-fluid" alt="">
-                    <h1 style="font-size: 3.7rem;; color: white;text-shadow: -1px 0 #a097958e, 0 1px #a097958e, 1px 0 #a097958e, 0 -1px #a097958e;"
-                        class="fw-bold">México, como nunca lo habias visto</h1>
+                    <img  src="{% static 'login/assets/images/logo.png' %} " class="img-fluid logo-sm" alt="">
+                    <h1  style=" color: white;text-shadow: -1px 0 #a097958e, 0 1px #a097958e, 1px 0 #a097958e, 0 -1px #a097958e;"
+                        class="fw-bold titulo-sm">México, como nunca lo habias visto</h1>
                     <br>
                     <button type="button" class="mt-lg-0 mt-3 btn btn_inicio btn-outline-light">Explorar</button>
                 </div>

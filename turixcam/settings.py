@@ -40,6 +40,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'camaras',
+    'evento',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'django_bunny',
+
 
 ]
 
@@ -51,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
+
 ]
 
 ROOT_URLCONF = 'turixcam.urls'
@@ -73,6 +82,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'turixcam.wsgi.application'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
 CSRF_TRUSTED_ORIGINS = ['http://turixcam.com', 'https://turixcam.com']
 
 # Database
@@ -81,7 +96,7 @@ CSRF_TRUSTED_ORIGINS = ['http://turixcam.com', 'https://turixcam.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'turixcamdb',
+        'NAME': 'turixcliente',
         'USER': 'root',
         'PASSWORD': 'Rmpv54321',
         'HOST': 'postgresql-156478-0.cloudclusters.net',  # Puedes cambiar esto según tu configuración de PostgreSQL
@@ -137,3 +152,40 @@ MEDIA_ROOT =  os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'login.CustomUser'
+
+#cliente id: 553853177313-1ibj1o1vm885hgosr8pummk8bnhpol9k.apps.googleusercontent.com
+#secreet key: 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
+LOGIN_REDIRECT_URL = "/profile"
+LOGUT_REDIRECT_URL = "/"
+ACCOUNT_LOGOUT_REDIRECT_URL = 'render_init_page'
+LOGIN_URL = 'view_user_login'
+ 
+SOCIALACCOUNT_LOGIN_ON_GET = True
+ACCOUNT_ADAPTER = 'login.myadapter.MyAccountAdapter'
+SOCIALACCOUNT_AUTO_SIGNUP = True
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'OAUTH_PKCE_ENABLED': True,
+    }
+}
+
+
+# Estas se pueden encontrar en el panel de control de tu almacenamiento en `FTP & API Access`
+BUNNY_USERNAME = "imagenes-turixcam-usuarios"
+BUNNY_PASSWORD = "5c174600-2fd4-4239-83673cb011f4-7066-44c8"
+# Este es el código de la región de almacenamiento. Por ejemplo, Los Ángeles es `la`, Singapur es `sg`, etc. El valor predeterminado es `ny` (Nueva York).
+BUNNY_REGION = "la"
+# Opcional. Por ejemplo, `https://myzone.b-cdn.net/`. Se utilizará `MEDIA_URL` si no se establece esto.
+BUNNY_HOSTNAME = "https://turixcam-usuarios-images.b-cdn.net/"
+# Opcional. Por ejemplo, `static/`. Si no se establece, los archivos se almacenarán en el directorio raíz del almacenamiento.
+BUNNY_BASE_DIR = "static/"

@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    {% load socialaccount %}
+
     {% load static %}
 
     {% block title %}
@@ -89,10 +91,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/font-awesome/css/all.min.css' %} ">
     <link rel="stylesheet" type="text/css"
         href="{% static 'login/assets/vendor/bootstrap-icons/bootstrap-icons.css' %} ">
-    <link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/tiny-slider/tiny-slider.css' %} ">
-    <link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/glightbox/css/glightbox.css' %} ">
     <link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/flatpickr/css/flatpickr.min.css' %} ">
-    <link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/choices/css/choices.min.css' %} ">
 
 
     <!-- Theme CSS -->
@@ -106,7 +105,7 @@
     <!-- Header START -->
     <header class="navbar-light header-sticky nav-control ">
         <!-- Logo Nav START -->
-        <nav class="navbar navbar-expand-xl ">
+        <nav class="navbar navbar-expand-xl d-lg-flex d-md-flex d-xl-flex d-none">
             <div class="container">
 
 
@@ -230,22 +229,32 @@
                         <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3"
                             aria-labelledby="profileDropdown">
                             <!-- Profile info -->
-                            <li class="px-3 mb-3">
+                            <li class=" mb-3 px-3">
                                 <div class="d-flex align-items-center">
                                     <!-- Avatar -->
                                     <a class="avatar me-3" href="{% url 'view_user_profile' %}">
-                                        <img class="avatar-img rounded-circle shadow"  href="{% url 'view_user_profile' %}"
-                                            src="{% static 'login/assets/images/logo-icon.svg' %} " alt="avatar">
+                                        <img class="avatar-img rounded-circle shadow"
+                                            href="{% url 'view_user_profile' %}"
+                                            src="{{ user.socialaccount_set.all.0.get_avatar_url }}" alt="avatar">
                                     </a>
+                                    {% if request.user.is_authenticated %}
                                     <div>
-                                        <a class="h6 mt-2 mt-sm-0" href="{% url 'view_user_login' %}">Registrate</a>
+                                        <a class="h6 mt-2 mt-sm-0" href="{% url 'view_user_profile' %}">{{request.user.username}}</a>
                                         <p class="small m-0">Turixta</p>
                                     </div>
+                                    {% else %}
+                                    <div>
+                                        <a class="h6 mt-2 mt-sm-0" href="{% url 'view_user_login' %}">Iniciar sesion</a>
+                                    </div>
+                                    {% endif %}
+
                                 </div>
                             </li>
-
-
-
+                            <li> <hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item " href="#"><i class="bi bi-bookmark-check fa-fw me-2"></i>Guardados</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart fa-fw me-2"></i>Favoritos</a></li>
+                            <li><a class="dropdown-item bg-danger-soft-hover" href="{% url 'function_logout' %}"><i class="bi bi-power fa-fw me-2"></i>Cerrar sesión</a></li>
+                            <li> <hr class="dropdown-divider"></li>
                             <!-- Dark mode options START -->
                             <li>
                                 <div
@@ -286,6 +295,7 @@
                                         </svg>
                                     </button>
                                 </div>
+
                             </li>
                             <!-- Dark mode options END-->
                         </ul>
@@ -484,7 +494,7 @@ Footer END -->
 
             <!-- Nav item Account -->
             <li class="nav-item">
-                <a class="nav-link " id="nav_mobile_perfil" href="#"><i class="bi bi-person-circle fa-fw"></i>
+                <a class="nav-link " id="nav_mobile_perfil" href="{% url 'view_user_profile' %}"><i class="bi bi-person-circle fa-fw"></i>
                     <span class="mb-0 nav-text">Perfil</span>
                 </a>
             </li>
@@ -496,10 +506,7 @@ Footer END -->
     <script src="{% static 'login/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js' %} "></script>
 
     <!-- Vendors -->
-    <script src="{% static 'login/assets/vendor/tiny-slider/tiny-slider.js' %} "></script>
-    <script src="{% static 'login/assets/vendor/glightbox/js/glightbox.js' %} "></script>
     <script src="{% static 'login/assets/vendor/flatpickr/js/flatpickr.min.js' %} "></script>
-    <script src="{% static 'login/assets/vendor/choices/js/choices.min.js' %} "></script>
 
     <!-- ThemeFunctions -->
     <script src="{% static 'login/assets/js/functions.js' %} "></script>

@@ -3,6 +3,7 @@
 
 <head>
     {% load static %}
+{% load socialaccount %}
 
     <title>Turixcam - Inicia sesión</title>
 
@@ -118,7 +119,7 @@ Main Content START -->
                                             </div>
                                             <!-- Google and facebook button -->
                                             <div class="vstack gap-3">
-                                                <a href="#" class="btn btn-light mb-0"><i
+                                                <a href="{% provider_login_url 'google' %}"  class="btn btn-light mb-0"><i
                                                         class="fab fa-fw fa-google text-google-icon me-2"></i>
                                                     Google</a>
                                                 <a href="#" class="btn btn-light mb-0"><i
@@ -135,8 +136,12 @@ Main Content START -->
                 </div>
             </div>
         </section>
+        
         <!-- =======================
+            
 Main Content END -->
+<script src="//accounts.google.com/gsi/client" async></script>
+<div id="g_id_onload" data-client_id="123-secret.apps.googleusercontent.com" data-login_uri="{% url 'google_login_by_token' %}" > </div>
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
 

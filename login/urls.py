@@ -13,6 +13,13 @@ urlpatterns = [
     path('login',views.view_user_login, name="view_user_login"),
     path('signup', views.view_user_signup, name="view_user_signup"),
     path('recovery_password',views.view_user_recovery_password, name="view_user_recovery_password"),
+    path('logout',views.function_logout, name="function_logout"),
+
+    #funciones
+    path('up_wallpaper',views.function_update_wallpaper, name="function_update_wallpaper"),
+    path('up_picture',views.function_update_profile_picture, name="function_update_profile_picture"),
+    path('up_info',views.function_update_info_profile, name="function_update_info_profile"),
+    path('up_password',views.function_update_password, name="function_update_password"),
 
     
 ]
