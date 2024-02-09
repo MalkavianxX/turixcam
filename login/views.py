@@ -52,7 +52,7 @@ def get_saved_profile(user):
     return guardados
 
 def view_user_profile(request):
-    redirect ("https://www.facebook.com/")
+    return redirect ("https://www.facebook.com/")
 
 
 def view_user_login(request):
