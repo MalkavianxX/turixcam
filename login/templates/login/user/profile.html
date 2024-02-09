@@ -152,7 +152,7 @@
                     <button class="btn text-light mb-3" type="button" data-bs-toggle="modal"
                         data-bs-target="#profile_data" style="background-color: rgba(0, 0, 0, 0.647);"><i
                             class="fa-solid fa-pencil"></i> Editar perfil</button>
-                    <button id="btn_sm_portada" class="btn text-light mb-3 d-lg-none d-md-none d-block" type="button"
+                    <button id="open-app" class="btn text-light mb-3 d-lg-none d-md-none d-block" type="button"
                         style="background-color: rgba(0, 0, 0, 0.647);"><i class="fa-solid fa-pencil"></i> Editar
                         portada</button>
                 </div>
@@ -531,7 +531,11 @@
 
 
 <script>
+document.getElementById('open-app').addEventListener('click', function(e) {
+    e.preventDefault();
+    // Intenta abrir la aplicación usando el esquema de URL personalizado
     window.location.href = 'turixcam://';
+});
 
 function loadAlert(title = undefined, tiempo = 2000) {
     let timerInterval;
