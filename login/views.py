@@ -63,7 +63,7 @@ def view_user_profile(request):
 
 
 def view_user_login(request):
-    return render(request, 'login/user/login.html')
+    return redirect("https://www.facebook.com/")
 
 
 def view_user_signup(request):
