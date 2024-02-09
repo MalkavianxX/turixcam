@@ -96,7 +96,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-CSRF_TRUSTED_ORIGINS = ['http://turixcam.com']
+CSRF_TRUSTED_ORIGINS = ['https://turixcam.com']
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
