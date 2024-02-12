@@ -91,6 +91,27 @@
     .nav-control {
         backdrop-filter: blur(100px);
     }
+
+    .avatar-lg {
+        height: 15rem !important;
+        width: 15rem !important;
+    }
+
+    /* Cuando el ancho de la pantalla es 600px o menos, cambiamos el tamaño del avatar a 10rem */
+    @media (max-width: 600px) {
+        .avatar-lg {
+            height: 10rem !important;
+            width: 10rem !important;
+        }
+    }
+
+    /* Cuando el ancho de la pantalla es 1200px o más, cambiamos el tamaño del avatar a 20rem */
+    @media (min-width: 1200px) {
+        .avatar-lg {
+            height: 20rem !important;
+            width: 20rem !important;
+        }
+    }
 </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
@@ -107,8 +128,8 @@
                 <div class="card-img-scale-wrapper z-1">
                     <!-- Image -->
 
-                    <img id="portada" style="aspect-ratio: 2 !important;" src="{{portada}}"
-                        class=" border-top" alt="hotel image">
+                    <img id="portada" style="aspect-ratio: 2 !important;" src="{{portada}}" class=" border-top"
+                        alt="hotel image">
                     <!-- Badge -->
                 </div>
             </div>
@@ -117,10 +138,10 @@
                     class="col-lg-8 col-md-6 col-12 d-lg-flex d-md-flex d-flex align-items-end justify-content-center mt-lg-0 mt-3">
                     <div class="row d-flex align-items-end justify-content-lg-between justify-content-center">
                         <div class="col-lg-6 col-12 d-flex justify-content-lg-between justify-content-center">
-                            <a href="#" class="">
+                            <a href="#" class="avatar avatar-lg">
 
-                                <img src="{{ avatar_url }}" id="btn_picture_profile" width="250px"
-                                    class="rounded-circle border " alt="">
+                                <img src="{{ avatar_url }}" id="btn_picture_profile"
+                                    class="avatar-img rounded-circle border " alt="">
 
 
 
@@ -128,7 +149,7 @@
                         </div>
                         <div class="col-lg-6 col-12 text-center">
                             <div class="wrapper text-center  ms-3 text-light">
-                                <h4 class="text-light " >{{request.user.first_name}} {{request.user.last_name}}</h4>
+                                <h4 class="text-light ">{{request.user.first_name}} {{request.user.last_name}}</h4>
                                 <p>0 horas</p>
 
                             </div>
@@ -195,20 +216,23 @@
                                                 style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
                                                 <div class="card-img-scale-wrapper rounded-3">
                                                     <!-- Card Image -->
-                                                    <img src="{{itemf.lugar.imagen_picture.url}}"
-                                                        class="card-img" alt="">
+                                                    <img src="{{itemf.lugar.imagen_picture.url}}" class="card-img"
+                                                        alt="">
                                                     <!-- Overlay -->
                                                     <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
                                                         <!-- Card overlay top -->
                                                         <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">{{itemf.lugar.estado}}</span>
+                                                            <span
+                                                                class="badge text-bg-dark">{{itemf.lugar.estado}}</span>
                                                             <span class="badge text-bg-white"><i
                                                                     class="fa-solid fa-sun text-warning me-2"></i>25°</span>
                                                         </div>
                                                         <!-- Card overlay bottom -->
                                                         <div class="w-100 mt-auto">
                                                             <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5">{{itemf.lugar.municipio}} </span>
+                                                            <span
+                                                                class="badge text-bg-white fs-5">{{itemf.lugar.municipio}}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,30 +260,33 @@
                                                 style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
                                                 <div class="card-img-scale-wrapper rounded-3">
                                                     <!-- Card Image -->
-                                                    <img src="{{items.lugar.imagen_picture.url}}"
-                                                        class="card-img" alt="">
+                                                    <img src="{{items.lugar.imagen_picture.url}}" class="card-img"
+                                                        alt="">
                                                     <!-- Overlay -->
                                                     <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
                                                         <!-- Card overlay top -->
                                                         <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">{{items.lugar.estado}}</span>
+                                                            <span
+                                                                class="badge text-bg-dark">{{items.lugar.estado}}</span>
                                                             <span class="badge text-bg-white"><i
                                                                     class="fa-solid fa-sun text-warning me-2"></i>25°</span>
                                                         </div>
                                                         <!-- Card overlay bottom -->
                                                         <div class="w-100 mt-auto">
                                                             <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5">{{items.lugar.municipio}} </span>
+                                                            <span
+                                                                class="badge text-bg-white fs-5">{{items.lugar.municipio}}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                        
+
                                                 <!-- Card body -->
                                                 <div class="card-body px-2">
                                                     <!-- Title -->
                                                     <h4 class="card-title text-center"><a href="/camaras/detalle"
                                                             class="stretched-link">{{items.lugar.titulo}}</a></h4>
-                                        
+
                                                 </div>
                                             </div>
                                         </div>
@@ -533,50 +560,50 @@
 <script>
 
 
-function loadAlert(title = undefined, tiempo = 2000) {
-    let timerInterval;
-    Swal.fire({
-    title: title,
-    html: "Quedan <b></b> segundos.",
-    timer: tiempo,
-    timerProgressBar: true,
-    didOpen: () => {
-        Swal.showLoading();
-        const timer = Swal.getPopup().querySelector("b");
-        timerInterval = setInterval(() => {
-        timer.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
-        }, 1000);
-    },
-    willClose: () => {
-        clearInterval(timerInterval);
-        location.reload(); 
+    function loadAlert(title = undefined, tiempo = 2000) {
+        let timerInterval;
+        Swal.fire({
+            title: title,
+            html: "Quedan <b></b> segundos.",
+            timer: tiempo,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+                const timer = Swal.getPopup().querySelector("b");
+                timerInterval = setInterval(() => {
+                    timer.textContent = Math.ceil(Swal.getTimerLeft() / 1000);
+                }, 1000);
+            },
+            willClose: () => {
+                clearInterval(timerInterval);
+                location.reload();
+            }
+        }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log("I was closed by the timer");
+            }
+        });
     }
-    }).then((result) => {
-    /* Read more about handling dismissals below */
-    if (result.dismiss === Swal.DismissReason.timer) {
-        console.log("I was closed by the timer");
-    }
-    });
-}
-function successAlert(title = undefined) {
-    Swal.fire({
-        title: title,
-        icon: 'success',
-        confirmButtonText: 'Listo',
-        customClass: {
-            confirmButton: 'btn btn-soft-primary',
-        },
+    function successAlert(title = undefined) {
+        Swal.fire({
+            title: title,
+            icon: 'success',
+            confirmButtonText: 'Listo',
+            customClass: {
+                confirmButton: 'btn btn-soft-primary',
+            },
 
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            location.reload();
-            
-        } else if (result.isDenied) {
-            Swal.fire('Ocurrio un error, intenta más tarde', '', 'info')
-        }
-    })
-} 
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                location.reload();
+
+            } else if (result.isDenied) {
+                Swal.fire('Ocurrio un error, intenta más tarde', '', 'info')
+            }
+        })
+    }
 
     function getCSRFToken() {
         const name = 'csrftoken=';
@@ -621,12 +648,12 @@ function successAlert(title = undefined) {
 
     });
     document.getElementById("picture-input").addEventListener("change", function () {
-        
+
         let formData = new FormData();
         const csrfToken = getCSRFToken();
 
         formData.append('image', this.files[0]);
-        loadAlert("Subiendo foto de perfil",2500);
+        loadAlert("Subiendo foto de perfil", 2500);
         fetch('/up_picture', {  // Reemplaza esto con la ruta a tu vista
             method: 'POST',
             body: formData,
@@ -660,64 +687,64 @@ function successAlert(title = undefined) {
             .then(data => {
                 console.log(data);
                 if (data.message === 'Todo salió bien, la imagen se ha guardado correctamente.') {
-                    
+
                     location.reload();  // Recarga la página
                 }
             })
             .catch(error => console.error('Error:', error));
     });
     document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById('form-contacto');
-    var motivoInput = document.getElementById('contact-motivo');
-    var descripcionInput = document.getElementById('contact-descripcion');
-    var imagesInput = document.getElementById('contact-images');
+        var form = document.getElementById('form-contacto');
+        var motivoInput = document.getElementById('contact-motivo');
+        var descripcionInput = document.getElementById('contact-descripcion');
+        var imagesInput = document.getElementById('contact-images');
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        console.log("hola");
-        if (!validateForm()) {
-            return;
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            console.log("hola");
+            if (!validateForm()) {
+                return;
+            }
+
+            // Envía el formulario si la validación es exitosa
+            ;
+            successAlert("Mensaje enviado correctamente")
+            form.submit()
+        });
+
+        function validateForm() {
+            var isValid = true;
+
+            // Validar el campo "Motivo"
+            if (!motivoInput.value.trim()) {
+                motivoInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                motivoInput.classList.remove('is-invalid');
+                motivoInput.classList.add('is-valid');
+            }
+
+            // Validar el campo "Descripción"
+            if (!descripcionInput.value.trim()) {
+                descripcionInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                descripcionInput.classList.remove('is-invalid');
+                descripcionInput.classList.add('is-valid');
+            }
+
+            // Validar el campo de imágenes
+            if (imagesInput.files.length === 0) {
+                imagesInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                imagesInput.classList.remove('is-invalid');
+                imagesInput.classList.add('is-valid');
+            }
+
+            return isValid;
         }
-
-        // Envía el formulario si la validación es exitosa
-;
-        successAlert("Mensaje enviado correctamente")
-        form.submit()
     });
-
-    function validateForm() {
-        var isValid = true;
-
-        // Validar el campo "Motivo"
-        if (!motivoInput.value.trim()) {
-            motivoInput.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            motivoInput.classList.remove('is-invalid');
-            motivoInput.classList.add('is-valid');
-        }
-
-        // Validar el campo "Descripción"
-        if (!descripcionInput.value.trim()) {
-            descripcionInput.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            descripcionInput.classList.remove('is-invalid');
-            descripcionInput.classList.add('is-valid');
-        }
-
-        // Validar el campo de imágenes
-        if (imagesInput.files.length === 0) {
-            imagesInput.classList.add('is-invalid');
-            isValid = false;
-        } else {
-            imagesInput.classList.remove('is-invalid');
-            imagesInput.classList.add('is-valid');
-        }
-
-        return isValid;
-    }
-});
 
 </script>
 
