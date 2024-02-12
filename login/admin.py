@@ -14,7 +14,7 @@ class IdeaAdmin(admin.ModelAdmin):
     list_display = ['usuario', 'descripcion', 'imagen']
 
 class ComentariosAdmin(admin.ModelAdmin):
-    list_display= ['user', 'puntuacion', 'text','lugar','fecha','status']
+    list_display= ['puntuacion', 'text','lugar','fecha','status']
 # Registra tus modelos aquí
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Favorito, FavoritoAdmin)
