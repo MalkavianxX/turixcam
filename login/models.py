@@ -71,4 +71,4 @@ class Comentario(models.Model):
 
 
     def __str__(self):
-        return f'{self.usuario.username} - {str(self.puntuacion)}'
+        return f'{self.user.username} - {str(self.puntuacion)}'
