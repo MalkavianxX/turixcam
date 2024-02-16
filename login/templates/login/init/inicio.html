@@ -107,7 +107,9 @@
         -webkit-text-fill-color: transparent;
         text-align: start;
     }
-
+    #globo_init{
+        cursor: pointer;
+    }
     .mitad {
         background: linear-gradient(to bottom, rgba(213, 213, 213, 0.847) 50%, rgba(0, 0, 0, 0.55) 50%);
         -webkit-background-clip: text;
@@ -147,6 +149,18 @@
 
 <script>
 window.onload = function () {
+    // Precarga las imágenes
+    let imgUrls = [
+        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
+        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
+        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png"
+    ];
+    let imgs = imgUrls.map(function(url) {
+        let img = new Image();
+        img.src = url;
+        return img;
+    });
+
     let img = document.getElementById('globo_init');
     img.style.transition = 'transform 0.5s ease-out';
 
@@ -163,15 +177,15 @@ window.onload = function () {
 
         if (clickCount === 3) {
             // Cambia la imagen a parapente y agrega un efecto de explosión
-            img.src = "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png";
+            img.src = imgs[0].src;
             img.style.animation = 'explode 0.5s ease-out';
         } else if (clickCount === 6) {
             // Cambia la imagen a parapente2 y agrega un efecto de explosión
-            img.src = "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png";
+            img.src = imgs[1].src;
             img.style.animation = 'explode 0.5s ease-out';
         } else if (clickCount === 9) {
             // Cambia la imagen a globo y agrega un efecto de explosión
-            img.src = "https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png";
+            img.src = imgs[2].src;
             img.style.animation = 'explode 0.5s ease-out';
             clickCount = 0;  // Reinicia el contador de clics
         }
