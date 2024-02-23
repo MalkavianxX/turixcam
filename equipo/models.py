@@ -9,7 +9,9 @@ class Personal(models.Model):
     telefono = models.CharField(max_length=20)
     correo = models.CharField(max_length=250)
     descripcion = models.TextField(max_length=10000)
-    puesto = models.CharField(max_length=250)
+    mison = models.TextField(max_length=10000, null=True , blank=True)
+    vision = models.TextField(max_length=10000, null=True , blank=True)
+    puesto = models.CharField(max_length=250, null=True , blank=True)
     foto_perfil = models.ImageField(storage=BunnyStorage(), upload_to='perfil_personal/',null=True,blank=True)
     foto_portada = models.ImageField(storage=BunnyStorage(),upload_to='portada_personal/',null=True,blank=True)
 
