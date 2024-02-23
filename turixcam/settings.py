@@ -191,11 +191,11 @@ SOCIALACCOUNT_PROVIDERS = {
 
 
 # Estas se pueden encontrar en el panel de control de tu almacenamiento en `FTP & API Access`
-BUNNY_USERNAME = "imagenes-turixcam-usuarios"
-BUNNY_PASSWORD = "5c174600-2fd4-4239-83673cb011f4-7066-44c8"
+BUNNY_USERNAME = "turixstatic"
+BUNNY_PASSWORD = "cb58e653-373f-432f-9cd02f0643ee-cf5a-43ff"
 # Este es el código de la región de almacenamiento. Por ejemplo, Los Ángeles es `la`, Singapur es `sg`, etc. El valor predeterminado es `ny` (Nueva York).
 BUNNY_REGION = "la"
 # Opcional. Por ejemplo, `https://myzone.b-cdn.net/`. Se utilizará `MEDIA_URL` si no se establece esto.
-BUNNY_HOSTNAME = "https://turixcam-usuarios-images.b-cdn.net/"
+BUNNY_HOSTNAME = "https://staticurix.b-cdn.net/"
 # Opcional. Por ejemplo, `static/`. Si no se establece, los archivos se almacenarán en el directorio raíz del almacenamiento.
 BUNNY_BASE_DIR = "static/"

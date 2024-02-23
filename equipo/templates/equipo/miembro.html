@@ -81,7 +81,7 @@
         width: 100%;
         height: 100%;
         z-index: -1;
-        background-image: url("https://booking.webestica.com/assets/images/blog/13.jpg");
+        background-image: url("{{personal.foto_portada.url}}");
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: cover;
@@ -89,7 +89,8 @@
     }
 
     .nav-control {
-        background-color: transparent !important;;
+        background-color: transparent !important;
+        ;
     }
 
     .avatar-lg {
@@ -112,12 +113,24 @@
             width: 20rem !important;
         }
     }
+
+    .comentarios {
+        text-align: justify !important;
+        font-size: 22px;
+        background-color: transparent !important;
+        border: 0 !important;
+        height: 25vh;
+    }
+
+    .comentarios::-webkit-scrollbar {
+        display: none;
+    }
 </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 <!-- **************** MAIN CONTENT START **************** -->
-<input type="hidden" value="x" id="cel">
-<input type="hidden" value="x" id="mail">
+<input type="hidden" value="{{personal.telefono}}" id="cel">
+<input type="hidden" value="{{personal.correo}}" id="mail">
 
 <div id="background"></div>
 <main>
@@ -130,7 +143,7 @@
                 <div class="col-lg-4 mt-2 col-12 d-flex justify-content-lg-center justify-content-center">
                     <a href="#" class="avatar avatar-lg">
 
-                        <img src="https://booking.webestica.com/assets/images/team/02.jpg " id="btn_picture_profile"
+                        <img src="{{personal.foto_perfil.url}}" id="btn_picture_profile"
                             class="avatar-img rounded-circle border " alt="">
 
 
@@ -139,16 +152,17 @@
                 </div>
                 <div class="col-lg-6 mt-2 col-12 text-center">
                     <div class="wrapper text-center text-light">
-                        <h3 class="text-light">Miguel Angel</h3>
-                        <h3 class="text-light ">López Hernandez</h3>
-                        <p class="text-light mt-lg-4">CEO y fundador</p>
+                        <h3 class="text-light">{{personal.nombre}}</h3>
+                        <h3 class="text-light ">{{personal.apellidom}} {{personal.apellidop}} </h3>
+                        <p class="text-light mt-lg-4">{{personal.puesto}}</p>
 
                     </div>
                     <div class="w-100 mt-5">
-                        <button class="w-50 btn btn-success btn-lg" onclick="window.location.href = 'tel:+1234567890'">
+                        <button class="w-50 btn btn-success btn-lg"
+                            onclick="window.location.href = 'tel:'+document.getElementById('cel').value">
                             <i class="fa-solid fa-phone"></i> Llamar </button>
                         <button class="btn btn-danger btn-lg"
-                            onclick="window.location.href = 'mailto:ejemplo@dominio.com'">
+                            onclick="window.location.href = document.getElementById('mail').value">
                             <i class="fa-solid fa-at"></i> Correo
                         </button>
 
@@ -167,13 +181,12 @@
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link mb-0 fs-4 " data-bs-toggle="tab" href="#tab-1-1"
                                         aria-selected="false" role="tab" tabindex="-1"><i
-                                        class="fa-solid text-success fa-globe fa-fw me-2"></i> Visión</a>
+                                            class="fa-solid text-success fa-globe fa-fw me-2"></i> Visión</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link mb-0 fs-4 " data-bs-toggle="tab" href="#tab-1-2"
                                         aria-selected="false" role="tab" tabindex="-1">
-                                            <i
-                                            class="fa-solid text-info fa-user-tie fa-fw me-2"></i>Acerca de mí</a>
+                                        <i class="fa-solid text-info fa-user-tie fa-fw me-2"></i>Acerca de mí</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link mb-0 fs-4 " data-bs-toggle="tab" href="#tab-1-3"
@@ -190,44 +203,11 @@
 
                                 <!-- Tab content item START -->
                                 <div class="tab-pane fade" id="tab-1-1" role="tabpanel">
-                                    <div class="row me-3 mt-3 d-flex justify-content-center">
-                                        {% for itemf in favoritos %}
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="card card-img-scale overflow-hidden bg-transparent"
-                                                style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
-                                                <div class="card-img-scale-wrapper rounded-3">
-                                                    <!-- Card Image -->
-                                                    <img src="{{itemf.lugar.imagen_picture.url}}" class="card-img"
-                                                        alt="">
-                                                    <!-- Overlay -->
-                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
-                                                        <!-- Card overlay top -->
-                                                        <div class="d-flex justify-content-between fs-5">
-                                                            <span
-                                                                class="badge text-bg-dark">{{itemf.lugar.estado}}</span>
-                                                            <span class="badge text-bg-white"><i
-                                                                    class="fa-solid fa-sun text-warning me-2"></i>25°</span>
-                                                        </div>
-                                                        <!-- Card overlay bottom -->
-                                                        <div class="w-100 mt-auto">
-                                                            <!-- Card category -->
-                                                            <span
-                                                                class="badge text-bg-white fs-5">{{itemf.lugar.municipio}}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                    <div class="row mt-3 d-flex justify-content-center">
+                                        <div class="col-12">
+                                            <textarea readonly class="comentarios form-control">{{personal.vision}}</textarea>
 
-                                                <!-- Card body -->
-                                                <div class="card-body px-2">
-                                                    <!-- Title -->
-                                                    <h4 class="card-title text-center"><a href="/camaras/detalle"
-                                                            class="stretched-link">{{itemf.lugar.titulo}}</a></h4>
-
-                                                </div>
-                                            </div>
                                         </div>
-                                        {% endfor %}
                                     </div>
                                 </div>
                                 <!-- Tab content item END -->
@@ -235,43 +215,11 @@
                                 <!-- Tab content item START -->
                                 <div class="tab-pane fade" id="tab-1-2" role="tabpanel">
                                     <div class="row mt-3 d-flex justify-content-center">
-                                        {% for items in guardados %}
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="card card-img-scale overflow-hidden bg-transparent"
-                                                style="background-color: rgba(0, 0, 0, 0.409); border-radius: 15px;">
-                                                <div class="card-img-scale-wrapper rounded-3">
-                                                    <!-- Card Image -->
-                                                    <img src="{{items.lugar.imagen_picture.url}}" class="card-img"
-                                                        alt="">
-                                                    <!-- Overlay -->
-                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4 ">
-                                                        <!-- Card overlay top -->
-                                                        <div class="d-flex justify-content-between fs-5">
-                                                            <span
-                                                                class="badge text-bg-dark">{{items.lugar.estado}}</span>
-                                                            <span class="badge text-bg-white"><i
-                                                                    class="fa-solid fa-sun text-warning me-2"></i>25°</span>
-                                                        </div>
-                                                        <!-- Card overlay bottom -->
-                                                        <div class="w-100 mt-auto">
-                                                            <!-- Card category -->
-                                                            <span
-                                                                class="badge text-bg-white fs-5">{{items.lugar.municipio}}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="col-12">
+                                            <textarea readonly
+                                                class="comentarios form-control">{{personal.descripcion}}</textarea>
 
-                                                <!-- Card body -->
-                                                <div class="card-body px-2">
-                                                    <!-- Title -->
-                                                    <h4 class="card-title text-center"><a href="/camaras/detalle"
-                                                            class="stretched-link">{{items.lugar.titulo}}</a></h4>
-
-                                                </div>
-                                            </div>
                                         </div>
-                                        {% endfor %}
 
                                     </div>
                                 </div>
@@ -280,39 +228,11 @@
                                 <!-- Tab content item START -->
                                 <div class="tab-pane fade" id="tab-1-3" role="tabpanel">
                                     <div class="row mt-3 me-3 d-flex justify-content-center">
-                                        <div class="col-lg-4 col-12">
-                                            <div class="card card-img-scale overflow-hidden bg-transparent">
-                                                <div class="card-img-scale-wrapper rounded-3">
-                                                    <!-- Card Image -->
-                                                    <img src="https://turixcam-images.b-cdn.net/Huasca/huasca.jpg"
-                                                        class="card-img" alt="">
-                                                    <!-- Overlay -->
-                                                    <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
-                                                        <!-- Card overlay top -->
-                                                        <div class="d-flex justify-content-between fs-5">
-                                                            <span class="badge text-bg-dark">Hidalgo</span>
-                                                            <span class="badge text-bg-white "><i
-                                                                    class="fa-solid fa-sun text-warning me-2"></i>25°</span>
-                                                        </div>
-                                                        <!-- Card overlay bottom -->
-                                                        <div class="w-100 mt-auto">
-                                                            <!-- Card category -->
-                                                            <span class="badge text-bg-white fs-5 ">Huasca de
-                                                                Ocampo</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                        <div class="col-12">
+                                            <textarea readonly class="comentarios form-control"> {{personal.mison}}</textarea>
 
-                                                <!-- Card body -->
-                                                <div class="card-body px-2">
-                                                    <!-- Title -->
-                                                    <h5 class="card-title text-center"><a href="/camaras/detalle"
-                                                            class="stretched-link">Cascada colgante</a></h5>
-                                                    <!-- Content -->
-
-                                                </div>
-                                            </div>
                                         </div>
+
 
                                     </div>
                                 </div>
