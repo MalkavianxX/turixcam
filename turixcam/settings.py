@@ -199,3 +199,10 @@ BUNNY_REGION = "la"
 BUNNY_HOSTNAME = "https://staticurix.b-cdn.net/"
 # Opcional. Por ejemplo, `static/`. Si no se establece, los archivos se almacenarán en el directorio raíz del almacenamiento.
 BUNNY_BASE_DIR = "static/"
+
+
+EMAIL_HOST = 'smtpout.secureserver.net'  # El host de tu servidor de correo
+EMAIL_PORT = 587  # El puerto que usa tu servidor de correo
+EMAIL_HOST_USER = 'soporte@turixcam.com'  # Tu dirección de correo
+EMAIL_HOST_PASSWORD = 'turixcam2023'  # La contraseña de tu correo
+EMAIL_USE_TLS = True  # Si tu servidor de correo usa TLS

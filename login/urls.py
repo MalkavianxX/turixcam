@@ -22,6 +22,8 @@ urlpatterns = [
     path('up_password',views.function_update_password, name="function_update_password"),
     path('fun_login',views.function_login, name="function_login"),
     path('fun_signup',views.function_signup, name="function_signup"),
+    path('fun_recovery',views.function_send_recovery_mail, name="function_send_recovery_mail"),
+
     
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

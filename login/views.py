@@ -1,10 +1,32 @@
 from django.http import JsonResponse
+import json
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout,authenticate, login
 from login.models import CustomUser, Favorito, Guardado  # Importa tu modelo personalizado
 from django.contrib.auth.hashers import make_password
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.conf import settings
+
+def function_send_recovery_mail(request):
+    try:
+        data = json.loads(request.body)
+        email = data.get('email')
+        subject = 'Reestablece tu contraseña'
+        template = get_template('login/email/recovery_password.html')
+        content = template.render()
+        message = EmailMultiAlternatives(subject, '', settings.EMAIL_HOST_USER, [email])
+        message.attach_alternative(content, 'text/html')
+        message.send()
+        return JsonResponse({'status': 'success', 'message': 'Correo enviado correctamente.'})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
+
+
+# Llama a la función para enviar el correo de prueba
+
 
 def is_social_auth(user):
     social_accounts = SocialAccount.objects.filter(user=user)
@@ -62,6 +84,7 @@ def view_user_profile(request):
 
 
 def view_user_login(request):
+
     return render(request, 'login/user/login.html')
 
 
@@ -70,6 +93,8 @@ def view_user_signup(request):
 
 def view_user_recovery_password(request):
     return render(request, 'login/user/recovery_password.html')
+
+
 
 @login_required
 def function_logout(request):
