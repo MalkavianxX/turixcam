@@ -10,6 +10,10 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.conf import settings
 
+
+def maintenance_view(request):
+    return render(request, 'login/init/maintenance.html')
+
 def function_send_recovery_mail(request):
     try:
         data = json.loads(request.body)
