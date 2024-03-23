@@ -68,7 +68,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "allauth.account.middleware.AccountMiddleware",
-    "login.middleware.MaintenanceMiddleware",
 
 ]
 
@@ -113,6 +112,7 @@ DATABASES = {
         'PORT': '19998',       # Puerto predeterminado de PostgreSQL
     }
 }
+
 
 
 # Password validation
