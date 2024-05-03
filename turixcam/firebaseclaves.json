@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "turixcamapp",
+  "private_key_id": "ccc6dd63f9dc808571eb4397ab15bfeb6b618f95",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC7JcAI3jE2WW4m\nok7GHO60UWlUD57/pLHEAmpFO4S322N49BrqR739eok4jbN65D3FgX0UJ5tAtmwV\nYS6xUa2eWQyQmhllFnsdAornlIJMKeJKs7SP0vNf0UX0Q7iPvARp4ZcKbjsKmH+j\nouvk8zfXSQVNuSfHlSEYWfwS5Ez+AFFSeJ+XQsHSD3dkdPdlsUD4OPYxZBBdK53Q\neCdhGNkl2sB+B9d1tKndS6dnGse8zVe6y3Bl+elmLFwmxFjdvgniQQtG2XAZyIzN\nHZzLj1YtxkOm7kR011mh5bGlZEVv5zD350R+xR8PYlAxB5BK/h0YmwNtorBD4UAU\nVzrdHJX3AgMBAAECggEACnULi/NOcKkCnKoJGMzZEb5S0l2lFsfPHxK7eW7f9Z4O\nqt2I+3pSxW0pab2RP9atFPItWQj1heIrm+44O7RCrUxwhUv3C0z8SByyQkpsFXFp\nsZ7lAfxZmQsKi6GVGIL7BCeU1wJdzjPDPhOGdt6YSjFMWJF2BZLxrHiquyuCmda2\nPhif3B3U31oIP61ShwtfCZJufcAagb4Lkwox+6n7D9VSYrmfE4oicoabed420oSs\n0y/jnh/ymfrxo5b1StBA+bUsEK+eO/N/QeZ8YT/2KIdOT53ae/0qUwly716YILcd\nT2AXXQmBpFTmncpI+kl8J3tzNjSGyTrWMxQCTiCk4QKBgQDdStJ4vVzjNsfWAYQK\nHnhD5UJuxg5dUKnufYEhWBfrAQiNREEh0QcwQpNRZK/OyC1Ga+NLcYqDjyndMDIA\nBjM0RoQBi5r6ZO0NcqQJ9qDWogFSQ7I+GKGMbDws5FFyQzOM/25nd/NH1fwhaUaa\n6NDiSYN/IPGtdW8pqQLCqolDOQKBgQDYf/fyOqvHCPiGANJLEWazvtT4GM2Ali9h\nyoWz1Y3zv9ks7kanTRG5CK4hIFwamYBgLFKgaO5MZhJSUzoQA8FgclfUDXoYnskY\n6WIQruDWeekYnGgy+NOhSzWdTeZCYBEI4d0yyzKvP6chT0+D9EAS5O45GoQzepVc\nVRW8atqyrwKBgGXiszEADqpWaH+xxvdZvAmWnpWd/rMcFoFFq5SMmMaMfUF9cXd+\nZA7mOCm7b+6G38GSnt33cszLt3ytWfgE4sJozRJhEoPCwBn29GvZ74eio3Ua0hAh\nCxA6LSKGJLG1GyEJ4e0lnw8uCJ3heK6ODs6BBlgb9OnmLb5CoJC8L+KRAoGBAL4N\nYGCw5ni7xEcGU5T4eprRq+z7APOfY4rKGSLsFkfio0hRB474FdXD6/BCkvf6xnom\njoYodwB0HiNM0kyar1f2KGmLRyJzyX7n6WFR0ygULu6e5s3QJx+RgUhMyRR9dpbA\nh8h+Hkk/bHzOPbRNZy3u770LLQBv3MwIGSOk/cUbAoGBAKPaxypg/IMePeZIcwsr\nj4E+AH4cBDss0xkAF5qPWJLLGPiKWnUGAIA7z7/bNN9/NoZ6F7IKrvxpx4xvxeL3\niXNELCFzpqZGy41R9BYIYz8P6+yfbvlQYivg7tRjhmxtFmjl51bLs4aOFADBjWfM\nT1AZhfdGA+0kgHQrDtLHifVl\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-idm6c@turixcamapp.iam.gserviceaccount.com",
+  "client_id": "110443898968448359497",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-idm6c%40turixcamapp.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

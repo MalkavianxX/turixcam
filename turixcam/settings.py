@@ -12,7 +12,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
+from firebase_admin import auth
+import stripe
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -55,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'django_bunny',
     'equipo',
+    'subscripcion',
 
 
 ]
@@ -207,3 +212,17 @@ EMAIL_PORT = 587  # El puerto que usa tu servidor de correo
 EMAIL_HOST_USER = 'soporte@turixcam.com'  # Tu dirección de correo
 EMAIL_HOST_PASSWORD = 'turixcam2023'  # La contraseña de tu correo
 EMAIL_USE_TLS = True  # Si tu servidor de correo usa TLS
+
+
+cred = credentials.Certificate('turixcam/firebaseclaves.json')
+firebase_admin.initialize_app(cred)
+
+DB= firestore.client()
+
+
+stripe.api_key = "sk_test_51P5x3PKusDeFdtimWQjsL5mbv80TamPCmaG5slFSvnZLpIo3Rsjvwv8I7epJLAyFxjQhDUKg0ROATvlQIpOmX4YZ00No0oKnLF"
+STRIPE_SECRET_KEY = "sk_test_51P5x3PKusDeFdtimWQjsL5mbv80TamPCmaG5slFSvnZLpIo3Rsjvwv8I7epJLAyFxjQhDUKg0ROATvlQIpOmX4YZ00No0oKnLF"
+DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"  # Si no es una nueva instalación
+DJSTRIPE_WEBHOOK_SECRET = "whsec_d4424a2b8c5394094926464764ddc4418b48e4ad891b2f148a0ecffc7ad27217"
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
