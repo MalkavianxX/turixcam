@@ -104,8 +104,6 @@ AUTHENTICATION_BACKENDS = [
 
 CSRF_TRUSTED_ORIGINS = ['https://turixcam.com']
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -113,8 +111,8 @@ DATABASES = {
         'NAME': 'turixcliente',
         'USER': 'root',
         'PASSWORD': 'Rmpv54321',
-        'HOST': 'postgresql-156478-0.cloudclusters.net',  # Puedes cambiar esto según tu configuración de PostgreSQL
-        'PORT': '19998',       # Puerto predeterminado de PostgreSQL
+        'HOST': 'postgresql-172484-0.cloudclusters.net',  
+        'PORT': '10058',        
     }
 }
 
