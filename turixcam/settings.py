@@ -109,7 +109,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'turixcliente',
-        'USER': 'root',
+        'USER': 'rooter',
         'PASSWORD': 'Rmpv54321',
         'HOST': 'postgresql-172484-0.cloudclusters.net',  
         'PORT': '10058',        
