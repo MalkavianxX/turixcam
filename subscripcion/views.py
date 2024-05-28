@@ -6,6 +6,16 @@ from django.conf import settings
 from .FireUser import FireUser
 from .UsuarioInfo import User  
 
+from django.http import FileResponse
+from django.views import View
+import os
+
+class AppleMerchantIdView(View):
+    def get(self, request, *args, **kwargs):
+        file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'static/.well-known/apple-developer-merchantid-domain-association')
+        return FileResponse(open(file_path, 'rb')) 
+
+
 stripe.api_key = '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'
 
 def renderCheckout(request,uid):

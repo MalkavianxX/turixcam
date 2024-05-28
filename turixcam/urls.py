@@ -4,7 +4,8 @@ from django.urls import path
 from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from django.urls import path
+from subscripcion.views import AppleMerchantIdView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('login.urls')),
@@ -13,6 +14,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('equipo/', include('equipo.urls')),
     path('subscripcion/', include('subscripcion.urls')),
+    path('.well-known/apple-developer-merchantid-domain-association', AppleMerchantIdView.as_view()),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
