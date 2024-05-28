@@ -192,7 +192,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'OAUTH_PKCE_ENABLED': True,
     }
 }
-
+ 
 
 # Estas se pueden encontrar en el panel de control de tu almacenamiento en `FTP & API Access`
 BUNNY_USERNAME = "turixstatic"
@@ -218,8 +218,9 @@ firebase_admin.initialize_app(cred)
 DB= firestore.client()
 
 
-stripe.api_key = "sk_test_51P5x3PKusDeFdtimWQjsL5mbv80TamPCmaG5slFSvnZLpIo3Rsjvwv8I7epJLAyFxjQhDUKg0ROATvlQIpOmX4YZ00No0oKnLF"
-STRIPE_SECRET_KEY = "sk_test_51P5x3PKusDeFdtimWQjsL5mbv80TamPCmaG5slFSvnZLpIo3Rsjvwv8I7epJLAyFxjQhDUKg0ROATvlQIpOmX4YZ00No0oKnLF"
+stripe.api_key = "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"
+STRIPE_SECRET_KEY = "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"
+
 DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"  # Si no es una nueva instalación
 DJSTRIPE_WEBHOOK_SECRET = "whsec_d4424a2b8c5394094926464764ddc4418b48e4ad891b2f148a0ecffc7ad27217"
 

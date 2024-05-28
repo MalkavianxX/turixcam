@@ -6,7 +6,7 @@ from django.conf import settings
 from .FireUser import FireUser
 from .UsuarioInfo import User  
 
-stripe.api_key = 'sk_test_51P5x3PKusDeFdtimWQjsL5mbv80TamPCmaG5slFSvnZLpIo3Rsjvwv8I7epJLAyFxjQhDUKg0ROATvlQIpOmX4YZ00No0oKnLF'
+stripe.api_key = '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'
 
 def renderCheckout(request,uid):
     user = FireUser.get(uid = uid)
@@ -52,11 +52,11 @@ def createPaymentIntent(request,uid):
 
   session = stripe.checkout.Session.create(
     line_items=[{
-        'price': "price_1P7470KusDeFdtimBc1zTtzj",
+        'price': "price_1PLWjZKusDeFdtimHAcVHkk7",
         'quantity': 1,
     }],
-    mode='subscription',
-    payment_method_configuration='pmc_1P751iKusDeFdtime14QKdEr',
+    mode='payment',
+    payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
 
     success_url='https://turixcam.com/subscripcion/success/'+uid+'/',
     cancel_url='https://turixcam.com/subscripcion/failure',
