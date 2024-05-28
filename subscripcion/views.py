@@ -35,7 +35,7 @@ def successPayment(request,uid):
         print(email.email)
         user = User.get(correo = email.email)
         user.premium = 'Mega fan'
-        user.credito = int(user.credito) + 50 
+        user.creditos = int(user.credito) + 15
         user.save()
     except Exception as e:
         print(e)
