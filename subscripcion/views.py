@@ -82,6 +82,62 @@ def createPaymentIntentFan(request,uid):
 
   return redirect(session.url, code=303)
 
+
+
+
+
+
+
+
+
+
+
+def successPaymentsup(request,uid):
+    try:
+        print(uid)
+        email = FireUser.get(uid = uid)
+        print(email.email)
+        user = User.get(correo = email.email)
+        user.premium = 'Super'
+        user.creditos = int(user.creditos) + 50
+        user.save()
+    except Exception as e:
+        print(e)
+    return render(request,"pagos/estados/success.html")
+
+
+def createPaymentIntentsup(request,uid):
+
+  session = stripe.checkout.Session.create(
+    line_items=[{
+        'price': "price_1PLyGKKusDeFdtimEdaIkV45",
+        'quantity': 1,
+    }],
+    mode='payment',
+    payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
+
+    success_url='https://turixcam.com/subscripcion/successPaymentsup/'+uid+'/',
+    cancel_url='https://turixcam.com/subscripcion/failure',
+  )
+
+  return redirect(session.url, code=303)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def failurePayment(request):
     return render(request,"pagos/estados/failure.html")
 
