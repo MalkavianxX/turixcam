@@ -12,5 +12,10 @@ urlpatterns = [
     path('success/<str:uid>/', views.successPayment, name='success'),
     path('failure', views.failurePayment, name='failure'),
     path('pending', views.pendingPayment, name='pending'),
+
+    path("createPaymentIntentFan/<str:uid>/", views.createPaymentIntentFan, name="createPaymentIntentFan"),
+    path('successFAN/<str:uid>/', views.successPaymentFAN, name='success'),
+
+
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
