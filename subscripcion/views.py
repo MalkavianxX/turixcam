@@ -68,8 +68,8 @@ def createPaymentIntent(request,uid):
     mode='payment',
     payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
 
-    success_url='http://localhost:8000/subscripcion/success/'+uid+'/',
-    cancel_url='http://localhost:8000/subscripcion/failure',
+    success_url='https://turixcam.com/subscripcion/success/'+uid+'/',
+    cancel_url='https://turixcam.com/subscripcion/failure',
   )
 
   return redirect(session.url, code=303)
