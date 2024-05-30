@@ -111,8 +111,8 @@ DATABASES = {
         'NAME': 'turixcliente',
         'USER': 'rooter',
         'PASSWORD': 'Rmpv54321',
-        'HOST': 'postgresql-172484-0.cloudclusters.net',  
-        'PORT': '10058',        
+        'HOST': 'postgresql-174165-0.cloudclusters.net',  
+        'PORT': '10004',        
     }
 }
 
