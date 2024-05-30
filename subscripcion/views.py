@@ -45,7 +45,7 @@ def successPayment(request,uid):
         print(email.email)
         user = User.get(correo = email.email)
         user.premium = 'Mega fan'
-        user.creditos = int(user.credito) + 15
+        user.creditos = int(user.creditos) + 15
         user.save()
     except Exception as e:
         print(e)
@@ -68,8 +68,8 @@ def createPaymentIntent(request,uid):
     mode='payment',
     payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
 
-    success_url='https://turixcam.com/subscripcion/success/'+uid+'/',
-    cancel_url='https://turixcam.com/subscripcion/failure',
+    success_url='http://localhost:8000/subscripcion/success/'+uid+'/',
+    cancel_url='http://localhost:8000/subscripcion/failure',
   )
 
   return redirect(session.url, code=303)
