@@ -15,6 +15,9 @@ urlpatterns = [
     path('equipo/', include('equipo.urls')),
     path('subscripcion/', include('subscripcion.urls')),
     path('.well-known/apple-developer-merchantid-domain-association', AppleMerchantIdView.as_view()),
+    path('legal/', include('legal.urls')),
+    path('comercio/', include('comercio.urls')),
+
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

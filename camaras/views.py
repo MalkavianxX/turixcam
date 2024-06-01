@@ -7,11 +7,11 @@ from login.models import (
     Comentario
 )  # Importa tu modelo personalizado
 from django.http import JsonResponse
-from .models import Lugar
+from .models import Camara
 
 
-def lugar_existe_byID(id):
-    return Lugar.objects.filter(pk=id).exists()
+def camara_existe_byID(id):
+    return Camara.objects.filter(pk=id).exists()
 
 # Create your views here.
 def view_init_page(request):
@@ -19,11 +19,11 @@ def view_init_page(request):
     return render(request, "camaras/view_init_page.html")
 
 
-def get_clase_favorito(usuario, lugar, modelo):
-    return "btn-danger" if modelo.objects.filter(usuario=usuario, lugar=lugar).exists() else "btn-outline-danger"
+def get_clase_favorito(usuario, camara, modelo):
+    return "btn-danger" if modelo.objects.filter(usuario=usuario, camara=camara).exists() else "btn-outline-danger"
 
-def get_clase_guardado(usuario, lugar, modelo):
-    return "btn-warning" if modelo.objects.filter(usuario=usuario, lugar=lugar).exists() else "btn-outline-warning"
+def get_clase_guardado(usuario, camara, modelo):
+    return "btn-warning" if modelo.objects.filter(usuario=usuario, camara=camara).exists() else "btn-outline-warning"
 
 def get_user_icon_profile(user):
     if user.custom_avatar_uploaded:
@@ -35,8 +35,8 @@ def get_user_icon_profile(user):
   
     return avatar_url  
 
-def get_all_coments(lugar):
-    comentarios = Comentario.objects.filter(lugar=lugar, status=True).order_by('-fecha')
+def get_all_coments(camara):
+    comentarios = Comentario.objects.filter(camara=camara, status=True).order_by('-fecha')
     media = 0.0
     for iter in comentarios:
         iter.user.avatar_url = get_user_icon_profile(iter.user)
@@ -46,8 +46,8 @@ def get_all_coments(lugar):
     return comentarios, "{0:.1f}".format(media)
 
 
-def get_puntuaciones(lugar):
-    comentarios = Comentario.objects.filter(lugar=lugar)
+def get_puntuaciones(camara):
+    comentarios = Comentario.objects.filter(camara=camara)
     total_comentarios = comentarios.count()
     puntuaciones = {i: 0 for i in range(1, 6)}  # Inicializa un diccionario con las puntuaciones del 1 al 5
 
@@ -70,28 +70,28 @@ def get_puntuaciones(lugar):
 
 
 def view_detail_camara(request):
-    lugar = Lugar.objects.get(pk=1)
+    camara = Camara.objects.get(pk=1)
     user = request.user   
-    comentarios,media =  get_all_coments(lugar)     
+    comentarios,media =  get_all_coments(camara)     
     if request.user.is_authenticated:
         context = {
-            "lugar": lugar,
-            "es_favorito": get_clase_favorito(user, lugar, Favorito),
-            "es_guardado": get_clase_guardado(user, lugar, Guardado),
+            "camara": camara,
+            "es_favorito": get_clase_favorito(user, camara, Favorito),
+            "es_guardado": get_clase_guardado(user, camara, Guardado),
             "comentarios": comentarios,
             "total_comentarios": comentarios.count(),
             "media":media,
-            "puntuaciones":get_puntuaciones(lugar),
+            "puntuaciones":get_puntuaciones(camara),
         }
     else:
         context = {
-            "lugar": lugar,
+            "camara": camara,
             "es_favorito": "btn-outline-danger",
             "es_guardado": "btn-outline-warning",
             "comentarios": comentarios,
             "total_comentarios": comentarios.count(),
             "media":media,
-            "puntuaciones":get_puntuaciones(lugar),
+            "puntuaciones":get_puntuaciones(camara),
         }           
     return render(request, "camaras/view_detail.html", context)
 
@@ -102,18 +102,18 @@ def addFavorite(request):
     if request.method == "POST":
         user = request.user
         if request.user.is_authenticated:
-            lugar_id = request.POST.get("id_lugar") 
+            camara_id = request.POST.get("id_camara") 
             try:
-                lugar = Lugar.objects.get(pk=lugar_id)
-            except Lugar.DoesNotExist:
-                return JsonResponse({"error": "El lugar no existe."}, status=400)
+                camara = Camara.objects.get(pk=camara_id)
+            except Camara.DoesNotExist:
+                return JsonResponse({"error": "El camara no existe."}, status=400)
 
-            if Favorito.objects.filter(usuario=user, lugar=lugar).exists():
-                Favorito.objects.get(usuario=user, lugar=lugar).delete()
-                return JsonResponse({"message": "Lugar eliminado.","add":"btn-outline-danger","del":"btn-danger",}, status=200)
+            if Favorito.objects.filter(usuario=user, camara=camara).exists():
+                Favorito.objects.get(usuario=user, camara=camara).delete()
+                return JsonResponse({"message": "Camara eliminado.","add":"btn-outline-danger","del":"btn-danger",}, status=200)
             else:
-                Favorito.objects.create(usuario=user, lugar=lugar)
-                return JsonResponse({'message': 'Lugar agregado.',"add":"btn-danger","del":"btn-outline-danger"}, status=200)
+                Favorito.objects.create(usuario=user, camara=camara)
+                return JsonResponse({'message': 'Camara agregado.',"add":"btn-danger","del":"btn-outline-danger"}, status=200)
         else:
             return JsonResponse({"error": "El usuario no está autenticado."}, status=400)
     else:
@@ -124,18 +124,18 @@ def addGuardado(request):
     if request.method == "POST":
         user = request.user
         if request.user.is_authenticated:
-            lugar_id = request.POST.get("id_lugar")
+            camara_id = request.POST.get("id_camara")
             try:
-                lugar = Lugar.objects.get(pk=lugar_id)
-            except Lugar.DoesNotExist:
-                return JsonResponse({"message": "El lugar no existe."}, status=400)
+                camara = Camara.objects.get(pk=camara_id)
+            except Camara.DoesNotExist:
+                return JsonResponse({"message": "El camara no existe."}, status=400)
 
-            if Guardado.objects.filter(usuario=user, lugar=lugar).exists():
-                Guardado.objects.get(usuario=user, lugar=lugar).delete()
-                return JsonResponse({"message": "Lugar eliminado.","add":"btn-outline-danger","del":"btn-danger",}, status=200)
+            if Guardado.objects.filter(usuario=user, camara=camara).exists():
+                Guardado.objects.get(usuario=user, camara=camara).delete()
+                return JsonResponse({"message": "Camara eliminado.","add":"btn-outline-danger","del":"btn-danger",}, status=200)
             else:
-                Guardado.objects.create(usuario=user, lugar=lugar)
-                return JsonResponse({'message': 'Lugar agregado.',"add":"btn-warning","del":"btn-outline-warning"}, status=200)
+                Guardado.objects.create(usuario=user, camara=camara)
+                return JsonResponse({'message': 'Camara agregado.',"add":"btn-warning","del":"btn-outline-warning"}, status=200)
         else:
             return JsonResponse({"message": "El usuario no está autenticado."}, status=400)
     else:
@@ -147,16 +147,16 @@ def addComentario(request):
     if request.method == "POST":
         user = request.user
         if user.is_authenticated:
-            lugar_id = request.POST.get("id_lugar")
+            camara_id = request.POST.get("id_camara")
             text = request.POST.get("text")
             puntuacion = request.POST.get("puntuacion")
             if not text or not puntuacion:
                 return JsonResponse({"message": "El comentario y la puntuación son obligatorios."}, status=400)
             try:
-                lugar = Lugar.objects.get(pk=lugar_id)
-            except Lugar.DoesNotExist:
-                return JsonResponse({"message": "El lugar no existe."}, status=400)
-            Comentario.objects.create(user=user, lugar=lugar, text=text, puntuacion=float(puntuacion))
+                camara = Camara.objects.get(pk=camara_id)
+            except Camara.DoesNotExist:
+                return JsonResponse({"message": "El camara no existe."}, status=400)
+            Comentario.objects.create(user=user, camara=camara, text=text, puntuacion=float(puntuacion))
             return JsonResponse({'message': 'Comentario agregado.'}, status=200)
         else:
             return redirect('login')

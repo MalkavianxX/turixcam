@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.conf import settings
+from camaras.models import Camara
 
 
 def maintenance_view(request):
@@ -42,8 +43,13 @@ def is_social_auth(user):
         # El usuario inició sesión directamente en tu aplicación
         return False, None
 # Create your views here.
+
 def render_init_page(request):
-    return render(request, 'login/init/inicio.html')
+    camaras = Camara.objects.get()
+    context = {
+        'camaras':camaras,
+    }
+    return render(request, 'login/init/inicio.html', context)
 
 
 def render_detalle_lugar(request):

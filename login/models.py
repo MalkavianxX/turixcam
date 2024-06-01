@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from camaras.models import Lugar
+from camaras.models import Camara
 from django_bunny.storage import BunnyStorage
 
 class CustomUser(AbstractUser):
@@ -8,8 +8,9 @@ class CustomUser(AbstractUser):
  
     foto_perfil = models.ImageField(storage=BunnyStorage(), upload_to='fotos_perfil/',null=True,blank=True)
     custom_avatar_uploaded = models.BooleanField(default=False)
-    horas = models.FloatField(default=0.0)
+    
     fecha = models.DateField(auto_now_add=True)
+    premium = models.CharField(max_length=250, default='free')
 
     class Meta:
         verbose_name = 'Usuario'
@@ -21,28 +22,28 @@ class CustomUser(AbstractUser):
 class Favorito(models.Model):
     usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='favoritos')
     fecha = models.DateField(auto_now_add=True)
-    lugar = models.ForeignKey(Lugar, on_delete=models.CASCADE)
+    camara = models.ForeignKey(Camara, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Favorito'
         verbose_name_plural = 'Favoritos'
-        unique_together = ('usuario', 'lugar',)
+        unique_together = ('usuario', 'camara')
 
     def __str__(self):
-        return f'{self.usuario.username} - {self.lugar.titulo}'
+        return f'{self.usuario.username} - {self.camara.titulo}'
 
 class Guardado(models.Model):
     usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='guardados')
     fecha = models.DateField(auto_now_add=True)
-    lugar = models.ForeignKey(Lugar, on_delete=models.CASCADE)
+    camara = models.ForeignKey(Camara, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Guardado'
         verbose_name_plural = 'Guardados'
-        unique_together = ('usuario', 'lugar',)
+        unique_together = ('usuario', 'camara')
 
     def __str__(self):
-        return f'{self.usuario.username} - {self.lugar.titulo}'
+        return f'{self.usuario.username} - {self.camara.titulo}'
 
 class Idea(models.Model):
     usuario = models.ForeignKey(CustomUser, on_delete= models.CASCADE, related_name='ideas')
@@ -59,7 +60,7 @@ class Idea(models.Model):
 class Comentario(models.Model):
     user = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name='comentarios')
     text = models.TextField(max_length = 10000)
-    lugar = models.ForeignKey(Lugar, on_delete = models.CASCADE)
+    camara = models.ForeignKey(Camara, on_delete = models.CASCADE)
     fecha = models.DateTimeField(auto_now_add=True)
     puntuacion = models.FloatField()
     imagen = models.ImageField(storage=BunnyStorage(), upload_to='comentarios/')

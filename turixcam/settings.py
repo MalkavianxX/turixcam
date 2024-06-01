@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'django_bunny',
     'equipo',
     'subscripcion',
+    'legal',
+    'comercio',
 
 
 ]
@@ -108,8 +110,8 @@ CSRF_TRUSTED_ORIGINS = ['https://turixcam.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'turixcliente',
-        'USER': 'rooter',
+        'NAME': 'turixdata',
+        'USER': 'root',
         'PASSWORD': 'Rmpv54321',
         'HOST': 'postgresql-174165-0.cloudclusters.net',  
         'PORT': '10004',        

@@ -1,0 +1,44 @@
+{% extends 'login/base/base.html' %}{% load static %}
+
+{% block title %}
+<title>Turixcam - Camaras en vivo </title>
+{% endblock %}
+{% block description %}
+<!-- Meta Tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="turixcam.com">
+<meta name="description" content="Turixcam - Terminos y condiciones">
+<style>
+    h4{
+        margin-top: 5vh;
+    }
+
+    p{
+        margin-top: 15px;
+        text-align: justify;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="w-100" style="margin-bottom: 50vh;">
+        <h4>Aviso de provacidad</h4>
+
+
+        <p>
+            Turixcam es una aplicación que se toma muy en serio la protección de sus datos personales. Nosotros, como
+            responsables de la recopilación y tratamiento de sus datos personales, nos adherimos a las regulaciones de
+            la ley mundial de protección de datos.
+            Los datos personales solo se recopilarán en la medida en que sea técnicamente necesario. Los datos
+            recopilados se utilizarán para proporcionar y mejorar nuestros servicios. En caso de que sus datos sean
+            transferidos a terceros solo será bajo una orden judicial.
+            Como usuario, tiene derecho a acceder, rectificar, cancelar y oponerse al tratamiento de sus datos
+            personales.
+            Para ejercer cualquiera de estos derechos, puede ponerse en contacto con nosotros a través de los canales
+            que proporcionaremos en nuestra plataforma.
+            Cualquier cambio en este aviso de privacidad se le notificará a través de nuestra plataforma.
+        </p>
+    </div>
+</div>
+{% endblock %}
