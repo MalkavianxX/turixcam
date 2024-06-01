@@ -17,25 +17,25 @@ class Camara(models.Model):
     def camara_background_path(instance, filename):
         # Conservar la extensión del archivo original
         extension = os.path.splitext(filename)[1]
-        # Construir la ruta con el nombre del cliente y el archivo
-        return f'Camara/{instance.titulo}/background/{instance.cliente}_background{extension}'
+        # Construir la ruta con el nombre del titulo y el archivo
+        return f'Camaras/{instance.titulo}/background/{instance.titulo}_background{extension}'
     def camara_background_dark_path(instance, filename):
         # Conservar la extensión del archivo original
         extension = os.path.splitext(filename)[1]
-        # Construir la ruta con el nombre del cliente y el archivo
-        return f'Camara/{instance.titulo}/backgrounDark/{instance.cliente}_backgroundDark{extension}'
+        # Construir la ruta con el nombre del titulo y el archivo
+        return f'Camaras/{instance.titulo}/backgrounDark/{instance.titulo}_backgroundDark{extension}'
 
     def camara_logo_path(instance, filename):
         # Conservar la extensión del archivo original
         extension = os.path.splitext(filename)[1]
-        # Construir la ruta con el nombre del cliente y el archivo
-        return f'Camara/{instance.titulo}/logo/{instance.cliente}_logo{extension}'
+        # Construir la ruta con el nombre del titulo y el archivo
+        return f'Camaras/{instance.titulo}/logo/{instance.titulo}_logo{extension}'
     
     def camara_pin_path(instance, filename):
         # Conservar la extensión del archivo original
         extension = os.path.splitext(filename)[1]
-        # Construir la ruta con el nombre del cliente y el archivo
-        return f'Camara/{instance.titulo}/pin/{instance.cliente}_pin{extension}'
+        # Construir la ruta con el nombre del titulo y el archivo
+        return f'Camaras/{instance.titulo}/pin/{instance.titulo}_pin{extension}'
 
 
     titulo = models.CharField(max_length=250)
