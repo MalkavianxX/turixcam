@@ -243,9 +243,11 @@ Main Content END -->
             console.log(data);
             if (data.status === '200') {
               // Inicio de sesión exitoso, redirige o actualiza la página si es necesario
+              console.log('se rediracciona')
               window.location.href = "/profile";
             } else {
               // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
+              console.log('no lo hzio')
               alert(data.message);
             }
           })

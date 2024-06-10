@@ -78,8 +78,14 @@ def view_user_profile(request):
     context = {}
     context['favoritos'] = get_favorites_profile(request.user)
     context['guardados'] = get_saved_profile(request.user)
-    context['portadas'] = ImagenesDefault.objects.filter(tipo = 'Portada')
-    context['perfiles'] = ImagenesDefault.objects.filter(tipo = 'Perfil')
+    print(request.user.premium)
+    if request.user.premium == "free":
+
+        context['portadas'] = ImagenesDefault.objects.filter(tipo = 'Portada',acceso = 'free')
+        context['perfiles'] = ImagenesDefault.objects.filter(tipo = 'Perfil', acceso = 'free')
+    else:
+        context['portadas'] = ImagenesDefault.objects.filter(tipo = 'Portada')
+        context['perfiles'] = ImagenesDefault.objects.filter(tipo = 'Perfil')
 
     return render(request, 'login/user/profile.html',context)
 
@@ -241,7 +247,7 @@ def function_login(request):
             if user is not None:
                 # Iniciar sesión y devolver un mensaje de éxito
                 login(request, user)
-                return JsonResponse({'message': 'Usuario creado e inició sesión exitosamente.'}, status=200)
+                return JsonResponse({'message': 'Usuario creado e inició sesión exitosamente.','status':'200'}, status=200)
             else:
                 # Las credenciales son inválidas
                 print("existe en turixcam.com pero no son las credenciales correctas")
@@ -362,8 +368,7 @@ def function_signup(request):
             login(request, django_user)
             return JsonResponse({'message': 'Usuario creado e inició sesión exitosamente.','status':'200'}, status=200)
 
-        # Devolver una respuesta exitosa
-        return JsonResponse({'status': 'ok'}, status=200)
+
 
     except Exception as e:
         # Manejo de errores generales

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head> 
     {% load static %}
 
     <title>Turixcam - Inicia sesión</title>
@@ -162,7 +162,7 @@ Main Content END -->
             })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.status === 'ok') {
+                    if (data.status === '200') {
                         window.location.href = '/profile'
                     } else {
                         // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario

@@ -17,7 +17,7 @@ class ComentariosAdmin(admin.ModelAdmin):
     list_display= ['id','puntuacion', 'text','content_object','fecha','status']
 
 class ImagenesDefaultAdmin(admin.ModelAdmin):
-    list_display = ['id','tipo','imagen']
+    list_display = ['id','tipo','imagen','acceso',]
 # Registra tus modelos aquí
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Favorito, FavoritoAdmin)

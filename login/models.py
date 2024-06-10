@@ -88,6 +88,6 @@ class ImagenesDefault(models.Model):
         return f'Default/{instance.tipo}/{filename}'
     tipo = models.CharField(max_length=50)
     imagen = models.ImageField(storage=BunnyStorage(), upload_to=cliente_logo_path)
-
+    acceso = models.CharField(max_length=50, default='free')
     def __str__(self) -> str:
         return str(self.tipo +' '+self.imagen.name)
