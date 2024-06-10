@@ -1,6 +1,7 @@
 from django.db import models
 from django_bunny.storage import BunnyStorage
 import os
+
 class Stream(models.Model):
     url = models.URLField(max_length=2500)
     key = models.CharField(max_length=2500)
@@ -8,10 +9,10 @@ class Stream(models.Model):
 
     class Meta:
         verbose_name = 'Stream'
-        verbose_name_plural = 'Streams'
+        verbose_name_plural = 'Streams' 
 
     def __str__(self): 
-        return self.url
+        return self.key
 
 class Camara(models.Model):
     def camara_background_path(instance, filename):
@@ -66,4 +67,3 @@ class Camara(models.Model):
     def __str__(self):
         return self.titulo
     
-

@@ -1,9 +1,9 @@
 from django.db import models
-import os
 from django_bunny.storage import BunnyStorage
+import os
 
-# Create your models here.
-class Comercio(models.Model):
+
+class Comercio(models.Model): 
 
     def cliente_logo_path(instance, filename):
         # Conservar la extensión del archivo original
@@ -46,6 +46,17 @@ class Comercio(models.Model):
     estado = models.BooleanField(default=True)
     fecha = models.DateField(auto_now_add=True)
 
+    fire_estado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.cliente
+    
+    def set_estrellas(self):
+        estrellasicons = []
+        for i in range(self.estrellas):
+            estrellasicons.append(i)
+        return estrellasicons
+
 
 class Imagen(models.Model):
     def cliente_galeria_path(instance, filename):
@@ -53,4 +64,5 @@ class Imagen(models.Model):
         return f'Clientes/{instance.comercio.cliente}/galeria/{filename}'
     comercio = models.ForeignKey(Comercio, related_name='imagenes', on_delete=models.CASCADE)
     imagen = models.ImageField(storage=BunnyStorage(), upload_to=cliente_galeria_path, null=True, blank=True)
+
 

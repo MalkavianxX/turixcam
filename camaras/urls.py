@@ -8,7 +8,7 @@ from . import views
 urlpatterns = [
     #vistas view_init_page
     path('buscar',views.view_init_page, name='view_init_page'),
-    path('detalle',views.view_detail_camara, name="view_detail_camara"),
+    path('detalle/<str:id>/',views.view_detail_camara, name="view_detail_camara"),
 
 
     #funciones jsonresponse

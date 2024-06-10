@@ -108,8 +108,11 @@
                                             <select id="form-estado" class="form-select js-choice"
                                                 data-search-enabled="true">
                                                 <option selected value="todos">Todos</option>
-                                                <option value="hidalgo">Hidalgo</option>
-                                                <option value="puebla">Puebla</option>
+                                                {% for est in estados %}
+                                                <option value="{{est}}">{{est}}</option>
+  
+                                                {% endfor %}
+
                                             </select>
                                         </div>
                                     </div>
@@ -125,10 +128,10 @@
                                             <select id="form-municipio" class="form-select js-choice "
                                                 data-search-enabled="true">
                                                 <option selected value="todos">Todos</option>
-                                                <option value="huasca de ocampo">Huasca de Ocampo</option>
-                                                <option value="Huauchinango">Huauchinango</option>
-                                                <option value="zacatlan">Zacatlan</option>
-
+                                                {% for mun in municipios %}
+                                                <option value="{{mun}}">{{mun}}</option>
+  
+                                                {% endfor %}
 
                                             </select>
                                         </div>
@@ -147,9 +150,10 @@
                                             <select id="form-lugar" class="form-select js-choice"
                                                 data-search-enabled="true">
                                                 <option selected value="todos">Todos</option>
-                                                <option value="cascadas">Cascadas </option>
-                                                <option value="puente colgante">Puente colgante </option>
-                                                <option value="centro">Centro </option>
+                                                {% for cam in camaras %}
+                                                <option value="{{cam.titulo}}">{{cam.titulo}}</option>
+  
+                                                {% endfor %}
 
                                             </select>
                                         </div>
@@ -176,26 +180,26 @@
     <section class="pt-0 pt-md-5 mt-xl-0 mt-5 ">
         <div class="container">
             <div class="row ">
-           
-                <div data-crd-estado="Puebla" data-crd-municipio="Huauchinango" data-crd-lugar="Cnetro"
-                    class="col-lg-4 col-md-6 col-12 mb-lg-4">
-                    <div class="card card-img-scale overflow-hidden bg-transparent">
+                {% for camara in camaras %}
+                <div class="col-lg-4 col-md-6 col-12 mb-lg-4" data-crd-estado="{{camara.estado}}" data-crd-municipio="{{camara.municipio}}" data-crd-lugar="{{camar.titulo}}"
+                    >
+                    <div id="{{camara.id}}" onclick="to_detail(this.id);" class="card card-img-scale overflow-hidden bg-transparent">
                         <div class="card-img-scale-wrapper ">
                             <!-- Card Image -->
-                            <img loading="lazy" src="https://turixcam-images.b-cdn.net/Huauchinango/huachinango.png"
-                                style="filter: brightness(0.80);" alt="">
+                            <img class="img-fluid" loading="lazy"  src="{{camara.logo.url}}"
+                                style="filter: brightness(0.80); height: 500px; width: fit-content;" alt="{{camara.titulo}}">
                             <!-- Overlay -->
                             <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
                                 <!-- Card overlay top -->
                                 <div class="d-flex justify-content-between fs-5">
-                                    <span class="badge text-bg-dark">Puebla</span>
+                                    <span class="badge text-bg-dark">{{camara.municipio}}</span>
                                     <span class="badge text-bg-white"><i
                                             class="fa-solid fa-cloud-rain text-info me-2"></i>15°</span>
                                 </div>
                                 <!-- Card overlay bottom -->
                                 <div class="w-100 mt-auto">
                                     <!-- Card category -->
-                                    <span class="badge text-bg-white fs-5">Huauchinango</span>
+                                    <span class="badge text-bg-white fs-5">{{camara.estado}}</span>
                                 </div>
                             </div>
                         </div>
@@ -203,13 +207,15 @@
                         <!-- Card body -->
                         <div class="card-body px-2 bg-blur-100">
                             <!-- Title -->
-                            <h5 class="card-title text-center"><a href="{% url 'view_detail_camara' %}"
-                                    class="stretched-link">Huauchinango centro</a></h5>
+                            <h5 class="card-title text-center"><a href="{% url 'view_detail_camara' camara.id %}"
+                                    class="stretched-link">{{camara.titulo}}</a></h5>
                             <!-- Content -->
 
                         </div>
                     </div>
-                </div>
+                </div> 
+                
+                {% endfor %}
             </div>
         </div>
 
@@ -219,7 +225,14 @@
 </main>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
+    function to_detail(id) {
+        window.location.href = '/camaras/detalle/'+id+'/';
+    };
+</script>
+<script>
+
 $(document).ready(function () {
     const selects = ['estado', 'municipio', 'lugar'];
     const formIds = selects.map(id => `#form-${id}`);
@@ -269,6 +282,8 @@ $(document).ready(function () {
             }
         });
     });
+
+
 });
 
 

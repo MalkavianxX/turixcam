@@ -14,7 +14,7 @@
 
     <!-- Dark mode -->
     <script>
- 
+
     </script>
 
     <!-- Favicon -->
@@ -33,13 +33,13 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'login/assets/css/style.css' %} " />
     <style>
-            body {
-        background-image: url("https://turixcam-images.b-cdn.net/HUAUCHINANGO.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        body {
+            background-image: url("https://turixcam-images.b-cdn.net/HUAUCHINANGO.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
 
-    }
+        }
     </style>
 </head>
 
@@ -52,7 +52,8 @@ Main Content START -->
             <div class="container h-100 d-flex px-0 px-sm-4">
                 <div class="row justify-content-center align-items-center m-auto">
                     <div class="col-12">
-                        <div class="bg-mode shadow rounded-3 overflow-hidden" style="background-color: rgba(0, 0, 0, 0.686) !important;">
+                        <div class="bg-mode shadow rounded-3 overflow-hidden"
+                            style="background-color: rgba(0, 0, 0, 0.686) !important;">
                             <div class="row d-flex justify-content-center">
                                 <!-- Vector Image -->
                                 <!-- Information -->
@@ -66,7 +67,8 @@ Main Content START -->
                                         <!-- Title -->
                                         <h1 class="mb-2 h3 text-light">Crea una cuenta</h1>
                                         <p class="mb-0 text-light">
-                                            ¿Ya tienes una cuenta? <a class="text-success" href="{% url 'view_user_login' %}"  >
+                                            ¿Ya tienes una cuenta? <a class="text-success"
+                                                href="{% url 'view_user_login' %}">
                                                 Iniciar sesion</a>
                                         </p>
 
@@ -92,34 +94,19 @@ Main Content START -->
                                                 <div class="mb-2">
                                                     <input type="checkbox" class="form-check-input"
                                                         id="rememberCheck" />
-                                                    <label class="form-check-label text-success" for="rememberCheck">Manten mi sesión 
+                                                    <label class="form-check-label text-success"
+                                                        for="rememberCheck">Manten mi sesión
                                                     </label>
                                                 </div>
                                             </div>
                                             <!-- Button -->
                                             <div>
-                                                <button  id="sup_btn" type="submit" class="btn btn-success w-100 mb-2">
+                                                <button id="sup_btn" type="submit" class="btn btn-success w-100 mb-2">
                                                     Registrate
                                                 </button>
                                             </div>
 
-                                            <!-- Divider -->
-                                            <div class="position-relative my-4">
-                                                <hr />
-                                                <p  style="background-color: #fd7d14bd; border-radius: 15px;" 
-                                                    class="small text-light position-absolute top-50 start-50 mb-2 translate-middle px-2">
-                                                    O registrate con
-                                                </p>
-                                            </div>
-                                            <!-- Google and facebook button -->
-                                            <div class="vstack gap-3 mt-3">
-                                                <a href="#" class="btn btn-light mb-0"><i
-                                                        class="fab fa-fw fa-google text-google-icon me-2"></i>
-                                                    Google</a>
-                                                <a href="#" class="btn btn-light mb-0"><i
-                                                        class="fab fa-fw fa-facebook-f text-facebook me-2"></i>
-                                                    Facebook</a>
-                                            </div>
+
                                         </form>
                                         <!-- Form END -->
                                     </div>
@@ -144,48 +131,48 @@ Main Content END -->
     <!-- ThemeFunctions -->
     <script src="{% static 'login/assets/js/functions.js'%} "></script>
     <script>
-            function getCSRFToken() {
-    const name = 'csrftoken=';
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
+        function getCSRFToken() {
+            const name = 'csrftoken=';
+            const decodedCookie = decodeURIComponent(document.cookie);
+            const cookieArray = decodedCookie.split(';');
 
-    for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i].trim();
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
+            for (let i = 0; i < cookieArray.length; i++) {
+                let cookie = cookieArray[i].trim();
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+
+            return null;
         }
-    }
+        document.getElementById('sup_btn').addEventListener('click', function (event) {
+            event.preventDefault();
+            const csrftoken = getCSRFToken();
 
-    return null;
-}
-        document.getElementById('sup_btn').addEventListener('click', function(event) {
-    event.preventDefault();
-    const csrftoken = getCSRFToken();
+            let formData = new FormData();
+            formData.append('email', document.getElementById('sup_email').value);
+            formData.append('password', document.getElementById('sup_pass').value);
 
-    let formData = new FormData();
-    formData.append('email', document.getElementById('sup_email').value);
-    formData.append('password', document.getElementById('sup_pass').value);
-
-    fetch('fun_signup', {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRFToken': csrftoken  // Asegúrate de tener disponible el token CSRF
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'ok') {
-            window.location.href = '/profile'
-        } else {
-            // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
-            alert(data.error);
-        }
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-});
+            fetch('fun_signup', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': csrftoken  // Asegúrate de tener disponible el token CSRF
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'ok') {
+                        window.location.href = '/profile'
+                    } else {
+                        // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
+                        alert(data.message);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
 
     </script>
 </body>

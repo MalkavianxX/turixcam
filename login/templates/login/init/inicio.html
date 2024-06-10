@@ -254,28 +254,27 @@ window.onscroll = function () {
 
             <div class="swiper mySwiper" >
                 <div class="swiper-wrapper">
-
-                    <div class="swiper-slide">
+                    {% for cam in camaras %}
+                    <div class="swiper-slide" onclick="to_camara({{cam.id}})">
                         <!-- Card START -->
                         <div class="card card-img-scale overflow-hidden bg-transparent">
                             <!-- Image and overlay -->
                             <div class="card-img-scale-wrapper ">
                                 <!-- Image -->
-                                <img src="{% static 'login/assets/images/category/hotel/bitmap.webp' %} "
-                                    class="card-img border-top" alt="Huauchinango">
+                                <img src="{{cam.logo.url}} "
+                                    class="card-img border-top" style="height: 500px;" alt="{{cam.titulo}}">
                                 <!-- Badge -->
                                 <div class="position-absolute bottom-0 start-0 p-3">
                                     <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
-                                            class="bi bi-geo-alt me-2"></i>Huauchinango</div>
+                                            class="bi bi-geo-alt me-2"></i>{{cam.municipio}}</div>
                                 </div>
                             </div>
 
                             <!-- Card body -->
-                            <div class="card-body px-2 border-bottom bg-white-offs">
+                            <div class="card-body px-2 border-bottom " style="backdrop-filter: blur(12px) !important;">
                                 <!-- Title -->
-                                <h5 class="card-title"><a href="{% url 'view_detail_camara' %}"
-                                        class="stretched-link">Centro
-                                        - Desfile</a></h5>
+                                <h5 class="card-title"><a href="#"
+                                        class="stretched-link">{{cam.titulo}}</a></h5>
                                 <!-- Price and rating -->
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h6 class="text-success mb-0">$0 <small class="fw-light">/ vista gratuita</small>
@@ -286,6 +285,7 @@ window.onscroll = function () {
                         </div>
                         <!-- Card END -->
                     </div>
+                    {% endfor %}
       
 
 
@@ -375,7 +375,7 @@ window.onscroll = function () {
         </div>
     </section>
 
-    <section class="mt-5 pt-5 pt-md-8 pb-0 " style="" >
+    <section class="mt-5 pt-5 pt-md-8 pb-0 "  >
 
     </section>
 
@@ -452,7 +452,9 @@ Featured Hotels END -->
         });
 
 
-
+        function to_camara(ref) {
+            window.location.href = '/camaras/detalle/' +ref;
+        }
     </script>
 
     {% endblock %}

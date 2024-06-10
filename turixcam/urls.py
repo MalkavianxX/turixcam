@@ -16,7 +16,7 @@ urlpatterns = [
     path('subscripcion/', include('subscripcion.urls')),
     path('.well-known/apple-developer-merchantid-domain-association', AppleMerchantIdView.as_view()),
     path('legal/', include('legal.urls')),
-    path('comercio/', include('comercio.urls')),
+    path('comercios/', include('comercios.urls')),
 
 
 ]

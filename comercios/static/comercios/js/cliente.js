@@ -1,38 +1,3 @@
-var swiper = new Swiper(".mySwiper", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-
-});
-var swipermore = new Swiper(".mySwipermore", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    coverflowEffect: {
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: true,
-    },
-    pagination: {
-        el: ".swiper-pagination",
-    },
-    breakpoints: {
-        640: {
-            slidesPerView: 1,
-            spaceBetween: 20
-        },
-        768: {
-            slidesPerView: 3,
-            spaceBetween: 30
-        }
-    }
-});
-
 function getCSRFToken() {
     const name = 'csrftoken=';
     const decodedCookie = decodeURIComponent(document.cookie);
@@ -47,81 +12,22 @@ function getCSRFToken() {
 
     return null;
 }
-document.getElementById('btn_addFavorito').addEventListener('click', function(e) {
-    e.preventDefault();
 
-    var lugar = document.getElementById('id_camara').value;
-    const token = getCSRFToken();
-    var formData = new FormData();
-    var boton = document.getElementById('btn_addFavorito');
-    formData.append('id_camara', lugar);
-    boton.style.animation = 'pulse 0.5s';
-    setTimeout(function() {
-        boton.style.animation = '';
-    }, 600);
-    fetch('/camaras/addFavorite', { // Asegúrate de reemplazar esto con la ruta correcta a tu función Django
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': token,
-        },
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        boton.classList.remove(data.del);
-        boton.classList.add(data.add);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-});
-
-document.getElementById('btn_addGuardado').addEventListener('click', function(e) {
-    e.preventDefault();
-
-    var lugar = document.getElementById('id_camara').value;
-    const token = getCSRFToken();
-    var formData = new FormData();
-    var boton = document.getElementById('btn_addGuardado');
-    formData.append('id_camara', lugar);
-    boton.style.animation = 'pulse 0.5s';
-    setTimeout(function() {
-        boton.style.animation = '';
-    }, 600);
-    fetch('/camaras/addGuardado', { // Asegúrate de reemplazar esto con la ruta correcta a tu función Django
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': token,
-        },
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        boton.classList.remove(data.del);
-        boton.classList.add(data.add);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-});
 
 document.getElementById('comen_btn').addEventListener('click', function(e) {
     e.preventDefault();
 
-    var lugar = document.getElementById('id_camara').value;
+    var comercio = document.getElementById('id_comercio').value;
     var text = document.getElementById('comen_text').value;
     var puntuacion = document.getElementById('comen_calificacion').value;
-    console.log(lugar,text,puntuacion);
+    console.log(comercio,text,puntuacion);
     const token = getCSRFToken();
     var formData = new FormData();
-    formData.append('object_id', lugar);
+    formData.append('object_id', comercio);
     formData.append('text', text);
     formData.append('puntuacion', puntuacion);
-    formData.append('object_type','camara');
-    formData.append('app_label','camaras');
-
+    formData.append('object_type','comercio');
+    formData.append('app_label','comercios');
 
     fetch('/camaras/addComentario', 
     { 

@@ -1,0 +1,58 @@
+{% load static %}
+
+<!-- Modal -->
+<div class="modal fade  modal-dialog-scrollable" id="modal-hoteles" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-hoteleslabel">Hoteles</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% if not hoteles %}
+                <div class="modal-body">
+                    <h3 class="text-secondary text-center mt-5 mb-5">Sin información</h3>
+                </div>
+                {% else %}
+                {%for hotel in hoteles %}
+                <div class="row d-flex mb-3 justify-content-between  pointer"
+                    onclick="window.location.href = '/comercios/comercio/'+this.id+'/' " id="{{hotel.id}}">
+                    <div class="col-8 align-self-cente">
+                        <p class="fw-bold " style="font-size: 1.3rem; color: white;">{{hotel.cliente}}</p>
+                        <div style="display: flex; justify-content: left;">
+                            <p class="d-flex align-self-center">{{hotel.estrellas}} &nbsp;&nbsp;</p>
+
+                            <p class=" align-self-center">
+                                {% for i in hotel.iconestrellas %}
+
+                                <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                                {% endfor %}
+                            </p>
+
+                        </div>
+
+                        <p>{{hotel.resumen}}</p>
+                        <div class="d-flex justify-content-start">
+                            {% if hotel.estado %}
+                            <p class="text-success">Abierto &nbsp;&nbsp;</p>
+                            {% else %}
+                            <p class="text-danger">Cerrado</p>
+                            {% endif %}
+                            <p>De {{hotel.apertura}} a {{hotel.cierre}}</p>
+                        </div>
+
+                    </div>
+                    <div class="col-4 d-flex align-self-center">
+                        <img src="{{hotel.logo.url}}" class="img-fluid rounded" alt="">
+                    </div>
+                </div>
+                <hr>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+</div>

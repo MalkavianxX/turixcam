@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
     #vistas view_init_page
+    path('comercio/<str:cm_id>/',views.view_detail_comercio, name='view_detail_comercio'),
 
 
 ]

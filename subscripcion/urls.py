@@ -11,7 +11,7 @@ urlpatterns = [
     path("createPaymentIntent/<str:uid>/", views.createPaymentIntent, name="createPaymentIntent"),
     path('success/<str:uid>/', views.successPayment, name='success'),
     
-    path('failure', views.failurePayment, name='failure'),
+    path('failure/<str:uid>/', views.failurePayment, name='failure'),
     path('pending', views.pendingPayment, name='pending'),
 
     path("createPaymentIntentFan/<str:uid>/", views.createPaymentIntentFan, name="createPaymentIntentFan"),

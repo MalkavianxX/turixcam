@@ -5,7 +5,7 @@ import stripe
 from django.conf import settings
 from .FireUser import FireUser
 from .UsuarioInfo import User  
-
+from login.models import CustomUser
 from django.http import FileResponse
 from django.views import View
 import os
@@ -19,6 +19,8 @@ class AppleMerchantIdView(View):
 stripe.api_key = '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'
 
 def renderCheckout(request,uid):
+
+        
     user = FireUser.get(uid = uid)
     if user is not None:
 
@@ -34,7 +36,15 @@ def renderCheckout(request,uid):
         }
         return render(request,"pagos/checkout/checkout.html",context)
     else:
-        print(user)
+        print('no es usuario postgree')
+        user = CustomUser.objects.get(pk = uid)
+        context = {
+            'email':user.email,
+            'usuario':user.username,
+            'foto':user.foto_perfil,
+            'uid':user.id,
+        }
+        
     return render(request,"pagos/checkout/checkout.html",context)
 
 
@@ -65,33 +75,6 @@ def successPaymentFAN(request,uid):
         print(e)
     return render(request,"pagos/estados/success.html")
 
-
-def createPaymentIntentFan(request,uid):
-
-  session = stripe.checkout.Session.create(
-    line_items=[{
-        'price': "price_1PLy8PKusDeFdtimmD8TtOEX",
-        'quantity': 1,
-    }],
-    mode='payment',
-    payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
-
-    success_url='https://turixcam.com/subscripcion/successFAN/'+uid+'/',
-    cancel_url='https://turixcam.com/subscripcion/failure',
-  )
-
-  return redirect(session.url, code=303)
-
-
-
-
-
-
-
-
-
-
-
 def successPaymentsup(request,uid):
     try:
         print(uid)
@@ -106,6 +89,25 @@ def successPaymentsup(request,uid):
     return render(request,"pagos/estados/success.html")
 
 
+def createPaymentIntentFan(request,uid):
+
+  session = stripe.checkout.Session.create(
+    line_items=[{
+        'price': "price_1PLy8PKusDeFdtimmD8TtOEX",
+        'quantity': 1,
+    }],
+    mode='payment',
+    payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
+
+    success_url='https://turixcam.com/subscripcion/successFAN/'+uid+'/',
+    cancel_url='https://turixcam.com/subscripcion/failure/'+uid+'/',
+  )
+
+  return redirect(session.url, code=303)
+
+
+
+
 def createPaymentIntentsup(request,uid):
 
   session = stripe.checkout.Session.create(
@@ -117,7 +119,7 @@ def createPaymentIntentsup(request,uid):
     payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
 
     success_url='https://turixcam.com/subscripcion/successPaymentsup/'+uid+'/',
-    cancel_url='https://turixcam.com/subscripcion/failure',
+    cancel_url='https://turixcam.com/subscripcion/failure/'+uid+'/',
   )
 
   return redirect(session.url, code=303)
@@ -125,21 +127,11 @@ def createPaymentIntentsup(request,uid):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-def failurePayment(request):
-    return render(request,"pagos/estados/failure.html")
+def failurePayment(request,uid):
+    context = {
+        'uid':uid,    
+    }
+    return render(request,"pagos/estados/failure.html", context)
 
 
 def pendingPayment(request):
@@ -156,7 +148,7 @@ def createPaymentIntent(request,uid):
     payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
 
     success_url='https://turixcam.com/subscripcion/success/'+uid+'/',
-    cancel_url='https://turixcam.com/subscripcion/failure',
+    cancel_url='https://turixcam.com/subscripcion/failure/'+uid+'/',
   )
 
   return redirect(session.url, code=303)

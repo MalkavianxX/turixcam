@@ -19,17 +19,14 @@
     body {
         margin: 0;
         height: 100%;
-
+        background-image: url({{camara.background_web.url}});
+        background-size: cover;
+        /* Ajusta la imagen al tamaño del contenedor */
+        background-repeat: no-repeat;
+        /* Evita que la imagen se repita */
     }
 
-    #myVideo {
-        position: fixed;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        z-index: 0 !important;
-    }
+
 
     header {
         background-color: rgba(0, 0, 0, 0.164) !important;
@@ -82,6 +79,14 @@
         text-align: start;
     }
 
+    .btn_attr {
+        cursor: pointer;
+    }
+
+    .pointer {
+        cursor: pointer !important;
+    }
+
     @keyframes pulse {
         0% {
             transform: scale(1);
@@ -95,14 +100,15 @@
             transform: scale(1);
         }
     }
-</style>
-<!-- **************** MAIN CONTENT START **************** -->
-<video autoplay muted loop id="myVideo">
-    <source src="https://turixcam-images.b-cdn.net/videos/Secuencia%2002.mp4" type="video/mp4">
-</video>
-<main>
-    {% csrf_token %}
 
+    #map {
+        height: 400px;
+        width: 100%;
+    }
+</style>
+
+<main style="height: 100vh !important; width: 100vw !important; overflow-y: scroll !important;">
+    {% csrf_token %}
 
     <!-- =======================
 	Image gallery START -->
@@ -112,16 +118,14 @@
                 <!-- Image -->
                 <div class="col-12 d-flex justify-content-center" style="border-radius: 15px;">
                     <div class="ratio ratio-16x9">
-                        <iframe width="560" height="315"
-                            src="https://www.youtube.com/embed/LfE-vF1wVt0?si=DGa9kjLqi79M03ZB"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen></iframe>
+                        <div id="player"></div>
+
                     </div>
                 </div>
 
             </div>
         </div>
+
     </section>
     <!-- =======================
 	Image gallery END -->
@@ -135,11 +139,7 @@
                     <!-- Meta -->
                     <div class="d-lg-flex justify-content-lg-between mb-1">
                         <!-- Title -->
-                        <div class="mb-2  mb-lg-0">
-                            <h1 class="fs-2">{{lugar.titulo}}, {{lugar.estado}} </h1>
-                            <!-- Location -->
 
-                        </div>
 
                         <!-- Buttons -->
                         <ul class="list-inline text-end">
@@ -152,7 +152,7 @@
                                 <a href="#" id="btn_addGuardado" class="btn btn-sm {{es_guardado}} px-2"><i
                                         class="fa-solid fa-fw fa-bookmark"></i></a>
                             </li>
-                            <input type="hidden" id="id_lugar" value="{{lugar.id}}">
+                            <input type="hidden" id="id_camara" value="{{camara.id}}">
                             <!-- Share icon -->
 
                         </ul>
@@ -182,69 +182,58 @@
                         <div class="card bg-transparent">
                             <!-- Card header -->
                             <div class="card-header border-bottom bg-transparent px-0 pt-0">
-                                <h3 class="mb-0">Acerca de este lugar</h3>
+                                <h1 class="fs-2">{{camara.titulo}} </h1>
                             </div>
 
                             <!-- Card body START -->
                             <div class="card-body pt-4 p-0">
-                                <h5 class="fw-light mb-4">Principales caracteristicas</h5>
+                                <h5 class="fw-light mb-4">¿Qué hacer por aquí?</h5>
 
                                 <!-- Highlights Icons -->
                                 <div class="hstack gap-3 mb-3">
-                                    <div class="icon-lg bg-success h5 rounded-2" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Free wifi">
-                                        <i class="fa-solid fa-wifi"></i>
+                                    <div class="icon-lg  h5 rounded btn_attr" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Hoteles">
+                                        <img data-bs-toggle="modal" data-bs-target="#modal-hoteles"
+                                            src="https://staticurix.b-cdn.net/Recursos%20WEB/ICONS/HotelB.png" alt="">
                                     </div>
-                                    <div class="icon-lg bg-info h5 rounded-2" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Swimming Pool">
-                                        <i class="fa-solid fa-swimming-pool"></i>
+                                    <div class="icon-lg  h5 rounded btn_attr" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Restaurantes">
+                                        <img data-bs-toggle="modal" data-bs-target="#modal-restaurantes"
+                                            src="https://staticurix.b-cdn.net/Recursos%20WEB/ICONS/RestauranteB.png"
+                                            alt="">
                                     </div>
-                                    <div class="icon-lg text-light h5 rounded-2" style="background-color: #fd7e14;"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Central AC">
-                                        <i class="fa-solid fa-snowflake"></i>
+                                    <div class="icon-lg text-light h5 rounded btn_attr" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Atracciones">
+                                        <img data-bs-toggle="modal" data-bs-target="#modal-atractivos"
+                                            src="https://staticurix.b-cdn.net/Recursos%20WEB/ICONS/PlayaB.png" alt="">
                                     </div>
-                                    <div class="icon-lg bg-danger h5 rounded-2" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Free Service">
-                                        <i class="fa-solid fa-concierge-bell"></i>
+                                    <div class="icon-lg  h5 rounded btn_attr" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Servicios">
+                                        <img data-bs-toggle="modal" data-bs-target="#modal-servicios"
+                                            src="https://staticurix.b-cdn.net/Recursos%20WEB/ICONS/EstacionamientoB.png"
+                                            alt="">
                                     </div>
                                 </div>
 
-                                <p class="mb-3 text-light"> Es un hermoso Pueblo Mágico ubicado en el centro de la
-                                    Sierra poblana.
-                                    Este lugar es ideal para el turismo de aventura y naturaleza, ya que puedes
-                                    disfrutar de actividades como ciclismo de montaña, paseos en lancha, pesca, safari
-                                    fotográfico y senderismo. </p>
+                                <p class="mb-3 text-light"> {{camara.descripcion}}</p>
 
-                                <div class="collapse" id="collapseContent">
-                                    <p class="my-3 text-light">Huauchinango está rodeado de ríos y cascadas, y está
-                                        lleno de
-                                        azaleas, conservando un encanto colonial. El colorido zócalo está perfumado por
-                                        azaleas, orquídeas y el aroma de cacahuate tostado. Aquí, las mujeres en trajes
-                                        típicos venden los productos típicos de la localidad.</p>
-                                </div>
-                                <a class="p-0 mb-4 mt-2 btn-more text-light d-flex align-items-center collapsed"
-                                    data-bs-toggle="collapse" href="#collapseContent" role="button"
-                                    aria-expanded="false" aria-controls="collapseContent">
-                                    Ver <span class="see-more ms-1">más</span><span class="see-less ms-1">menos</span><i
-                                        class="fa-solid fa-angle-down ms-2"></i>
-                                </a>
+
 
                                 <!-- List -->
                                 <h5 class="fw-light mb-2">Etiquetas</h5>
                                 <ul class="list-group list-group-borderless mb-0">
                                     <li class="list-group-item text-light h6 fw-light d-flex mb-0"><i
-                                            class="bi bi-patch-check-fill text-success me-2"></i>Pueblo Mágico desde
-                                        2015.</li>
+                                            class="bi bi-patch-check-fill text-success me-2"></i>{{camara.etiquetauno}}
+                                    </li>
                                     <li class="list-group-item text-light h6 fw-light d-flex mb-0"><i
-                                            class="bi bi-patch-check-fill text-info me-2"></i>Cerro del Madroño: Para
-                                        senderismo y vistas panorámicas.</li>
+                                            class="bi bi-patch-check-fill text-info me-2"></i>{{camara.etiquetados}}
+                                    </li>
                                     <li class="list-group-item  h6 fw-light d-flex mb-0"><i
-                                            class="bi bi-patch-check-fill  me-2" style="color: #fd7e14;"></i>Presa de
-                                        Nexapa: Ideal
-                                        para paseos en lancha.</li>
+                                            class="bi bi-patch-check-fill  me-2"
+                                            style="color: #fd7e14;"></i>{{camara.etiquetatres}}</li>
                                     <li class="list-group-item text-light h6 fw-light d-flex mb-0"><i
-                                            class="bi bi-patch-check-fill text-danger me-2 "></i>Conserva un encanto
-                                        colonial. </li>
+                                            class="bi bi-patch-check-fill text-danger me-2 "></i>{{camara.etiquetacuatro}}
+                                    </li>
                                 </ul>
                             </div>
                             <!-- Card body END -->
@@ -323,7 +312,7 @@
                                     <!-- Rating -->
                                     <div class="form-control-bg-light mb-3">
                                         <select class="form-select js-choice" id="comen_calificacion">
-                                            <option value="5" selected="">★★★★★ (5/5)</option>
+                                            <option value="5" selected>★★★★★ (5/5)</option>
                                             <option value="4">★★★★☆ (4/5)</option>
                                             <option value="3">★★★☆☆ (3/5)</option>
                                             <option value="2">★★☆☆☆ (2/5)</option>
@@ -341,23 +330,23 @@
                                     <button type="submit" id="comen_btn" class="btn btn-lg btn-primary mb-0">Comentar <i
                                             class="bi fa-fw bi-arrow-right ms-2"></i></button>
                                     {% else %}
-                                   
-                                    <button type="submit" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-custom-class="custom-tooltip" data-bs-title="Debes iniciar sesión."
-                                         id="comen_btn" class="btn btn-lg btn-primary mb-0">Comentar <i
+
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#modal-login"
+                                        class="btn btn-lg btn-primary mb-0">Comentar <i
                                             class="bi fa-fw bi-arrow-right ms-2"></i></button>
-                                    {%endif %}
+                                    {% endif %}
                                 </form>
                                 <!-- Leave review END -->
-                                <div class="" style="background-color: rgba(0, 0, 0, 0.399); border-radius: 15px;">
+                                <div class="comentarios"
+                                    style="background-color: rgba(0, 0, 0, 0.399); border-radius: 15px;">
                                     <!-- Review item START -->
                                     {% for item in comentarios %}
 
-                                    <div class="d-md-flex my-4 w-100 mb-3">
+                                    <div class="d-flex my-4 w-100 mb-3 ">
                                         <!-- Avatar -->
                                         <div class="mt-3 ms-2 avatar avatar-lg me-3 flex-shrink-0">
-                                            <img class="avatar-img rounded-circle" loading="lazy" src="{{item.user.avatar_url}}"
-                                                alt="avatar">
+                                            <img class="avatar-img rounded-circle" loading="lazy"
+                                                src="{{item.user.avatar_url}}" alt="avatar">
                                         </div>
                                         <!-- Text -->
                                         <div class="w-100 mt-3 ms-2">
@@ -366,12 +355,13 @@
                                                     <h6 class="me-3 mb-0">{{item.user.first_name}} </h6>
                                                     <!-- Info -->
                                                     <ul class="nav nav-divider small mb-2">
-                                                        <li class="nav-item">{{item.fecha}}</li>
-                                                        <li class="nav-item"></li>
+                                                        <li class="nav-item" style="font-size: 0.85em;">{{item.fecha}}
+                                                        </li>
+
                                                     </ul>
                                                 </div>
                                                 <!-- Review star -->
-                                                <div class="icon-md rounded text-bg-warning fs-6">{{item.puntuacion}}
+                                                <div class="icon-md rounded text-bg-warning  fs-6">{{item.puntuacion}}
                                                 </div>
                                             </div>
 
@@ -405,8 +395,8 @@
 
                             <div class="card shadow rounded-3 overflow-hidden">
                                 <a class="weatherwidget-io" href="https://forecast7.com/es/20d18n98d06/huauchinango/"
-                                    data-label_1="HUAUCHINANGO" data-label_2="Pronostico"
-                                    data-theme="weather_one">HUAUCHINANGO Pronostico</a>
+                                    data-label_1="{{camara.titulo}}" data-label_2="Pronostico"
+                                    data-theme="weather_one">{{camara.titulo}} Pronostico</a>
                                 <script>
                                     !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
                                 </script>
@@ -418,26 +408,8 @@
 
                         <!-- Best deal END -->
                         <div class="mb-4 mt-4">
-                            <h3 class="" style="margin-top: 5rem;" >Alojamiento</h3>
-                            <div class="swiper mySwiper">
-                                <div class="swiper-wrapper">
-
-                                    <div class="swiper-slide">
-                                        <!-- Card START -->
-                                        <div class="card  overflow-hidden bg-transparent">
-                                        <div class="card-body">
-                                            <h3>Sin información</h3>
-                                        </div>
-
-                                        </div>
-                                        <!-- Card END -->
-                                    </div>
-
-
-
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
+                            <h3 class="" style="margin-top: 5rem;">Mapa</h3>
+                            <div id="map"></div>
 
 
                         </div>
@@ -451,10 +423,132 @@
     <!-- =======================
 	About hotel END -->
 
+
+
+    {% include "camaras/components/modal-hoteles.html" %}
+    {% include "camaras/components/modal-restaurantes.html" %}
+    {% include "camaras/components/modal-atractivos.html" %}
+    {% include "camaras/components/modal-servicios.html" %}
+    {% include "login/components/login-modal.html" %}
 </main>
+<input type="text" value="{{locaciones}}">
 <!-- **************** MAIN CONTENT END **************** -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script src="{% static 'login/assets/vendor/sticky-js/sticky.min.js' %}"></script>
 <script src="{% static 'camaras/js/funciones_cliente.js' %}"></script>
+
+
+
+<script>
+    // 2. Este código carga la API del reproductor de YouTube de manera asíncrona.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. Esta función crea un <iframe> (y el reproductor de YouTube)
+    //    después de que se descarga el código de la API.
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '360',
+            width: '640',
+            videoId: 'pIoV-zCEV2A',
+            playerVars: {
+                'autoplay': 1,
+                'controls': 1,
+                'showinfo': 0,
+                'rel': 0,
+                'modestbranding': 1,
+                'mute': 1
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. La API llamará a esta función cuando el reproductor de video esté listo.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // 5. La API llama a esta función cuando cambia el estado del reproductor.
+    //    La función indica que cuando se reproduce un video (state=1),
+    //    el reproductor debería reproducir durante seis segundos y luego detenerse.
+    var done = false;
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const starsContainer = document.getElementById('stars');
+        const numStars = parseInt(starsContainer.getAttribute('data-stars'));
+        let stars = '';
+
+        for (let i = 0; i < numStars; i++) {
+            stars += '<i class="fa-solid fa-star" style="color: #FFD43B;"></i>';
+        }
+
+        starsContainer.innerHTML = stars;
+
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 4,
+                center: { lat: -33, lng: 151 }  // Puedes cambiar estas coordenadas al centro de tus ubicaciones.
+            });
+        }
+
+    });
+
+
+</script>
+
+{% if request.user.premium != 'free' %}
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD45ZrDuWFBMy-ggn7T49WVa4zX3WyAxPA&libraries=places&callback=initMap"></script>
+    <script>
+        var locations = {{ locaciones| safe }};
+        console.log(locations)
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: { lat: Number('{{ camara.latitude | safe }}'), lng: Number('{{ camara.longitude | safe }}') },
+            });
+
+            for (var i = 0; i < locations.length; i++) {
+                var icon = {
+                    url: locations[i].icon,
+                    scaledSize: new google.maps.Size(50, 50)
+                };
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(Number(locations[i].lat), Number(locations[i].lng)),
+                    icon: icon,
+                    map: map,
+                    id: locations[i].id
+                });
+
+                marker.addListener('click', function () {
+                    window.location.href = '/camaras/detalle/' + this.id + '/';
+                });
+            }
+        }
+    </script>
+{% else %}
+    <script>
+        var mapElement = document.getElementById('map');
+        mapElement.innerHTML = '<h3 class="text-secondary text-center mt-5 mb-5">Actualiza a Premium para acceder al mapa y mucho más</h3>';
+    </script>
+{% endif %}
+
 {% endblock %}

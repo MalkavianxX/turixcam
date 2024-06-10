@@ -1,0 +1,82 @@
+{% load static %}
+
+
+<div class="modal fade  modal-dialog-scrollable" id="modal-login" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-hoteleslabel">Iniciar sesiòn</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form  id="form-modal-singup" class="mt-4 text-start">{% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label text-light">Correo </label>
+                        <input id="sup_email" type="email" class="form-control" />
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <label class="form-label text-light">Contraseña </label>
+                        <input class="form-control fakepassword" type="password"
+                            id="sup_pass" />
+                        <span
+                            class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3">
+                            <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
+                        </span>
+                    </div>
+                    <div class="mb-3 text-start">
+                        <div class="mb-2">
+                            <input type="checkbox" class="form-check-input"
+                                id="rememberCheck" />
+                            <label class="form-check-label " for="rememberCheck">Manten mi sesión 
+                            </label>
+                        </div>
+                    </div>
+               
+                    <div>
+                        <button  id="btn-modal-singup" type="submit" class="btn btn-orange w-100 mb-2">
+                            Crear cuenta
+                        </button>
+                    </div>
+                    <p class="text-secondary mt-3" style="font-size: 0.8em;"><small>Al crear una cuenta en turixcam.com acepta los terminos y condiciones.</small></p>
+
+
+                </form>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+document.getElementById('form-modal-singup').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var email = document.getElementById('sup_email').value;
+    var password = document.getElementById('sup_pass').value;
+    var csrfToken = document.querySelector('input[name=csrfmiddlewaretoken]').value;
+
+    fetch('/fun_login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken
+        },
+        body: new URLSearchParams({
+            'username': email,
+            'password': password
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        window.location.reload();
+    })
+    .catch(error => console.error(error));
+});
+
+</script>

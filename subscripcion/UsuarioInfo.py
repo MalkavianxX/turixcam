@@ -4,7 +4,7 @@ class DoesNotExist(Exception):
     pass
 
 class User:
-    def __init__(self, id=None, **kwargs):
+    def __init__(self, id=None, **kwargs): 
         self.collection = settings.DB.collection('Usuarios')
         self.id = id
         for k, v in kwargs.items():
