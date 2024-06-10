@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import CustomUser, Favorito, Guardado, Idea, Comentario, ImagenesDefault
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ['id','username', 'first_name', 'last_name', 'foto_perfil', 'foto_portada', 'fecha']
+    list_display = ['id','username', 'first_name', 'last_name', 'foto_perfil', 'foto_portada', 'premium','creditos']
     search_fields = ('username', 'email')
 class FavoritoAdmin(admin.ModelAdmin):
     list_display = ['id','usuario', 'fecha', 'camara']

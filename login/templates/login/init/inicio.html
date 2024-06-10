@@ -149,12 +149,24 @@
 
 <script>
 window.onload = function () {
-    // Precarga las imágenes
-    let imgUrls = [
+    // Precarga las imágenes 
+    console.log('{{request.user.premium}}')
+    if ('{{request.user.premium}}' == "free" ){
+        console.log("verfdad")
+        var imgUrls = [
         "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
         "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
-        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png"
+        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png",
     ];
+    }else{
+        console.log("false")
+        var imgUrls = [
+        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
+        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
+        "https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png",
+    ];
+    }
+    console.log(imgUrls)
     let imgs = imgUrls.map(function(url) {
         let img = new Image();
         img.src = url;
@@ -225,18 +237,42 @@ window.onscroll = function () {
                 <!-- Content -->
                 <div class="col-lg-7 align-self-start justify-content-center text-center  ">
                     <!-- Title -->
-
+                    {% if request.user.premium == "free" %}
                     <img  src="{% static 'login/assets/images/logo.png' %} " class="img-fluid logo-sm" alt="">
+                    {% else %}
+                        <img  src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/logo-premium.png " class="img-fluid logo-sm" alt="">
+
+                    {% endif %}
                     <h1  style=" color: white;text-shadow: -1px 0 #a097958e, 0 1px #a097958e, 1px 0 #a097958e, 0 -1px #a097958e;"
-                        class="fw-bold titulo-sm">México, como nunca lo habias visto</h1>
+                        class="fw-bold titulo-sm">
+                        {% if request.user.premium == "free" %}
+
+                            México, como nunca lo habias visto
+                        {% else %}
+                        MÉXICO CON PREMIUM
+                        {% endif %}
+                        </h1>
                     <br>
-                    <button type="button" class="mt-lg-0 mt-3 btn btn_inicio btn-outline-light">Explorar</button>
+                    <a type="button" href="{% url 'view_init_page' %}" class="mt-lg-0 mt-3 btn btn_inicio btn-outline-light">Explorar</a>
                 </div>
 
                 <!-- Image -->
                 <div class="col-lg-5 icon_float_init z-0 position-relative text-center">
-                    <img style="filter: brightness(0.90);" id="globo_init" class="img-fluid"
-                        src="https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png" alt="">
+                {% if request.user.premium == "free" %}
+                    <img style="filter: brightness(0.90);" 
+                        id="globo_init" 
+                        class="img-fluid"
+                        src="https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png" 
+                        alt=""
+                    >
+                {% else %}
+                    <img style="filter: brightness(0.90);" 
+                        id="globo_init" 
+                        class="img-fluid"
+                        src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png" 
+                        alt=""
+                    >
+                {% endif %}
 
                 </div>
             </div>

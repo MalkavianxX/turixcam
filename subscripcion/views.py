@@ -18,6 +18,21 @@ class AppleMerchantIdView(View):
 
 stripe.api_key = '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'
 
+def get_user_by_id(user_id):
+    # Obtén una referencia al documento que quieres
+    doc_ref = settings.DB.collection('Usuarios').document(user_id)
+
+    # Obtén el documento
+    doc = doc_ref.get()
+
+    if doc.exists:
+        # Si el documento existe, devuelve sus datos
+        return doc.to_dict()
+    else:
+        # Si el documento no existe, devuelve None
+        return None
+
+
 def renderCheckout(request,uid):
 
         
@@ -28,23 +43,27 @@ def renderCheckout(request,uid):
             foto = 'https://turixcam-images.b-cdn.net/Recursos%20WEB/Fotos%20Perfil%20Defecto/D.png'
         else:
             foto = user.photo_url
+        info = get_user_by_id(user.email)
+        
         context = {
             'email': user.email,
             'usuario': user.display_name,
             'foto':foto,
             'uid': uid,
+            'premium':info.get('premium'),
         }
         return render(request,"pagos/checkout/checkout.html",context)
     else:
-        print('no es usuario postgree')
+        print('es usuario postgree')
         user = CustomUser.objects.get(pk = uid)
         context = {
             'email':user.email,
             'usuario':user.username,
             'foto':user.foto_perfil,
             'uid':user.id,
+            'premium':user.premium,
         }
-        
+    
     return render(request,"pagos/checkout/checkout.html",context)
 
 

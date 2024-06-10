@@ -19,7 +19,7 @@ class FireUser:
         except exceptions.FirebaseError as e:
             print("Error al obtener todos los usuarios: ", e)
             return []
-
+    
     @classmethod
     def filter(cls, **kwargs):
         try:

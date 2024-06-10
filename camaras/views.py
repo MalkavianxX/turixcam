@@ -44,12 +44,7 @@ def get_clase_guardado(usuario, camara, modelo):
     return "btn-warning" if modelo.objects.filter(usuario=usuario, camara=camara).exists() else "btn-outline-warning"
 
 def get_user_icon_profile(user):
-    if user.custom_avatar_uploaded:
-        avatar_url = user.foto_perfil.url
-    elif user.socialaccount_set.exists():
-        avatar_url = user.socialaccount_set.all().first().get_avatar_url
-    else:
-        avatar_url = user.foto_perfil.url  # Esto será la URL de la imagen predeterminada
+    avatar_url = user.foto_perfil
   
     return avatar_url  
 
@@ -88,11 +83,8 @@ def get_puntuaciones(obj):
 
     return puntuaciones
 
-
-
  
 def view_detail_camara(request,id):
-    
 
     camara = Camara.objects.get(pk=id)
     camaras = Camara.objects.all().order_by('titulo')
