@@ -240,16 +240,19 @@ window.onscroll = function () {
                     {% if request.user.premium == "free" %}
                     <img  src="{% static 'login/assets/images/logo.png' %} " class="img-fluid logo-sm" alt="">
                     {% else %}
-                        <img  src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/logo-premium.png " class="img-fluid logo-sm" alt="">
+                    <img  src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/logo-premium.png " class="img-fluid logo-sm" alt="">
 
                     {% endif %}
                     <h1  style=" color: white;text-shadow: -1px 0 #a097958e, 0 1px #a097958e, 1px 0 #a097958e, 0 -1px #a097958e;"
                         class="fw-bold titulo-sm">
-                        {% if request.user.premium == "free" %}
-
+                        
+                        {% if request.user.premium %}
+                            
                             México, como nunca lo habias visto
-                        {% else %}
-                        MÉXICO CON PREMIUM
+                            
+                        {% endif %}
+                        {% if request.user.premium != "free" and request.user.is_authenticated  %}
+                            MÉXICO CON PREMIUM
                         {% endif %}
                         </h1>
                     <br>

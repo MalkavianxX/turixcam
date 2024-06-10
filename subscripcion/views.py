@@ -9,6 +9,7 @@ from login.models import CustomUser
 from django.http import FileResponse
 from django.views import View
 import os
+from django.contrib.auth.decorators import login_required
 
 class AppleMerchantIdView(View):
     def get(self, request, *args, **kwargs):
@@ -31,7 +32,6 @@ def get_user_by_id(user_id):
     else:
         # Si el documento no existe, devuelve None
         return None
-
 
 def renderCheckout(request,uid):
 

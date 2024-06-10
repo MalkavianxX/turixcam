@@ -171,7 +171,7 @@ AUTH_USER_MODEL = 'login.CustomUser'
 
 #cliente id: 553853177313-1ibj1o1vm885hgosr8pummk8bnhpol9k.apps.googleusercontent.com
 #secreet key: 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
-LOGIN_REDIRECT_URL = "/profile"
+LOGIN_REDIRECT_URL = "/login"
 LOGUT_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_REDIRECT_URL = 'render_init_page'
 LOGIN_URL = 'view_user_login'

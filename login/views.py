@@ -9,6 +9,7 @@ from django.template.loader import get_template
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 
+
 # Importaciones de modelos
 from login.models import CustomUser, Favorito, Guardado, ImagenesDefault
 from allauth.socialaccount.models import SocialAccount
@@ -50,7 +51,7 @@ def is_social_auth(user):
         # El usuario inició sesión directamente en tu aplicación
         return False, None
 # Create your views here.
-
+@login_required
 def render_init_page(request):
     camaras = Camara.objects.all()
     context = {
@@ -58,7 +59,7 @@ def render_init_page(request):
     } 
     return render(request, 'login/init/inicio.html', context)
 
-
+@login_required
 def render_detalle_lugar(request):
     return render(request, 'login/init/detalle.html')
 

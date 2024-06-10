@@ -11,10 +11,12 @@ from .models import Camara
 from comercios.models import Comercio
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 
 def camara_existe_byID(id):
     return Camara.objects.filter(pk=id).exists()
 
+@login_required
 # Create your views here.
 def view_init_page(request):
     camaras = Camara.objects.all().order_by('titulo')
@@ -83,7 +85,8 @@ def get_puntuaciones(obj):
 
     return puntuaciones
 
- 
+@login_required
+
 def view_detail_camara(request,id):
 
     camara = Camara.objects.get(pk=id)
