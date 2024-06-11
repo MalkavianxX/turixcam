@@ -4,6 +4,7 @@ from .models import CustomUser, Favorito, Guardado, Idea, Comentario, ImagenesDe
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ['id','username', 'first_name', 'last_name', 'foto_perfil', 'foto_portada', 'premium','creditos']
     search_fields = ('username', 'email')
+
 class FavoritoAdmin(admin.ModelAdmin):
     list_display = ['id','usuario', 'fecha', 'camara']
 
@@ -18,6 +19,7 @@ class ComentariosAdmin(admin.ModelAdmin):
 
 class ImagenesDefaultAdmin(admin.ModelAdmin):
     list_display = ['id','tipo','imagen','acceso',]
+    
 # Registra tus modelos aquí
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Favorito, FavoritoAdmin)
