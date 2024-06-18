@@ -67,7 +67,7 @@ def render_detalle_lugar(request):
 
 def get_favorites_profile(user):
     favoritos = Favorito.objects.filter(usuario=user).order_by('-fecha')
-    return favoritos
+    return favoritos 
  
 def get_saved_profile(user):
     guardados = Guardado.objects.filter(usuario=user).order_by('-fecha')
