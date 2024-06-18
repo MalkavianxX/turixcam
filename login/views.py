@@ -91,7 +91,7 @@ def view_user_profile(request):
 
 
 def view_user_login(request):
-
+    print(settings.STRIPE_SECRET_KEY)
     return render(request, 'login/user/login.html')
 
 
