@@ -59,6 +59,30 @@
         background-size: cover;
       }
     </style>
+    <script
+      async
+      src="https://fundingchoicesmessages.google.com/i/pub-5735730034243265?ers=1"
+      nonce="3zsBsjGciiWKQgATuUuhNQ"
+    ></script>
+    <script nonce="3zsBsjGciiWKQgATuUuhNQ">
+      (function () {
+        function signalGooglefcPresent() {
+          if (!window.frames["googlefcPresent"]) {
+            if (document.body) {
+              const iframe = document.createElement("iframe");
+              iframe.style =
+                "width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;";
+              iframe.style.display = "none";
+              iframe.name = "googlefcPresent";
+              document.body.appendChild(iframe);
+            } else {
+              setTimeout(signalGooglefcPresent, 0);
+            }
+          }
+        }
+        signalGooglefcPresent();
+      })();
+    </script>
   </head>
 
   <body>
@@ -165,8 +189,6 @@ Main Content START -->
                             Inicar sesión
                           </button>
                         </div>
-
-    
                       </form>
                       <!-- Form END -->
                     </div>
@@ -198,65 +220,66 @@ Main Content END -->
 
     <!-- ThemeFunctions -->
     <script src="{% static 'login/assets/js/functions.js'%} "></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
-     crossorigin="anonymous"></script>
-       <script>
-    function getCSRFToken() {
-      const name = "csrftoken=";
-      const decodedCookie = decodeURIComponent(document.cookie);
-      const cookieArray = decodedCookie.split(";");
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function getCSRFToken() {
+        const name = "csrftoken=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(";");
 
-      for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i].trim();
-        if (cookie.indexOf(name) === 0) {
-          return cookie.substring(name.length, cookie.length);
+        for (let i = 0; i < cookieArray.length; i++) {
+          let cookie = cookieArray[i].trim();
+          if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+          }
         }
+
+        return null;
       }
+      document
+        .getElementById("login_btn_login")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          const csrftoken = getCSRFToken();
 
-      return null;
-    }
-    document
-      .getElementById("login_btn_login")
-      .addEventListener("click", function (event) {
-        event.preventDefault();
-        const csrftoken = getCSRFToken();
+          let formData = new FormData();
+          formData.append(
+            "username",
+            document.getElementById("login_user").value
+          );
+          formData.append(
+            "password",
+            document.getElementById("login_pass").value
+          );
 
-        let formData = new FormData();
-        formData.append(
-          "username",
-          document.getElementById("login_user").value
-        );
-        formData.append(
-          "password",
-          document.getElementById("login_pass").value
-        );
-
-        fetch("fun_login", {
-          method: "POST",
-          body: formData,
-          headers: {
-            "X-CSRFToken": csrftoken, // Asegúrate de tener disponible el token CSRF
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            if (data.status === '200') {
-              // Inicio de sesión exitoso, redirige o actualiza la página si es necesario
-              console.log('se rediracciona')
-              window.location.href = "/profile";
-            } else {
-              // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
-              console.log('no lo hzio')
-              alert(data.message);
-            }
+          fetch("fun_login", {
+            method: "POST",
+            body: formData,
+            headers: {
+              "X-CSRFToken": csrftoken, // Asegúrate de tener disponible el token CSRF
+            },
           })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      });
-  </script>
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              if (data.status === "200") {
+                // Inicio de sesión exitoso, redirige o actualiza la página si es necesario
+                console.log("se rediracciona");
+                window.location.href = "/profile";
+              } else {
+                // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
+                console.log("no lo hzio");
+                alert(data.message);
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+    </script>
   </body>
-
-
 </html>

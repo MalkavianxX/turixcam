@@ -1,123 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head> 
+  <head>
     {% load static %}
 
     <title>Turixcam - Inicia sesión</title>
 
     <!-- Meta Tags -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <meta name="author" content="Turixcam.com" />
-    <meta name="description" content="Accede a muchos lugares turisticos en directo." />
+    <meta
+      name="description"
+      content="Accede a muchos lugares turisticos en directo."
+    />
 
     <!-- Dark mode -->
-    <script>
-
-    </script>
+    <script></script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static 'login/assets/images/favicon.ico' %}" />
+    <link
+      rel="shortcut icon"
+      href="{% static 'login/assets/images/favicon.ico' %}"
+    />
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap"
+    />
 
-    <link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/font-awesome/css/all.min.css' %} " />
-    <link rel="stylesheet" type="text/css"
-        href="{% static 'login/assets/vendor/bootstrap-icons/bootstrap-icons.css' %} " />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'login/assets/vendor/font-awesome/css/all.min.css' %} "
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'login/assets/vendor/bootstrap-icons/bootstrap-icons.css' %} "
+    />
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static 'login/assets/css/style.css' %} " />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'login/assets/css/style.css' %} "
+    />
     <style>
-        body {
-            background-image: url("https://turixcam-images.b-cdn.net/HUAUCHINANGO.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-
-        }
+      body {
+        background-image: url("https://turixcam-images.b-cdn.net/HUAUCHINANGO.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
     </style>
-</head>
+    <script
+      async
+      src="https://fundingchoicesmessages.google.com/i/pub-5735730034243265?ers=1"
+      nonce="3zsBsjGciiWKQgATuUuhNQ"
+    ></script>
+    <script nonce="3zsBsjGciiWKQgATuUuhNQ">
+      (function () {
+        function signalGooglefcPresent() {
+          if (!window.frames["googlefcPresent"]) {
+            if (document.body) {
+              const iframe = document.createElement("iframe");
+              iframe.style =
+                "width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;";
+              iframe.style.display = "none";
+              iframe.name = "googlefcPresent";
+              document.body.appendChild(iframe);
+            } else {
+              setTimeout(signalGooglefcPresent, 0);
+            }
+          }
+        }
+        signalGooglefcPresent();
+      })();
+    </script>
+  </head>
 
-<body>
+  <body>
     <!-- **************** MAIN CONTENT START **************** -->
     <main>
-        <!-- =======================
+      <!-- =======================
 Main Content START -->
-        <section class="vh-xxl-100">
-            <div class="container h-100 d-flex px-0 px-sm-4">
-                <div class="row justify-content-center align-items-center m-auto">
-                    <div class="col-12">
-                        <div class="bg-mode shadow rounded-3 overflow-hidden"
-                            style="background-color: rgba(0, 0, 0, 0.686) !important;">
-                            <div class="row d-flex justify-content-center">
-                                <!-- Vector Image -->
-                                <!-- Information -->
-                                <div class="col-12 order-1">
-                                    <div class="p-4 p-sm-7 r">
-                                        <!-- Logo -->
-                                        <a href="{% url 'render_init_page' %}" class="d-flex justify-content-center">
-                                            <img class="h-70px mb-4 r" src="{% static 'login/assets/images/logo.png' %}"
-                                                alt="logo" />
-                                        </a>
-                                        <!-- Title -->
-                                        <h1 class="mb-2 h3 text-light">Crea una cuenta</h1>
-                                        <p class="mb-0 text-light">
-                                            ¿Ya tienes una cuenta? <a class="text-success"
-                                                href="{% url 'view_user_login' %}">
-                                                Iniciar sesion</a>
-                                        </p>
+      <section class="vh-xxl-100">
+        <div class="container h-100 d-flex px-0 px-sm-4">
+          <div class="row justify-content-center align-items-center m-auto">
+            <div class="col-12">
+              <div
+                class="bg-mode shadow rounded-3 overflow-hidden"
+                style="background-color: rgba(0, 0, 0, 0.686) !important"
+              >
+                <div class="row d-flex justify-content-center">
+                  <!-- Vector Image -->
+                  <!-- Information -->
+                  <div class="col-12 order-1">
+                    <div class="p-4 p-sm-7 r">
+                      <!-- Logo -->
+                      <a
+                        href="{% url 'render_init_page' %}"
+                        class="d-flex justify-content-center"
+                      >
+                        <img
+                          class="h-70px mb-4 r"
+                          src="{% static 'login/assets/images/logo.png' %}"
+                          alt="logo"
+                        />
+                      </a>
+                      <!-- Title -->
+                      <h1 class="mb-2 h3 text-light">Crea una cuenta</h1>
+                      <p class="mb-0 text-light">
+                        ¿Ya tienes una cuenta?
+                        <a
+                          class="text-success"
+                          href="{% url 'view_user_login' %}"
+                        >
+                          Iniciar sesion</a
+                        >
+                      </p>
 
-                                        <!-- Form START -->
-                                        <form class="mt-4 text-start">
-                                            <!-- Email -->
-                                            <div class="mb-3">
-                                                <label class="form-label text-light">Correo </label>
-                                                <input id="sup_email" type="email" class="form-control" />
-                                            </div>
-                                            <!-- Password -->
-                                            <div class="mb-3 position-relative">
-                                                <label class="form-label text-light">Contraseña </label>
-                                                <input class="form-control fakepassword" type="password"
-                                                    id="sup_pass" />
-                                                <span
-                                                    class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3">
-                                                    <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
-                                                </span>
-                                            </div>
-                                            <!-- Remember me -->
-                                            <div class="mb-3 text-center">
-                                                <div class="mb-2">
-                                                    <input type="checkbox" class="form-check-input"
-                                                        id="rememberCheck" />
-                                                    <label class="form-check-label text-success"
-                                                        for="rememberCheck">Manten mi sesión
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <!-- Button -->
-                                            <div>
-                                                <button id="sup_btn" type="submit" class="btn btn-success w-100 mb-2">
-                                                    Registrate
-                                                </button>
-                                            </div>
-
-
-                                        </form>
-                                        <!-- Form END -->
-                                    </div>
-                                </div>
-                            </div>
+                      <!-- Form START -->
+                      <form class="mt-4 text-start">
+                        <!-- Email -->
+                        <div class="mb-3">
+                          <label class="form-label text-light">Correo </label>
+                          <input
+                            id="sup_email"
+                            type="email"
+                            class="form-control"
+                          />
                         </div>
+                        <!-- Password -->
+                        <div class="mb-3 position-relative">
+                          <label class="form-label text-light"
+                            >Contraseña
+                          </label>
+                          <input
+                            class="form-control fakepassword"
+                            type="password"
+                            id="sup_pass"
+                          />
+                          <span
+                            class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3"
+                          >
+                            <i
+                              class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"
+                            ></i>
+                          </span>
+                        </div>
+                        <!-- Remember me -->
+                        <div class="mb-3 text-center">
+                          <div class="mb-2">
+                            <input
+                              type="checkbox"
+                              class="form-check-input"
+                              id="rememberCheck"
+                            />
+                            <label
+                              class="form-check-label text-success"
+                              for="rememberCheck"
+                              >Manten mi sesión
+                            </label>
+                          </div>
+                        </div>
+                        <!-- Button -->
+                        <div>
+                          <button
+                            id="sup_btn"
+                            type="submit"
+                            class="btn btn-success w-100 mb-2"
+                          >
+                            Registrate
+                          </button>
+                        </div>
+                      </form>
+                      <!-- Form END -->
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </section>
-        <!-- =======================
+          </div>
+        </div>
+      </section>
+      <!-- =======================
 Main Content END -->
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
@@ -131,52 +204,58 @@ Main Content END -->
     <!-- ThemeFunctions -->
     <script src="{% static 'login/assets/js/functions.js'%} "></script>
     <script>
-        function getCSRFToken() {
-            const name = 'csrftoken=';
-            const decodedCookie = decodeURIComponent(document.cookie);
-            const cookieArray = decodedCookie.split(';');
+      function getCSRFToken() {
+        const name = "csrftoken=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const cookieArray = decodedCookie.split(";");
 
-            for (let i = 0; i < cookieArray.length; i++) {
-                let cookie = cookieArray[i].trim();
-                if (cookie.indexOf(name) === 0) {
-                    return cookie.substring(name.length, cookie.length);
-                }
-            }
-
-            return null;
+        for (let i = 0; i < cookieArray.length; i++) {
+          let cookie = cookieArray[i].trim();
+          if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+          }
         }
-        document.getElementById('sup_btn').addEventListener('click', function (event) {
-            event.preventDefault();
-            const csrftoken = getCSRFToken();
 
-            let formData = new FormData();
-            formData.append('email', document.getElementById('sup_email').value);
-            formData.append('password', document.getElementById('sup_pass').value);
+        return null;
+      }
+      document
+        .getElementById("sup_btn")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+          const csrftoken = getCSRFToken();
 
-            fetch('fun_signup', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRFToken': csrftoken  // Asegúrate de tener disponible el token CSRF
-                },
+          let formData = new FormData();
+          formData.append("email", document.getElementById("sup_email").value);
+          formData.append(
+            "password",
+            document.getElementById("sup_pass").value
+          );
+
+          fetch("fun_signup", {
+            method: "POST",
+            body: formData,
+            headers: {
+              "X-CSRFToken": csrftoken, // Asegúrate de tener disponible el token CSRF
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.status === "200") {
+                window.location.href = "/profile";
+              } else {
+                // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
+                alert(data.message);
+              }
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === '200') {
-                        window.location.href = '/profile'
-                    } else {
-                        // Maneja el error, puedes mostrar el mensaje de error en la interfaz de usuario
-                        alert(data.message);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+            .catch((error) => {
+              console.error("Error:", error);
+            });
         });
-
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
-     crossorigin="anonymous"></script>
-</body>
-
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
