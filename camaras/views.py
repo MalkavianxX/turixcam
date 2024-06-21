@@ -85,12 +85,32 @@ def get_puntuaciones(obj):
 
     return puntuaciones
 
-@login_required
 
+from django.core.cache import cache
+
+def need_Adversiment(request, camara_id):
+    # Obtener las cámaras visitadas de la caché o establecer una lista vacía
+    camaras_visitadas = cache.get('camaras_visitadas', [])
+    print(camaras_visitadas)
+    # Verificar si el ID de la cámara ya está en la lista
+    if camara_id not in camaras_visitadas:
+        # Agregar el ID de la cámara actual si aún no está en la lista
+        camaras_visitadas.append(camara_id)
+        cache.set('camaras_visitadas', camaras_visitadas, 3600)  # Almacena en caché durante 1 hora
+        print("se agrego")
+        print(camaras_visitadas)
+        return "true"
+    else:
+        return "false"
+
+
+@login_required
 def view_detail_camara(request,id):
 
     camara = Camara.objects.get(pk=id)
     camaras = Camara.objects.all().order_by('titulo')
+
+
     user = request.user   
     comentarios,media =  get_all_coments(camara)     
     restaurantes = get_comercios(camara.titulo,'Restaurante') 
@@ -104,7 +124,7 @@ def view_detail_camara(request,id):
                 i.iconestrellas = i.set_estrellas()
                 print(i.cliente)
 
-    print(comentarios.count())
+   
     context = {
         "camara": camara,
         "comentarios": comentarios,
@@ -114,6 +134,8 @@ def view_detail_camara(request,id):
         "hoteles": hoteles,
         "atractivos": atractivos,
         "restaurantes": restaurantes,
+        "need_ad": str( need_Adversiment(request, camara.id)),
+        "time": 12,
     }
 
     if request.user.is_authenticated:
@@ -127,6 +149,8 @@ def view_detail_camara(request,id):
         camaras_js = [{'lat': c.latitude, 'lng': c.longitude, 'icon': c.pin.url, 'id': c.id } for c in camaras]
         print("locaionew: ",camaras_js)
         context['locaciones'] = camaras_js
+
+    camara.register_view()
     return render(request, "camaras/view_detail.html", context)
 
 

@@ -187,12 +187,9 @@ EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True  
 
 
-# Obtener el contenido del JSON desde la variable de entorno
-firebase_credentials = os.environ.get('FIREBASE_CREDENTIALS')
-json_data = json.loads(firebase_credentials)
 
 # Inicializar la aplicación de Firebase con las credenciales
-cred = credentials.Certificate(json_data)
+cred = credentials.Certificate('C:/Users/Admin/Downloads/turixcamapp-firebase-adminsdk-idm6c-d948ded55e.json')
 firebase_admin.initialize_app(cred)
 
 # Obtener una referencia a la base de datos Firestore

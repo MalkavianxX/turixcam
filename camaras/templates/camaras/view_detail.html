@@ -438,6 +438,21 @@
     {% include "camaras/components/modal-atractivos.html" %}
     {% include "camaras/components/modal-servicios.html" %}
     {% include "login/components/login-modal.html" %}
+    <!-- Modal -->
+<div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="miModalLabel">Anuncio</h5>
+                
+            </div>
+            <div class="modal-body">
+                <!-- Inserta aquí el reproductor de video (por ejemplo, un iframe de YouTube) -->
+                <img src="https://www.dondeir.com/wp-content/uploads/2023/10/sabritas-switch-.jpg" class="img-fluid" alt="">
+            </div>
+        </div>
+    </div>
+</div>
 </main>
 
 <!-- **************** MAIN CONTENT END **************** -->
@@ -520,12 +535,12 @@
 
 </script>
 
+
 {% if request.user.premium != 'free' %}
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD45ZrDuWFBMy-ggn7T49WVa4zX3WyAxPA&libraries=places&callback=initMap"></script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD45ZrDuWFBMy-ggn7T49WVa4zX3WyAxPA&libraries=places&callback=initMap"></script>
 <script>
-    var locations = {{ locaciones| safe }};
-    console.log(locations)
+
 
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
@@ -551,12 +566,54 @@
             });
         }
     }
+
+    var need_adversiment = {{ need_ad| safe}};
+    console.log(need_adversiment);
+
 </script>
+
+
+
 {% else %}
+
+<script>
+    // Esperar 'time' segundos y cerrar el modal si need_ad es verdadero
+    var need_ad = {{ need_ad|safe }};  // Corrección: evaluar como booleano
+    var time = {{ time|safe }};
+    console.log(need_ad, time);
+    if (need_ad == 'true') {  // Si need_ad es verdadero
+        console.log("si ver");
+        var miModal = document.getElementById("miModal");
+        miModal.classList.add("show");  // Mostrar el modal
+        
+
+        // Esperar 'time' segundos y cerrar el modal
+        setTimeout(function() {
+            miModal.classList.remove("show");  // Ocultar el modal
+            miModal.style.display = "none";  // Ocultar el fondo oscuro
+        }, time * 1000);  // Convertir a milisegundos
+    }else{
+        console.log("no ver");
+        var miModal = document.getElementById("miModal");
+        miModal.classList.add("show");  // Mostrar el modal
+        miModal.style.display = "block";  // Mostrar el fondo oscuro
+
+        // Esperar 'time' segundos y cerrar el modal
+        setTimeout(function() {
+            miModal.classList.remove("show");  // Ocultar el modal
+            miModal.style.display = "none";  // Ocultar el fondo oscuro
+        }, time * 1000);  // Convertir a milisegundos
+    }
+</script>
+
+
+
+
 <script>
     var mapElement = document.getElementById('map');
     mapElement.innerHTML = '<h3 class="text-secondary text-center mt-5 mb-5">Actualiza a Premium para acceder al mapa y mucho más</h3>';
 </script>
+
 {% endif %}
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
     crossorigin="anonymous"></script>

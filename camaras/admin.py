@@ -4,7 +4,7 @@ from .models import Stream, Camara
 class StreamAdmin(admin.ModelAdmin):
     list_display = ['id','url', 'key', 'activo']
 class CamaraAdmin(admin.ModelAdmin):
-    list_display = ('id','titulo','estado','likes','stream',)
+    list_display = ('id','titulo','estado','likes','stream','views')
 
 # Registra tus modelos aquí
 admin.site.register(Stream, StreamAdmin)

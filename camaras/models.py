@@ -59,6 +59,7 @@ class Camara(models.Model):
     likes = models.IntegerField(default=0)
     pin = models.ImageField(storage=BunnyStorage(), upload_to=camara_background_path)
     stream = models.ForeignKey(Stream, on_delete=models.CASCADE, related_name='streams', null=True, blank=True)
+    views = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = 'Camara'
@@ -67,3 +68,7 @@ class Camara(models.Model):
     def __str__(self):
         return self.titulo
     
+    def register_view(self):
+        self.views = self.views + 1
+        self.save()
+        
