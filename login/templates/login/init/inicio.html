@@ -107,122 +107,141 @@
         -webkit-text-fill-color: transparent;
         text-align: start;
     }
-    #globo_init{
+
+    #globo_init {
         cursor: pointer;
+        width: 75%;
+
     }
+
     .mitad {
         background: linear-gradient(to bottom, rgba(213, 213, 213, 0.847) 50%, rgba(0, 0, 0, 0.55) 50%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-    .sep-sm-6{
-        margin-top: unset;
-    }
-    .titulo-sm{
-        font-size: 3.7rem;
-    }
-    .logo-sm{
-        width: 50% !important;
-    }
-    @media screen and (max-width: 600px) {
 
     .sep-sm-6 {
-        margin-top: 11rem;
+        margin-top: unset;
     }
-    .titulo-sm{
-        font-size: -webkit-xxx-large;
-    }
-    .logo-sm{
-        width: 100% !important;
-    }
-}
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(0.95); }
-    100% { transform: scale(1); }
-}
 
-@keyframes explode {
-    /* Define tu animación de explosión aquí */
-}
+    .titulo-sm {
+        font-size: 3.7rem;
+    }
+
+    .logo-sm {
+        width: 50% !important;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .sep-sm-6 {
+            margin-top: 11rem;
+        }
+
+        .titulo-sm {
+            font-size: -webkit-xxx-large;
+        }
+
+        .logo-sm {
+            width: 100% !important;
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(0.95);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes explode {
+        /* Define tu animación de explosión aquí */
+    }
 </style>
 
 <script>
-window.onload = function () {
-    // Precarga las imágenes 
-    console.log('{{request.user.premium}}')
-    if ('{{request.user.premium}}' == "free" ){
-        console.log("verfdad")
-        var imgUrls = [
-        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
-        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
-        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png",
-    ];
-    }else{
-        console.log("false")
-        var imgUrls = [
-        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
-        "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
-        "https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png",
-    ];
-    }
-    console.log(imgUrls)
-    let imgs = imgUrls.map(function(url) {
-        let img = new Image();
-        img.src = url;
-        return img;
-    });
+    window.onload = function () {
+        // Precarga las imágenes 
+        console.log('{{request.user.premium}}')
+        if ('{{request.user.premium}}' == "free") {
+            console.log("verfdad")
+            var imgUrls = [
+                "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
+                "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
+                "https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png",
+            ];
+        } else {
+            console.log("false")
+            var imgUrls = [
+                "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
+                "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
+                "https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png",
+            ];
+        }
+        console.log(imgUrls)
+        let imgs = imgUrls.map(function (url) {
+            let img = new Image();
+            img.src = url;
+            return img;
+        });
 
-    let img = document.getElementById('globo_init');
-    img.style.transition = 'transform 0.5s ease-out';
+        let img = document.getElementById('globo_init');
+        img.style.transition = 'transform 0.5s ease-out';
 
-    // Agrega un contador de clics a tu imagen
-    let clickCount = 0;
-    img.onclick = function () {
-        clickCount++;
+        // Agrega un contador de clics a tu imagen
+        let clickCount = 0;
+        img.onclick = function () {
+            clickCount++;
 
-        // Agrega una animación de pulsación
-        img.style.animation = 'pulse 0.2s ease-in-out';
-        setTimeout(function() {
-            img.style.animation = '';
-        }, 200);  // Elimina la animación después de 0.2 segundos
+            // Agrega una animación de pulsación
+            img.style.animation = 'pulse 0.2s ease-in-out';
+            setTimeout(function () {
+                img.style.animation = '';
+            }, 200);  // Elimina la animación después de 0.2 segundos
 
-        if (clickCount === 3) {
-            // Cambia la imagen a parapente y agrega un efecto de explosión
-            img.src = imgs[0].src;
-            img.style.animation = 'explode 0.5s ease-out';
-        } else if (clickCount === 6) {
-            // Cambia la imagen a parapente2 y agrega un efecto de explosión
-            img.src = imgs[1].src;
-            img.style.animation = 'explode 0.5s ease-out';
-        } else if (clickCount === 9) {
-            // Cambia la imagen a globo y agrega un efecto de explosión
-            img.src = imgs[2].src;
-            img.style.animation = 'explode 0.5s ease-out';
-            clickCount = 0;  // Reinicia el contador de clics
+            if (clickCount === 3) {
+                // Cambia la imagen a parapente y agrega un efecto de explosión
+                img.src = imgs[0].src;
+                img.style.animation = 'explode 0.5s ease-out';
+            } else if (clickCount === 6) {
+                // Cambia la imagen a parapente2 y agrega un efecto de explosión
+                img.src = imgs[1].src;
+                img.style.animation = 'explode 0.5s ease-out';
+            } else if (clickCount === 9) {
+                // Cambia la imagen a globo y agrega un efecto de explosión
+                img.src = imgs[2].src;
+                img.style.animation = 'explode 0.5s ease-out';
+                clickCount = 0;  // Reinicia el contador de clics
+            }
         }
     }
-}
 
-window.onscroll = function () {
-    let img = document.getElementById('globo_init');
-    let y = window.scrollY;
-    let x = (window.innerWidth / window.innerHeight) * 0.55 * y;
-    let x_p = window.innerWidth;
-    let y_p = window.innerHeight;
+    window.onscroll = function () {
+        let img = document.getElementById('globo_init');
+        let y = window.scrollY;
+        let x = (window.innerWidth / window.innerHeight) * 0.55 * y;
+        let x_p = window.innerWidth;
+        let y_p = window.innerHeight;
 
-    // Define un tamaño de pantalla mediano en píxeles (ajusta este valor según tus necesidades)
-    let mediumScreenSize = 768;
+        // Define un tamaño de pantalla mediano en píxeles (ajusta este valor según tus necesidades)
+        let mediumScreenSize = 768;
 
-    if (x_p < mediumScreenSize) {
-        // Si la pantalla es pequeña, mueve la imagen solo hacia abajo
-        img.style.transform = 'translate(0px,' + y + 'px)';
-    } else {
-        // Si la pantalla es mediana o grande, mueve la imagen en diagonal hacia la izquierda
-        img.style.transform = 'translate(' + -x + 'px,' + y + 'px)';
+        if (x_p < mediumScreenSize) {
+            // Si la pantalla es pequeña, mueve la imagen solo hacia abajo
+            img.style.transform = 'translate(0px,' + y + 'px)';
+        } else {
+            // Si la pantalla es mediana o grande, mueve la imagen en diagonal hacia la izquierda
+            img.style.transform = 'translate(' + -x + 'px,' + y + 'px)';
+        }
+
     }
-
-}
 
 
 </script>
@@ -230,7 +249,8 @@ window.onscroll = function () {
 <main>
 
 
-    <section class=" d-flex justify-content-center align-items-center mt-xl-0 mt-5 " style="height: 80vh; margin-bottom: 10vh;">
+    <section class=" d-flex justify-content-center align-items-center mt-xl-0 mt-5 "
+        style="height: 80vh; margin-bottom: 10vh;">
         <div class="container sep-sm-6">
             <!-- Content and Image START -->
             <div class="row ">
@@ -238,44 +258,38 @@ window.onscroll = function () {
                 <div class="col-lg-7 align-self-start justify-content-center text-center  ">
                     <!-- Title -->
                     {% if request.user.premium == "free" %}
-                    <img  src="{% static 'login/assets/images/logo.png' %} " class="img-fluid logo-sm" alt="">
+                    <img src="{% static 'login/assets/images/logo.png' %} " class="img-fluid logo-sm" alt="">
                     {% else %}
-                    <img  src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/logo-premium.png " class="img-fluid logo-sm" alt="">
+                    <img src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/logo-premium.png "
+                        class="img-fluid logo-sm" alt="">
 
                     {% endif %}
-                    <h1  style=" color: white;text-shadow: -1px 0 #a097958e, 0 1px #a097958e, 1px 0 #a097958e, 0 -1px #a097958e;"
+                    <h1 style=" color: white;text-shadow: -1px 0 #a097958e, 0 1px #a097958e, 1px 0 #a097958e, 0 -1px #a097958e;"
                         class="fw-bold titulo-sm">
-                        
+
                         {% if request.user.premium == "free" %}
-                            
-                            México, como nunca lo habias visto
-                            
+
+                        México, como nunca lo habias visto
+
                         {% endif %}
-                        {% if request.user.premium != "free" and request.user.is_authenticated  %}
-                            MÉXICO CON PREMIUM
+                        {% if request.user.premium != "free" and request.user.is_authenticated %}
+                        PREMIUM
                         {% endif %}
-                        </h1>
+                    </h1>
                     <br>
-                    <a type="button" href="{% url 'view_init_page' %}" class="mt-lg-0 mt-3 btn btn_inicio btn-outline-light">Explorar</a>
+                    <a type="button" href="{% url 'view_init_page' %}"
+                        class="mt-lg-0 mt-3 btn btn_inicio btn-outline-light">Explorar</a>
                 </div>
 
                 <!-- Image -->
                 <div class="col-lg-5 icon_float_init z-0 position-relative text-center">
-                {% if request.user.premium == "free" %}
-                    <img style="filter: brightness(0.90);" 
-                        id="globo_init" 
-                        class="img-fluid"
-                        src="https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png" 
-                        alt=""
-                    >
-                {% else %}
-                    <img style="filter: brightness(0.90);" 
-                        id="globo_init" 
-                        class="img-fluid"
-                        src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png" 
-                        alt=""
-                    >
-                {% endif %}
+                    {% if request.user.premium == "free" %}
+                    <img style="filter: brightness(0.90);" id="globo_init" class="img-fluid"
+                        src="https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png" alt="">
+                    {% else %}
+                    <img style="filter: brightness(0.90);" id="globo_init" class="img-fluid"
+                        src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png" alt="">
+                    {% endif %}
 
                 </div>
             </div>
@@ -285,13 +299,13 @@ window.onscroll = function () {
         </div>
     </section>
 
-<br>
-    <section >
-        <div class="container-fluid" >
+    <br>
+    <section>
+        <div class="container-fluid">
             <h1 class="ms-5 titulo-trans d-xl-flex d-none" style="font-size: 8rem;">Los mejores lugares</h1>
             <h1 class=" titulo-trans text-center d-xl-none d-flex" style="font-size: 9vh;"> Luagres favoritos</h1>
 
-            <div class="swiper mySwiper" >
+            <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     {% for cam in camaras %}
                     <div class="swiper-slide" onclick="to_camara({{cam.id}})">
@@ -300,8 +314,8 @@ window.onscroll = function () {
                             <!-- Image and overlay -->
                             <div class="card-img-scale-wrapper ">
                                 <!-- Image -->
-                                <img src="{{cam.logo.url}} "
-                                    class="card-img border-top" style="height: 500px;" alt="{{cam.titulo}}">
+                                <img src="{{cam.logo.url}} " class="card-img border-top" style="height: 500px;"
+                                    alt="{{cam.titulo}}">
                                 <!-- Badge -->
                                 <div class="position-absolute bottom-0 start-0 p-3">
                                     <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
@@ -312,8 +326,7 @@ window.onscroll = function () {
                             <!-- Card body -->
                             <div class="card-body px-2 border-bottom " style="backdrop-filter: blur(12px) !important;">
                                 <!-- Title -->
-                                <h5 class="card-title"><a href="#"
-                                        class="stretched-link">{{cam.titulo}}</a></h5>
+                                <h5 class="card-title"><a href="#" class="stretched-link">{{cam.titulo}}</a></h5>
                                 <!-- Price and rating -->
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h6 class="text-success mb-0">$0 <small class="fw-light">/ vista gratuita</small>
@@ -325,7 +338,7 @@ window.onscroll = function () {
                         <!-- Card END -->
                     </div>
                     {% endfor %}
-      
+
 
 
                 </div>
@@ -344,7 +357,7 @@ window.onscroll = function () {
 
         <h1 class=" titulo-trans text-center d-xl-none  d-flex z-3" style="font-size: 9vh; z-index: 2;"> SIEMPRE EN VIVO
         </h1>
-        <video preload="none" class="end-0 "  autoplay loop muted
+        <video preload="none" class="end-0 " autoplay loop muted
             style="border-radius: 10px !important; position: absolute; width: 90%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(0.85); ">
             <source src="https://turixcam-images.b-cdn.net/videos/principal/videofestival.mp4" type="video/mp4">
         </video>
@@ -414,15 +427,22 @@ window.onscroll = function () {
         </div>
     </section>
 
-    <section class="mt-5 pt-5 pt-md-8 pb-0 "  >
+    <section class="mt-5 pt-5 pt-md-8 pb-0 ">
 
     </section>
 
 
     <section class="">
         <div class="container">
+            <script async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
+                crossorigin="anonymous"></script>
+            <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"
+                data-ad-client="ca-pub-5735730034243265" data-ad-slot="4227636885"></ins>
+            <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
             <div class="row g-4">
-
                 <!-- Help -->
                 <div class="col-md-6 col-xxl-4">
                     <div class=" d-flex rounded-3 h-100 p-4" style="backdrop-filter:blur(12px)">
@@ -436,7 +456,7 @@ window.onscroll = function () {
 
                 <!-- Trust -->
                 <div class="col-md-6 col-xxl-4">
-                    <div class="d-flex rounded-3 h-100 p-4"  style="backdrop-filter:blur(12px)">
+                    <div class="d-flex rounded-3 h-100 p-4" style="backdrop-filter:blur(12px)">
                         <h3><i class="fa-solid text-light fa-hand-holding-usd"></i></h3>
                         <div class="ms-3">
                             <h5 class="text-light">Pagos confiables</h5>
@@ -446,7 +466,7 @@ window.onscroll = function () {
                 </div>
 
                 <!-- Download app -->
-                <div class="col-lg-6 col-xl-5 col-xxl-3 ms-xxl-auto"  style="backdrop-filter:blur(12px)">
+                <div class="col-lg-6 col-xl-5 col-xxl-3 ms-xxl-auto" style="backdrop-filter:blur(12px)">
                     <h5 class="mb-4 text-light">Descarga la app</h5>
                     <div class="row g-3">
                         <!-- Google play store button -->
@@ -492,7 +512,7 @@ Featured Hotels END -->
 
 
         function to_camara(ref) {
-            window.location.href = '/camaras/detalle/' +ref;
+            window.location.href = '/camaras/detalle/' + ref;
         }
     </script>
 

@@ -240,7 +240,15 @@
                         </div>
                         <!-- About hotel START -->
 
-
+                        <script async
+                            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
+                            crossorigin="anonymous"></script>
+                        <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                            data-ad-format="fluid" data-ad-client="ca-pub-5735730034243265"
+                            data-ad-slot="5881777139"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
 
                         <div class="card bg-transparent">
                             <!-- Card header -->
@@ -431,7 +439,7 @@
     {% include "camaras/components/modal-servicios.html" %}
     {% include "login/components/login-modal.html" %}
 </main>
-<input type="text" value="{{locaciones}}">
+
 <!-- **************** MAIN CONTENT END **************** -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -513,43 +521,43 @@
 </script>
 
 {% if request.user.premium != 'free' %}
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD45ZrDuWFBMy-ggn7T49WVa4zX3WyAxPA&libraries=places&callback=initMap"></script>
-    <script>
-        var locations = {{ locaciones| safe }};
-        console.log(locations)
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD45ZrDuWFBMy-ggn7T49WVa4zX3WyAxPA&libraries=places&callback=initMap"></script>
+<script>
+    var locations = {{ locaciones| safe }};
+    console.log(locations)
 
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 8,
-                center: { lat: Number('{{ camara.latitude | safe }}'), lng: Number('{{ camara.longitude | safe }}') },
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: { lat: Number('{{ camara.latitude | safe }}'), lng: Number('{{ camara.longitude | safe }}') },
+        });
+
+        for (var i = 0; i < locations.length; i++) {
+            var icon = {
+                url: locations[i].icon,
+                scaledSize: new google.maps.Size(50, 50)
+            };
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(Number(locations[i].lat), Number(locations[i].lng)),
+                icon: icon,
+                map: map,
+                id: locations[i].id
             });
 
-            for (var i = 0; i < locations.length; i++) {
-                var icon = {
-                    url: locations[i].icon,
-                    scaledSize: new google.maps.Size(50, 50)
-                };
-
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(Number(locations[i].lat), Number(locations[i].lng)),
-                    icon: icon,
-                    map: map,
-                    id: locations[i].id
-                });
-
-                marker.addListener('click', function () {
-                    window.location.href = '/camaras/detalle/' + this.id + '/';
-                });
-            }
+            marker.addListener('click', function () {
+                window.location.href = '/camaras/detalle/' + this.id + '/';
+            });
         }
-    </script>
+    }
+</script>
 {% else %}
-    <script>
-        var mapElement = document.getElementById('map');
-        mapElement.innerHTML = '<h3 class="text-secondary text-center mt-5 mb-5">Actualiza a Premium para acceder al mapa y mucho más</h3>';
-    </script>
+<script>
+    var mapElement = document.getElementById('map');
+    mapElement.innerHTML = '<h3 class="text-secondary text-center mt-5 mb-5">Actualiza a Premium para acceder al mapa y mucho más</h3>';
+</script>
 {% endif %}
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 {% endblock %}

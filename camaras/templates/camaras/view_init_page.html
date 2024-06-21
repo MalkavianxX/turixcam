@@ -61,7 +61,8 @@
         top: 0;
         z-index: 1000;
     }
-    .card-img-scale-wrapper{
+
+    .card-img-scale-wrapper {
         cursor: pointer;
     }
 </style>
@@ -110,7 +111,7 @@
                                                 <option selected value="todos">Todos</option>
                                                 {% for est in estados %}
                                                 <option value="{{est}}">{{est}}</option>
-  
+
                                                 {% endfor %}
 
                                             </select>
@@ -130,7 +131,7 @@
                                                 <option selected value="todos">Todos</option>
                                                 {% for mun in municipios %}
                                                 <option value="{{mun}}">{{mun}}</option>
-  
+
                                                 {% endfor %}
 
                                             </select>
@@ -152,7 +153,7 @@
                                                 <option selected value="todos">Todos</option>
                                                 {% for cam in camaras %}
                                                 <option value="{{cam.titulo}}">{{cam.titulo}}</option>
-  
+
                                                 {% endfor %}
 
                                             </select>
@@ -181,13 +182,14 @@
         <div class="container">
             <div class="row ">
                 {% for camara in camaras %}
-                <div class="col-lg-4 col-md-6 col-12 mb-lg-4" data-crd-estado="{{camara.estado}}" data-crd-municipio="{{camara.municipio}}" data-crd-lugar="{{camar.titulo}}"
-                    >
-                    <div id="{{camara.id}}" onclick="to_detail(this.id);" class="card card-img-scale overflow-hidden bg-transparent">
+                <div class="col-lg-4 col-md-6 col-12 mb-lg-4" data-crd-estado="{{camara.estado}}"
+                    data-crd-municipio="{{camara.municipio}}" data-crd-lugar="{{camar.titulo}}" style="margin-bottom: 3vh !important;">
+                    <div id="{{camara.id}}" onclick="to_detail(this.id);"
+                        class="card card-img-scale overflow-hidden bg-transparent">
                         <div class="card-img-scale-wrapper ">
                             <!-- Card Image -->
-                            <img class="img-fluid" loading="lazy"  src="{{camara.logo.url}}"
-                                style="filter: brightness(0.80); height: 500px; width: fit-content;" alt="{{camara.titulo}}">
+                            <img class="img-fluid" loading="lazy" src="{{camara.logo.url}}"
+                                style="filter: brightness(0.80); height: 500px; width: 100%;" alt="{{camara.titulo}}">
                             <!-- Overlay -->
                             <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
                                 <!-- Card overlay top -->
@@ -205,17 +207,29 @@
                         </div>
 
                         <!-- Card body -->
-                        <div class="card-body px-2 bg-blur-100">
+                        <div class="card-body px-2 bg-blur-100" style="height: 3.5vh !important;">
                             <!-- Title -->
-                            <h5 class="card-title text-center"><a href="{% url 'view_detail_camara' camara.id %}"
+                            <h5 class="card-title text-center" style="margin-top: -1vh !important;"><a href="{% url 'view_detail_camara' camara.id %}"
                                     class="stretched-link">{{camara.titulo}}</a></h5>
                             <!-- Content -->
 
                         </div>
                     </div>
-                </div> 
-                
+                </div>
+
                 {% endfor %}
+                <div class="col-12">
+                    <script async
+                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
+                        crossorigin="anonymous"></script>
+                    <!-- Bloque -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5735730034243265"
+                        data-ad-slot="4213472248" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
             </div>
         </div>
 
@@ -228,67 +242,67 @@
 
 <script>
     function to_detail(id) {
-        window.location.href = '/camaras/detalle/'+id+'/';
+        window.location.href = '/camaras/detalle/' + id + '/';
     };
 </script>
 <script>
 
-$(document).ready(function () {
-    const selects = ['estado', 'municipio', 'lugar'];
-    const formIds = selects.map(id => `#form-${id}`);
-    const dataAttrs = selects.map(id => `data-crd-${id}`);
+    $(document).ready(function () {
+        const selects = ['estado', 'municipio', 'lugar'];
+        const formIds = selects.map(id => `#form-${id}`);
+        const dataAttrs = selects.map(id => `data-crd-${id}`);
 
-    formIds.forEach((formId, index) => {
-        $(formId).change(function() {
-            const selectedValue = $(this).val().toLowerCase();
-            const nextFormId = formIds[index + 1];
-            const nextDataAttr = dataAttrs[index + 1];
+        formIds.forEach((formId, index) => {
+            $(formId).change(function () {
+                const selectedValue = $(this).val().toLowerCase();
+                const nextFormId = formIds[index + 1];
+                const nextDataAttr = dataAttrs[index + 1];
 
-            if (nextFormId) {
-                $(nextFormId).empty();
-                let optionsAvailable = false;
+                if (nextFormId) {
+                    $(nextFormId).empty();
+                    let optionsAvailable = false;
 
-                $(`div[${dataAttrs[index]}]`).each(function() {
-                    const divValue = $(this).attr(dataAttrs[index]).toLowerCase();
-                    if (selectedValue === "todos" || divValue.includes(selectedValue)) {
-                        const nextValue = $(this).attr(nextDataAttr);
-                        $(nextFormId).append(new Option(nextValue, nextValue));
-                        optionsAvailable = true;
-                    }
-                });
-
-                if (!optionsAvailable) {
-                    $(nextFormId).append(new Option("Ningún valor disponible", ""));
-                }
-            }
-
-            $('div[data-crd-estado]').fadeOut();
-
-            if (selectedValue === "todos" && formId === '#form-estado') {
-                $('div[data-crd-estado]').fadeIn();
-                $('#form-municipio, #form-lugar').append(new Option("Seleccione una opción", ""));
-            } else {
-                $('div[data-crd-estado]').each(function () {
-                    const match = selects.every((select, i) => {
-                        const value = $(`#form-${select}`).val().toLowerCase();
-                        const divValue = $(this).attr(`data-crd-${select}`).toLowerCase();
-                        return value === "todos" || divValue.includes(value);
+                    $(`div[${dataAttrs[index]}]`).each(function () {
+                        const divValue = $(this).attr(dataAttrs[index]).toLowerCase();
+                        if (selectedValue === "todos" || divValue.includes(selectedValue)) {
+                            const nextValue = $(this).attr(nextDataAttr);
+                            $(nextFormId).append(new Option(nextValue, nextValue));
+                            optionsAvailable = true;
+                        }
                     });
 
-                    if (match) {
-                        $(this).fadeIn();
+                    if (!optionsAvailable) {
+                        $(nextFormId).append(new Option("Ningún valor disponible", ""));
                     }
-                });
-            }
+                }
+
+                $('div[data-crd-estado]').fadeOut();
+
+                if (selectedValue === "todos" && formId === '#form-estado') {
+                    $('div[data-crd-estado]').fadeIn();
+                    $('#form-municipio, #form-lugar').append(new Option("Seleccione una opción", ""));
+                } else {
+                    $('div[data-crd-estado]').each(function () {
+                        const match = selects.every((select, i) => {
+                            const value = $(`#form-${select}`).val().toLowerCase();
+                            const divValue = $(this).attr(`data-crd-${select}`).toLowerCase();
+                            return value === "todos" || divValue.includes(value);
+                        });
+
+                        if (match) {
+                            $(this).fadeIn();
+                        }
+                    });
+                }
+            });
         });
+
+
     });
-
-
-});
 
 
 </script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 {% endblock %}
