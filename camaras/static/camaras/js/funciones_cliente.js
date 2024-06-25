@@ -139,28 +139,38 @@ document.getElementById('comen_btn').addEventListener('click', function(e) {
             // Crea un nuevo elemento DOM para el comentario
             var comentarioDiv = document.createElement('div');
             comentarioDiv.innerHTML = `
-                <div class="d-md-flex my-4 w-100 mb-3">
+            <div class="comentario-user d-block w-100 mb-2" style="background-color: rgba(0, 0, 0, 0.399); border-radius: 15px;">
+                <!-- Avatar -->
+                <div class="d-flex comentario-cuerpo mb-2" style="cursor: pointer;">
                     <div class="mt-3 ms-2 avatar avatar-lg me-3 flex-shrink-0">
-                        <img class="avatar-img rounded-circle" loading="lazy"
-                            src="${data.comentario.avatar_url}" alt="avatar">
+                        <img class="avatar-img rounded-circle" loading="lazy" src="${data.comentario.avatar_url}" alt="avatar">
                     </div>
+                    <!-- Text -->
                     <div class="w-100 mt-3 ms-2">
-                        <div class="d-flex  justify-content-between mt-1 mt-md-0">
-                            <div class="">
-                                <h6 class="me-3 mb-0">${data.comentario.username}</h6>
+                        <div class="d-flex justify-content-between mt-1 mt-md-0">
+                            <div>
+                                <h6 class="me-3 mb-0" >${data.comentario.username}</h6>
+                                <!-- Info -->
                                 <ul class="nav nav-divider small mb-2">
-                                    <li class="nav-item" style="font-size: 0.85em;" >${data.comentario.fecha}</li>
-                                    
+                                    <li class="nav-item" style="font-size: 0.85em; color: #ffffff61 !important;">${data.comentario.fecha}</li>
                                 </ul>
                             </div>
+                            <!-- Review star -->
                             <div class="icon-md rounded text-bg-warning fs-6">${data.comentario.puntuacion}</div>
                         </div>
                         <p class="mb-2">${data.comentario.text}</p>
                     </div>
                 </div>
-                <hr class="mb-3">
-                <div class="mb-3"></div>
-            `;
+                <!-- Actions -->
+                <div class="comentario-accion d-flex justify-content-center w-100 border border-top">   
+                            <p class="text-danger" onclick="eliminarComentario(${data.comentario.id})" style="margin-top: 0.5rem !important; margin-bottom: 1rem !important;">
+                                <i class="fa-solid fa-trash"></i> Eliminar
+                            </p>
+                </div>
+            </div>
+            <hr class="mb-3">
+            <div class="mb-3"></div>
+        `;
             // Agrega el nuevo comentario al principio de la lista de comentarios
             var comentariosDiv = document.querySelector('.comentarios');
             comentariosDiv.insertBefore(comentarioDiv, comentariosDiv.firstChild);
