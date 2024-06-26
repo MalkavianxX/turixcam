@@ -373,3 +373,4 @@ def function_signup(request):
     except Exception as e:
         # Manejo de errores generales
         return JsonResponse({'error': True, 'message': 'Error al crear el usuario: {}'.format(str(e))}, status=500)
+

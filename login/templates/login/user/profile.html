@@ -132,6 +132,24 @@
     background-color: #ffffff00;
     color: white;
   }
+
+  .new {
+    
+    animation: colorChange 2s infinite alternate;
+}
+
+@keyframes colorChange {
+    0% {
+        filter: drop-shadow(0 0 100px #00a800);
+    }
+
+    100% {
+        filter: drop-shadow(0 0  10px #003402);
+    }
+
+}
+
+
 </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
@@ -163,7 +181,7 @@
             src="{{request.user.foto_perfil}}"
             alt="perfil"
             {% else %}
-              style="border-radius: 50%; border: 4px solid #deae28"
+              class="new"
               src="{{request.user.foto_perfil}}"
               alt="perfil"
           {% endif %}

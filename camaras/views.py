@@ -247,3 +247,12 @@ def addComentario(request):
 
     else:
         return JsonResponse({"message": "Fallo de método, se esperaba una solicitud POST."}, status=405)
+
+
+@login_required
+def remove_comentario(request,id):
+    try:
+        comentario = Comentario.objects.get(pk = id)
+    except Exception as e:
+        print(e)
+    pass
