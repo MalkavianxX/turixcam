@@ -179,41 +179,29 @@
 	Search END -->
 
     <section class="pt-0 pt-md-5 mt-xl-0 mt-5 ">
-        <div class="container">
+        <div class="container"> 
             <div class="row ">
                 {% for camara in camaras %}
-                <div class="col-lg-4 col-md-6 col-12 mb-lg-4" data-crd-estado="{{camara.estado}}"
+                <div class="col-lg-6 col-md-6 col-12 mb-lg-4" data-crd-estado="{{camara.estado}}"
                     data-crd-municipio="{{camara.municipio}}" data-crd-lugar="{{camar.titulo}}" style="margin-bottom: 3vh !important;">
                     <div id="{{camara.id}}" onclick="to_detail(this.id);"
                         class="card card-img-scale overflow-hidden bg-transparent">
-                        <div class="card-img-scale-wrapper ">
+                        <div class="card-img-scale-wrapper shadow" style="">
                             <!-- Card Image -->
-                            <img class="img-fluid" loading="lazy" src="{{camara.logo.url}}"
-                                style="filter: brightness(0.80); height: 500px; width: 100%;" alt="{{camara.titulo}}">
+                            <img class="img-fluid" loading="lazy" src="{{camara.background_web.url}}"
+                                style="filter: brightness(0.80); height: 250px; width: 100%;" alt="{{camara.titulo}}">
                             <!-- Overlay -->
-                            <div class="card-img-overlay d-flex flex-column z-index-1 p-4">
+                            <div class="card-img-overlay d-flex flex-column z-index-1 " style="padding: 6.6rem;">
                                 <!-- Card overlay top -->
-                                <div class="d-flex justify-content-between fs-5">
-                                    <span class="badge text-bg-dark">{{camara.municipio}}</span>
-                                    <span class="badge text-bg-white"><i
-                                            class="fa-solid fa-cloud-rain text-info me-2"></i>15°</span>
+                                <div class="d-flex justify-content-center top-0 fs-5">
+                                    <h1>{{camara.estado}}</h1>
                                 </div>
                                 <!-- Card overlay bottom -->
-                                <div class="w-100 mt-auto">
-                                    <!-- Card category -->
-                                    <span class="badge text-bg-white fs-5">{{camara.estado}}</span>
-                                </div>
+                               
                             </div>
                         </div>
 
-                        <!-- Card body -->
-                        <div class="card-body px-2 bg-blur-100" style="height: 3.5vh !important;">
-                            <!-- Title -->
-                            <h5 class="card-title text-center" style="margin-top: -1vh !important;"><a href="{% url 'view_detail_camara' camara.id %}"
-                                    class="stretched-link">{{camara.titulo}}</a></h5>
-                            <!-- Content -->
 
-                        </div>
                     </div>
                 </div>
 

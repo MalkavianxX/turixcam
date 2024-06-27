@@ -51,7 +51,7 @@ def is_social_auth(user):
         # El usuario inició sesión directamente en tu aplicación
         return False, None
 # Create your views here.
-@login_required
+
 def render_init_page(request):
     camaras = Camara.objects.all()
     context = {
@@ -59,7 +59,7 @@ def render_init_page(request):
     } 
     return render(request, 'login/init/inicio.html', context)
 
-@login_required
+
 def render_detalle_lugar(request):
     return render(request, 'login/init/detalle.html')
 

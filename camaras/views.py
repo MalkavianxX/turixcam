@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 def camara_existe_byID(id):
     return Camara.objects.filter(pk=id).exists()
 
-@login_required
+
 # Create your views here.
 def view_init_page(request):
     camaras = Camara.objects.all().order_by('titulo')
@@ -104,7 +104,7 @@ def need_Adversiment(request, camara_id):
         return "false"
 
 
-@login_required
+
 def view_detail_camara(request,id):
 
     camara = Camara.objects.get(pk=id)
