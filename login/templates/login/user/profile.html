@@ -176,14 +176,16 @@
           <img
             width="168px"
             height="168px"
-            {% if request.user.premium == "free" %}
-            style="border-radius: 50%; border: 4px solid #ffffffe7"
-            src="{{request.user.foto_perfil}}"
+            style="border-radius: 50%;"
             alt="perfil"
+            {% if request.user.premium == "free" %}
+            
+            src="{{request.user.foto_perfil}}"
+            
             {% else %}
               class="new"
               src="{{request.user.foto_perfil}}"
-              alt="perfil"
+             
           {% endif %}
           />
  
