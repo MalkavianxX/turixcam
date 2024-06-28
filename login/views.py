@@ -54,8 +54,15 @@ def is_social_auth(user):
 
 def render_init_page(request):
     camaras = Camara.objects.all()
+    estados = []
+    filter_camaras = []
+    for cam in camaras:
+        if cam.estado not in estados:
+            estados.append(cam.estado)
+            filter_camaras.append(cam)
+            
     context = {
-        'camaras':camaras,
+        'camaras':filter_camaras,
     } 
     return render(request, 'login/init/inicio.html', context)
 
@@ -89,9 +96,9 @@ def view_user_profile(request):
 
     return render(request, 'login/user/profile.html',context)
 
-
+ 
 def view_user_login(request):
-    print(settings.STRIPE_SECRET_KEY)
+    
     return render(request, 'login/user/login.html')
 
 

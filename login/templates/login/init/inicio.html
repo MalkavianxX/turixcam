@@ -277,7 +277,7 @@
                         {% endif %}
                     </h1>
                     <br>
-                    <a type="button" href="{% url 'view_init_page' %}"
+                    <a type="button" href="{% url 'view_init_page' None %}"
                         class="mt-lg-0 mt-3 btn btn_inicio btn-outline-light">Explorar</a>
                 </div>
 
@@ -304,39 +304,37 @@
         <div class="container-fluid">
             <h1 class="ms-5 titulo-trans d-xl-flex d-none" style="font-size: 8rem;">Los mejores lugares</h1>
             <h1 class=" titulo-trans text-center d-xl-none d-flex" style="font-size: 9vh;"> Lugares favoritos</h1>
-
+ 
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     {% for cam in camaras %}
-                    <div class="swiper-slide" onclick="to_camara({{cam.id}})">
-                        <!-- Card START -->
-                        <div class="card card-img-scale overflow-hidden bg-transparent">
-                            <!-- Image and overlay -->
-                            <div class="card-img-scale-wrapper ">
-                                <!-- Image -->
-                                <img src="{{cam.logo.url}} " class="card-img border-top" style="height: 500px;"
-                                    alt="{{cam.titulo}}">
-                                <!-- Badge -->
-                                <div class="position-absolute bottom-0 start-0 p-3">
-                                    <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
-                                            class="bi bi-geo-alt me-2"></i>{{cam.municipio}}</div>
-                                </div>
-                            </div>
 
-                            <!-- Card body -->
-                            <div class="card-body px-2 border-bottom " style="backdrop-filter: blur(12px) !important;">
-                                <!-- Title -->
-                                <h5 class="card-title"><a href="#" class="stretched-link">{{cam.titulo}}</a></h5>
-                                <!-- Price and rating -->
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h6 class="text-success mb-0">$0 <small class="fw-light">/ vista gratuita</small>
-                                    </h6>
-                                    <h6 class="mb-0">0<i class="fa-solid fa-star text-warning ms-1"></i></h6>
+ 
+
+                <div class="swiper-slide"  style="margin-bottom: 3vh !important;" onclick="to_camara({{cam.id}})">
+                    <div id="{{cam.id}}" onclick="to_detail(this.id);"
+                        class="card card-img-scale overflow-hidden bg-transparent">
+                        <div class="card-img-scale-wrapper shadow" style="">
+                            <!-- Card Image -->
+                            <img class="img-fluid" loading="lazy" src="{{cam.background_web.url}}"
+                                style="filter: brightness(0.80); height: 25vh !important; width: 100%;" alt="{{cam.titulo}}">
+                            <!-- Overlay -->
+                            <div class="card-img-overlay d-flex flex-column z-index-1 " style="padding: 6.6rem;">
+                                <!-- Card overlay top -->
+                                <div class="d-flex justify-content-center top-0 fs-5">
+                                    <h2>{{cam.estado}}</h2>
                                 </div>
+                                <!-- Card overlay bottom -->
+                               
                             </div>
                         </div>
-                        <!-- Card END -->
+
+
                     </div>
+                </div>
+
+
+
                     {% endfor %}
 
 
@@ -512,7 +510,7 @@ Featured Hotels END -->
 
 
         function to_camara(ref) {
-            window.location.href = '/camaras/detalle/' + ref;
+            window.location.href = '/camaras/buscar/' + ref;
         }
     </script>
 

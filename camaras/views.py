@@ -18,25 +18,54 @@ def camara_existe_byID(id):
 
 
 # Create your views here.
-def view_init_page(request):
-    camaras = Camara.objects.all().order_by('titulo')
+def view_init_page(request,id):
+    if id == 'None':
+        estados = []
+        camaras = Camara.objects.all().order_by('titulo')
 
-    municipios = []
-    estados = []
-    for i in camaras:
-        if i.municipio not in municipios:
-            municipios.append(i.municipio)
-        if i.estado not in estados:
-            estados.append(i.estado)
-    context = {
-        'camaras':camaras,
-        'municipios':municipios,
-        'estados': estados,
-    }        
+            
+        municipios = []
+        estados = []
+        for i in camaras:
+            if i.municipio not in municipios:
+                municipios.append(i.municipio)
+            if i.estado not in estados:
+                
+                estados.append(i.estado)
+            
 
-    
+        context = {
+            'camaras':camaras,
+            'municipios':municipios,
+            'estados': estados, 
+        }        
 
-    return render(request, "camaras/view_init_page.html",context)
+        return render(request, "camaras/view_init_page.html",context)
+    else:
+                
+        estados = []
+        camaras = Camara.objects.all().order_by('titulo')
+        cam_cuestion = Camara.objects.get(pk = id)
+        lugares = Camara.objects.filter(estado = cam_cuestion.estado).order_by('titulo')
+            
+        municipios = []
+        estados = []
+        for i in camaras:
+            if i.municipio not in municipios:
+                municipios.append(i.municipio)
+            if i.estado not in estados:
+                
+                estados.append(i.estado)
+            
+
+        context = {
+            'camaras':lugares,
+            'municipios':municipios,
+            'estados': estados, 
+        }        
+
+        return render(request, "camaras/view_init_page.html",context)
+
 
 
 def get_clase_favorito(usuario, camara, modelo):

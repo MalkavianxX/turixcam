@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     #vistas view_init_page
-    path('buscar',views.view_init_page, name='view_init_page'),
+    path('buscar/<str:id>/',views.view_init_page, name='view_init_page'),
     path('detalle/<str:id>/',views.view_detail_camara, name="view_detail_camara"),
 
 

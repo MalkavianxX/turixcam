@@ -79,111 +79,121 @@
 
     <section class="py-3 py-sm-0 sticky">
         <div class="container">
+            <div class="d-lg-flex d-none">
+                <img src="https://images2.alphacoders.com/515/515958.jpg"
+                    style="margin-left: -39vh; width: 18vw; height: 100vh; margin-top: 20vh; position: absolute;" height="100%" alt="">
+                <!-- Search with offcanvas START -->
+                <div class="w-100">
+                    <div class="offcanvas-sm offcanvas-top" tabindex="-1" id="offcanvasEditsearch"
+                    aria-labelledby="offcanvasEditsearchLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasEditsearchLabel">Buscador de lugares</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                            data-bs-target="#offcanvasEditsearch" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body p-2">
+                        <div class=" p-4 rounded w-100">
+                            <!-- Booking from START -->
+                            <form class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4 "
+                                style="background-color: rgba(0, 0, 0, 0.512) !important;">
+                                <div class="row g-4 align-items-center">
+                                    <!-- Location -->
+                                    <div class="col-lg-4">
+                                        <div class="form-control-border form-control-transparent form-fs-md d-flex">
+                                            <!-- Icon -->
+                                            <i class="text-success bi bi-geo-alt fs-3 me-2 mt-2"></i>
+                                            <!-- Select input -->
+                                            <div class="flex-grow-1">
+                                                <label class="form-label">Estado</label>
+                                                <select id="form-estado" class="form-select js-choice"
+                                                    data-search-enabled="true">
+                                                    <option selected value="todos">Todos</option>
+                                                    {% for est in estados %}
+                                                    <option value="{{est}}">{{est}}</option>
+
+                                                    {% endfor %}
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Location -->
+                                    <div class="col-lg-4">
+                                        <div class="form-control-border form-control-transparent form-fs-md d-flex">
+                                            <!-- Icon -->
+                                            <i class="bi text-info bi-geo-alt fs-3 me-2 mt-2"></i>
+                                            <!-- Select input -->
+                                            <div class="flex-grow-1">
+                                                <label class="form-label">Municipio</label>
+                                                <select id="form-municipio" class="form-select js-choice "
+                                                    data-search-enabled="true">
+                                                    <option selected value="todos">Todos</option>
+                                                    {% for mun in municipios %}
+                                                    <option value="{{mun}}">{{mun}}</option>
+
+                                                    {% endfor %}
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Location -->
+                                    <div class="col-lg-4">
+                                        <div class="form-control-border form-control-transparent form-fs-md d-flex">
+                                            <!-- Icon -->
+                                            <i class="text-danger bi bi-geo-alt fs-3 me-2 mt-2"></i>
+                                            <!-- Select input -->
+                                            <div class="flex-grow-1">
+                                                <label class="form-label">Lugares</label>
+                                                <select id="form-lugar" class="form-select js-choice"
+                                                    data-search-enabled="true">
+                                                    <option selected value="todos">Todos</option>
+                                                    {% for cam in camaras %}
+                                                    <option value="{{cam.titulo}}">{{cam.titulo}}</option>
+
+                                                    {% endfor %}
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Button -->
+                                <div class="btn-position-md-middle">
+                                    <a data-bs-dismiss="offcanvas" data-bs-target="#offcanvasEditsearch"
+                                        aria-label="Close" class="icon-lg btn btn-round btn-outline-light mb-0"
+                                        href="#"><i class="text-light bi bi-search fa-fw"></i></a>
+                                </div>
+                            </form>
+                            <!-- Booking from END -->
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <img src="https://images2.alphacoders.com/515/515958.jpg"
+                style="margin-left: 124vh; width: 18vw; height: 100vh; position: absolute; margin-top: 20vh;" height="100%" alt="">
+                <!-- Search with offcanvas END -->
+            </div>
             <!-- Offcanvas button for search -->
             <button class="btn btn-outline-light d-sm-none w-100 mb-0 text-light" type="button"
                 data-bs-toggle="offcanvas" data-bs-target="#offcanvasEditsearch" aria-controls="offcanvasEditsearch"><i
                     class="bi bi-pencil-square me-2"></i>Abrir buscador</button>
 
-            <!-- Search with offcanvas START -->
-            <div class="offcanvas-sm offcanvas-top  " tabindex="-1" id="offcanvasEditsearch"
-                aria-labelledby="offcanvasEditsearchLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasEditsearchLabel">Buscador de lugares</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-                        data-bs-target="#offcanvasEditsearch" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body p-2">
-                    <div class=" p-4 rounded w-100">
-                        <!-- Booking from START -->
-                        <form class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4 "
-                            style="background-color: rgba(0, 0, 0, 0.512) !important;">
-                            <div class="row g-4 align-items-center">
-                                <!-- Location -->
-                                <div class="col-lg-4">
-                                    <div class="form-control-border form-control-transparent form-fs-md d-flex">
-                                        <!-- Icon -->
-                                        <i class="text-success bi bi-geo-alt fs-3 me-2 mt-2"></i>
-                                        <!-- Select input -->
-                                        <div class="flex-grow-1">
-                                            <label class="form-label">Estado</label>
-                                            <select id="form-estado" class="form-select js-choice"
-                                                data-search-enabled="true">
-                                                <option selected value="todos">Todos</option>
-                                                {% for est in estados %}
-                                                <option value="{{est}}">{{est}}</option>
 
-                                                {% endfor %}
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Location -->
-                                <div class="col-lg-4">
-                                    <div class="form-control-border form-control-transparent form-fs-md d-flex">
-                                        <!-- Icon -->
-                                        <i class="bi text-info bi-geo-alt fs-3 me-2 mt-2"></i>
-                                        <!-- Select input -->
-                                        <div class="flex-grow-1">
-                                            <label class="form-label">Municipio</label>
-                                            <select id="form-municipio" class="form-select js-choice "
-                                                data-search-enabled="true">
-                                                <option selected value="todos">Todos</option>
-                                                {% for mun in municipios %}
-                                                <option value="{{mun}}">{{mun}}</option>
-
-                                                {% endfor %}
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!-- Location -->
-                                <div class="col-lg-4">
-                                    <div class="form-control-border form-control-transparent form-fs-md d-flex">
-                                        <!-- Icon -->
-                                        <i class="text-danger bi bi-geo-alt fs-3 me-2 mt-2"></i>
-                                        <!-- Select input -->
-                                        <div class="flex-grow-1">
-                                            <label class="form-label">Lugares</label>
-                                            <select id="form-lugar" class="form-select js-choice"
-                                                data-search-enabled="true">
-                                                <option selected value="todos">Todos</option>
-                                                {% for cam in camaras %}
-                                                <option value="{{cam.titulo}}">{{cam.titulo}}</option>
-
-                                                {% endfor %}
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Button -->
-                            <div class="btn-position-md-middle">
-                                <a data-bs-dismiss="offcanvas" data-bs-target="#offcanvasEditsearch" aria-label="Close"
-                                    class="icon-lg btn btn-round btn-outline-light mb-0" href="#"><i
-                                        class="text-light bi bi-search fa-fw"></i></a>
-                            </div>
-                        </form>
-                        <!-- Booking from END -->
-                    </div>
-                </div>
-            </div>
-            <!-- Search with offcanvas END -->
         </div>
     </section>
     <!-- =======================
 	Search END -->
 
-    <section class="pt-0 pt-md-5 mt-xl-0 mt-5 ">
-        <div class="container"> 
+    <section class="pt-0 " style="">
+        <div class="container">
             <div class="row ">
                 {% for camara in camaras %}
                 <div class="col-lg-6 col-md-6 col-12 mb-lg-4" data-crd-estado="{{camara.estado}}"
-                    data-crd-municipio="{{camara.municipio}}" data-crd-lugar="{{camar.titulo}}" style="margin-bottom: 3vh !important;">
+                    data-crd-municipio="{{camara.municipio}}" data-crd-lugar="{{camar.titulo}}"
+                    style="margin-bottom: 3vh !important;">
                     <div id="{{camara.id}}" onclick="to_detail(this.id);"
                         class="card card-img-scale overflow-hidden bg-transparent">
                         <div class="card-img-scale-wrapper shadow" style="">
@@ -194,16 +204,26 @@
                             <div class="card-img-overlay d-flex flex-column z-index-1 " style="padding: 6.6rem;">
                                 <!-- Card overlay top -->
                                 <div class="d-flex justify-content-center top-0 fs-5">
-                                    <h1>{{camara.estado}}</h1>
+                                    <h1 class="text-center">{{camara.titulo}}</h1>
                                 </div>
                                 <!-- Card overlay bottom -->
-                               
+
                             </div>
                         </div>
-
-
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-6 col-12 mb-lg-4" style="margin-bottom: 3vh !important;">
+                    <div class="card card-img-scale overflow-hidden bg-transparent">
+                        <div class="card-img-scale-wrapper shadow" style="">
+                            <!-- Card Image -->
+                            <img class="img-fluid" loading="lazy" src="https://images2.alphacoders.com/515/515958.jpg"
+                                style="filter: brightness(0.80); height: 250px; width: 100%;" alt="">
+                            <!-- Overlay -->
+
+                        </div>
+                    </div>
+                </div>
+
 
                 {% endfor %}
                 <div class="col-12">
