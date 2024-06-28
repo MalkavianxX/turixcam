@@ -253,6 +253,9 @@ def addComentario(request):
 def remove_comentario(request,id):
     try:
         comentario = Comentario.objects.get(pk = id)
+        id_camara = comentario.object_id
+        comentario.delete()
+        return redirect('view_detail_camara',id = id_camara)
     except Exception as e:
         print(e)
     pass

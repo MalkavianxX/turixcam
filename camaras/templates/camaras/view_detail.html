@@ -407,10 +407,11 @@
                                             class="comentario-accion d-none w-100  border border-top">
                                             <div class="d-flex justify-content-center">
                                                 {% if item.user.id == request.user.id %}
-                                                <p class="text-danger" onclick="" id="{{item.id}}"
-                                                    style="margin-top: 0.5rem !important; margin-bottom: 1rem !important;">
+                                                <a class="text-danger" href="{% url 'remove_comentario' item.id %}" id="{{item.id}}"
+                                                    style="margin-top: 0.5rem !important; margin-bottom: 1rem !important; text-decoration: none;">
                                                     <i class="fa-solid fa-trash "></i> Eliminar
-                                                </p>
+                                                </a>
+                                       
                                                 {% else %}
                                                 <p class="text-warning" onclick=""
                                                     style="margin-top: 0.5rem !important; margin-bottom: 1rem !important;">

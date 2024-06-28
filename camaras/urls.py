@@ -15,6 +15,7 @@ urlpatterns = [
     path('addFavorite',views.addFavorite, name='addFavorite'),
     path('addGuardado',views.addGuardado, name='addGuardado'),
     path('addComentario',views.addComentario, name='addComentario'),
+    path('remove_comentario/<int:id>/', views.remove_comentario, name="remove_comentario"),
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
