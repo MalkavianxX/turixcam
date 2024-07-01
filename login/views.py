@@ -14,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from login.models import CustomUser, Favorito, Guardado, ImagenesDefault
 from allauth.socialaccount.models import SocialAccount
 from camaras.models import Camara 
-
+from comercios.models import Comercio
 # Otras importaciones
 from subscripcion.FireUser import FireUser
 import requests
@@ -54,7 +54,9 @@ def is_social_auth(user):
 
 def render_init_page(request):
     camaras = Camara.objects.all()
+    comercios = Comercio.objects.filter(estrellas = 5).order_by('importancia')[:5]
     estados = []
+    
     filter_camaras = []
     for cam in camaras:
         if cam.estado not in estados:
@@ -63,7 +65,10 @@ def render_init_page(request):
             
     context = {
         'camaras':filter_camaras,
+        'estados':estados,
+        'comercios':comercios,
     } 
+    
     return render(request, 'login/init/inicio.html', context)
 
 

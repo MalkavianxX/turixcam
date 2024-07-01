@@ -1,18 +1,12 @@
-{% extends 'login/base/base.html' %}{% load static %}
-
-{% block title %}
-<title>Turixcam - Camaras en vivo </title>
-{% endblock %}
-
-{% block description %}
+{% extends 'login/base/base.html' %}{% load static %} {% block title %}
+<title>Turixcam - Camaras en vivo</title>
+{% endblock %} {% block description %}
 <!-- Meta Tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="author" content="Webestica.com">
-<meta name="description" content="Turixcam - Camras en vivo">
-{% endblock %}
-
-{% block content %}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="author" content="Webestica.com" />
+<meta name="description" content="Turixcam - Camras en vivo" />
+{% endblock %} {% block content %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <style>
     .swiper {
@@ -53,15 +47,13 @@
 
     .icon_float_end {
         animation: flotar 2.5s ease-in-out infinite;
-
     }
 
     body {
-        background-image: url('https://i.redd.it/u9z9rmz2ryf21.jpg');
+        background-image: url("https://i.redd.it/u9z9rmz2ryf21.jpg");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-
     }
 
     header {
@@ -75,7 +67,6 @@
     .btn_inicio {
         border-color: white !important;
         color: white !important;
-
     }
 
     .btn_inicio:hover {
@@ -97,12 +88,12 @@
 
     .animate {
         animation: flotar 2.5s ease-in-out infinite;
-
     }
 
     .titulo-trans {
-
-        background: -webkit-linear-gradient(Bottom, rgba(213, 213, 213, 0.847), rgba(255, 255, 255, 0.841));
+        background: -webkit-linear-gradient(Bottom,
+                rgba(213, 213, 213, 0.847),
+                rgba(255, 255, 255, 0.841));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-align: start;
@@ -111,11 +102,12 @@
     #globo_init {
         cursor: pointer;
         width: 75%;
-
     }
 
     .mitad {
-        background: linear-gradient(to bottom, rgba(213, 213, 213, 0.847) 50%, rgba(0, 0, 0, 0.55) 50%);
+        background: linear-gradient(to bottom,
+                rgba(213, 213, 213, 0.847) 50%,
+                rgba(0, 0, 0, 0.55) 50%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -133,7 +125,6 @@
     }
 
     @media screen and (max-width: 600px) {
-
         .sep-sm-6 {
             margin-top: 11rem;
         }
@@ -168,32 +159,36 @@
 
 <script>
     window.onload = function () {
-        // Precarga las imágenes 
-        console.log('{{request.user.premium}}')
-        if ('{{request.user.premium}}' == "free") {
-            console.log("verfdad")
+        // Precarga las imágenes
+        console.log("{{request.user.premium}}");
+        if ("{{request.user.premium}}" == "free") {
+            console.log("verfdad");
             var imgUrls = [
                 "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
                 "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
                 "https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png",
             ];
         } else {
-            console.log("false")
+            console.log("false");
             var imgUrls = [
                 "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente2.png",
                 "https://turixcam-images.b-cdn.net/Backgrounds/inicio/parapente.png",
                 "https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png",
             ];
         }
-        console.log(imgUrls)
+        console.log(imgUrls);
         let imgs = imgUrls.map(function (url) {
             let img = new Image();
             img.src = url;
             return img;
         });
 
-        let img = document.getElementById('globo_init');
-        img.style.transition = 'transform 0.5s ease-out';
+        let img = document.getElementById("globo_init");
+
+        const audioGlobo = document.getElementById('audioAparece');
+        const audioExplosion = document.getElementById('audioDesaparece');
+        audioGlobo.play();
+        img.style.transition = "transform 0.5s ease-out";
 
         // Agrega un contador de clics a tu imagen
         let clickCount = 0;
@@ -201,30 +196,36 @@
             clickCount++;
 
             // Agrega una animación de pulsación
-            img.style.animation = 'pulse 0.2s ease-in-out';
+            img.style.animation = "pulse 0.2s ease-in-out";
+            audioGlobo.play();
             setTimeout(function () {
-                img.style.animation = '';
-            }, 200);  // Elimina la animación después de 0.2 segundos
+                img.style.animation = "";
+            }, 200); // Elimina la animación después de 0.2 segundos
 
             if (clickCount === 3) {
                 // Cambia la imagen a parapente y agrega un efecto de explosión
                 img.src = imgs[0].src;
-                img.style.animation = 'explode 0.5s ease-out';
+                img.style.animation = "explode 0.5s ease-out";
+                audioExplosion.play();
+
             } else if (clickCount === 6) {
                 // Cambia la imagen a parapente2 y agrega un efecto de explosión
                 img.src = imgs[1].src;
-                img.style.animation = 'explode 0.5s ease-out';
+                img.style.animation = "explode 0.5s ease-out";
+                audioExplosion.play();
+
             } else if (clickCount === 9) {
                 // Cambia la imagen a globo y agrega un efecto de explosión
                 img.src = imgs[2].src;
-                img.style.animation = 'explode 0.5s ease-out';
-                clickCount = 0;  // Reinicia el contador de clics
+                img.style.animation = "explode 0.5s ease-out";
+                clickCount = 0; // Reinicia el contador de clics
+                audioGlobo.play();
             }
-        }
-    }
+        };
+    };
 
     window.onscroll = function () {
-        let img = document.getElementById('globo_init');
+        let img = document.getElementById("globo_init");
         let y = window.scrollY;
         let x = (window.innerWidth / window.innerHeight) * 0.55 * y;
         let x_p = window.innerWidth;
@@ -235,48 +236,45 @@
 
         if (x_p < mediumScreenSize) {
             // Si la pantalla es pequeña, mueve la imagen solo hacia abajo
-            img.style.transform = 'translate(0px,' + y + 'px)';
+            img.style.transform = "translate(0px," + y + "px)";
         } else {
             // Si la pantalla es mediana o grande, mueve la imagen en diagonal hacia la izquierda
-            img.style.transform = 'translate(' + -x + 'px,' + y + 'px)';
+            img.style.transform = "translate(" + -x + "px," + y + "px)";
         }
-
-    }
-
-
+    };
 </script>
 
 <main>
-
-
-    <section class=" d-flex justify-content-center align-items-center mt-xl-0 mt-5 "
-        style="height: 80vh; margin-bottom: 10vh;">
+        <audio id="audioAparece" src="{% static 'login/audio/aparece.mp3' %}"></audio>
+        <audio id="audioDesaparece" src="{% static 'login/audio/desaparece.mp3' %}"></audio>
+    <section class="d-flex justify-content-center align-items-center mt-xl-0 mt-5"
+        style="height: 80vh; margin-bottom: 10vh">
         <div class="container sep-sm-6">
             <!-- Content and Image START -->
-            <div class="row ">
+            <div class="row">
                 <!-- Content -->
-                <div class="col-lg-7 align-self-start justify-content-center text-center  ">
+                <div class="col-lg-7 align-self-start justify-content-center text-center">
                     <!-- Title -->
                     {% if request.user.premium == "free" %}
-                    <img src="{% static 'login/assets/images/logo.png' %} " class="img-fluid logo-sm" alt="">
+                    <img src="{% static 'login/assets/images/logo.png' %} " class="img-fluid logo-sm" alt="" />
                     {% else %}
                     <img src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/logo-premium.png "
-                        class="img-fluid logo-sm" alt="">
+                        class="img-fluid logo-sm" alt="" />
 
                     {% endif %}
-                    <h1 style=" color: white;text-shadow: -1px 0 #a097958e, 0 1px #a097958e, 1px 0 #a097958e, 0 -1px #a097958e;"
-                        class="fw-bold titulo-sm">
-
+                    <h1 style="
+              color: white;
+              text-shadow: -1px 0 #a097958e, 0 1px #a097958e, 1px 0 #a097958e,
+                0 -1px #a097958e;
+            " class="fw-bold titulo-sm">
                         {% if request.user.premium == "free" %}
-
                         México, como nunca lo habias visto
-
                         {% endif %}
                         {% if request.user.premium != "free" and request.user.is_authenticated %}
                         PREMIUM
                         {% endif %}
                     </h1>
-                    <br>
+                    <br />
                     <a type="button" href="{% url 'view_init_page' None %}"
                         class="mt-lg-0 mt-3 btn btn_inicio btn-outline-light">Explorar</a>
                 </div>
@@ -284,208 +282,348 @@
                 <!-- Image -->
                 <div class="col-lg-5 icon_float_init z-0 position-relative text-center">
                     {% if request.user.premium == "free" %}
-                    <img style="filter: brightness(0.90);" id="globo_init" class="img-fluid"
-                        src="https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png" alt="">
+                    <img style="filter: brightness(0.9)" id="globo_init" class="img-fluid"
+                        src="https://turixcam-images.b-cdn.net/Backgrounds/inicio/globo.png" alt="" />
                     {% else %}
-                    <img style="filter: brightness(0.90);" id="globo_init" class="img-fluid"
-                        src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png" alt="">
+                    <img style="filter: brightness(0.9)" id="globo_init" class="img-fluid"
+                        src="https://staticurix.b-cdn.net/Recursos%20WEB/PREMIUM/globo-premium.png" alt="" />
                     {% endif %}
-
                 </div>
             </div>
             <!-- Content and Image END 8003332222-->
-
-
         </div>
     </section>
 
-    <br>
+    <br />
     <section>
         <div class="container-fluid">
-            <h1 class="ms-5 titulo-trans d-xl-flex d-none" style="font-size: 8rem;">Los mejores lugares</h1>
-            <h1 class=" titulo-trans text-center d-xl-none d-flex" style="font-size: 9vh;"> Lugares favoritos</h1>
- 
+            <h1 class="ms-5 titulo-trans d-xl-flex d-none" style="font-size: 8rem">
+                Los mejores lugares
+            </h1>
+            <h1 class="titulo-trans text-center d-xl-none d-flex" style="font-size: 9vh">
+                Lugares favoritos
+            </h1>
+            <div class="row justify-content-center" style="backdrop-filter: blur(12px) !important">
+                <div class="col-lg-4 col-md-6 col-12" style="background-color: transparent !important">
+                    <!-- Title -->
+                    <h6 class="d-none d-xl-block mb-3">Busca por estado</h6>
+
+                    <!-- Booking from START -->
+                    <form class="card rounded-3 p-4 pe-md-5 pb-5 pb-md-4" style="
+              backdrop-filter: blur(12px) !important;
+              background-color: transparent !important;
+            ">
+                        <div class="row align-items-center">
+                            <!-- Location -->
+                            <div class="col-lg-12">
+                                <div class="form-control-border form-control-transparent form-fs-md d-flex">
+                                    <!-- Icon -->
+                                    <i class="bi bi-geo-alt fs-3 me-2 mt-2 text-light"></i>
+                                    <!-- Select input -->
+                                    <div class="flex-grow-1">
+                                        <label class="form-label fw-bold" style="
+                        color: white !important;
+                        background-color: transparent;
+                        margin-left: 0 !important;
+                      ">Busca por estado</label>
+                                        <select id="form-estado" style="
+                        background-color: #ffffff7d !important ;
+                        color: black !important;
+                      " class="form-select js-choice" data-search-enabled="true">
+                                            <option selected value="todos" style="color: black">
+                                                Todos
+                                            </option>
+                                            {% for i in estados %}
+                                            <option value="{{i}}">{{i}}</option>
+
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button -->
+                    </form>
+                    <!-- Booking from END -->
+                </div>
+            </div>
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                     {% for cam in camaras %}
 
- 
-
-                <div class="swiper-slide"  style="margin-bottom: 3vh !important;" onclick="to_camara({{cam.id}})">
-                    <div id="{{cam.id}}" onclick="to_detail(this.id);"
-                        class="card card-img-scale overflow-hidden bg-transparent">
-                        <div class="card-img-scale-wrapper shadow" style="">
-                            <!-- Card Image -->
-                            <img class="img-fluid" loading="lazy" src="{{cam.background_web.url}}"
-                                style="filter: brightness(0.80); height: 25vh !important; width: 100%;" alt="{{cam.titulo}}">
-                            <!-- Overlay -->
-                            <div class="card-img-overlay d-flex flex-column z-index-1 " style="padding: 6.6rem;">
-                                <!-- Card overlay top -->
-                                <div class="d-flex justify-content-center top-0 fs-5">
-                                    <h2>{{cam.estado}}</h2>
+                    <div class="swiper-slide" data-crd-estado="{{cam.estado}}" style="margin-bottom: 3vh !important"
+                        onclick="to_camara({{cam.id}})">
+                        <div id="{{cam.id}}" onclick="to_detail(this.id);"
+                            class="card card-img-scale overflow-hidden bg-transparent">
+                            <div class="card-img-scale-wrapper shadow" style="">
+                                <!-- Card Image -->
+                                <img class="img-fluid" loading="lazy" src="{{cam.background_web.url}}" style="
+                                    filter: brightness(0.8);
+                                    height: 25vh !important;
+                                    width: 100%;
+                                " alt="{{cam.titulo}}" />
+                              
+                                <div class="card-img-overlay d-flex flex-column z-index-1" style="padding: 6.6rem">
+                                    <!-- Card overlay top -->
+                                    <div class="d-flex justify-content-center top-0 fs-5">
+                                        <h2>{{cam.estado}}</h2>
+                                    </div>
+                                    <!-- Card overlay bottom -->
                                 </div>
-                                <!-- Card overlay bottom -->
-                               
                             </div>
                         </div>
-
-
                     </div>
-                </div>
-
-
 
                     {% endfor %}
-
-
-
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
         </div>
 
+        {% if request.user.premium == "free" %}
+        <div class="container">
+
+    
+            <div class="swiper comercioSwipper">
+                <div class="swiper-wrapper">
+                    {% for comer in comercios %}
+                    <div class="swiper-slide"
+                        >
+    
+                       
+                            <!-- Card START -->
+                            <div class="card card-img-scale overflow-hidden ">
+                                <!-- Image and overlay -->
+                                <div class="card-img-scale-wrapper rounded-3">
+                                    <!-- Image -->
+                                    <img src="https://images2.alphacoders.com/515/515958.jpg" style="width: 100vw !important; height: 25vh !important;"
+                                        class="img-fluid" alt="">
+                                    <!-- Badge -->
+
+                                </div>
+    
+
+                            </div>
+                            <!-- Card END -->
+                        
+    
+    
+    
+                    </div>
+                    {% endfor %}
+    
+                </div>
+    
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+
+        {% else %}
+        <div class="container">
+            <h1 class="ms-5 titulo-trans d-xl-flex d-none" style="font-size: 8rem">
+                Visitia
+            </h1>
+            <h1 class="titulo-trans text-center d-xl-none d-flex" style="font-size: 9vh">
+                Visita
+            </h1>
+    
+            <div class="swiper comercioSwipper">
+                <div class="swiper-wrapper">
+                    {% for comer in comercios %}
+                    <div class="swiper-slide" id="comer.id" onclick="(to_comercio({{comer.id}}))"
+                        >
+    
+                       
+                            <!-- Card START -->
+                            <div class="card card-img-scale overflow-hidden bg-transparent">
+                                <!-- Image and overlay -->
+                                <div class="card-img-scale-wrapper rounded-3">
+                                    <!-- Image -->
+                                    <img src="{{comer.logo.url}} " style="width: 100vw !important; height: 25vh !important;"
+                                        class="img-fluid" alt="">
+                                    <!-- Badge -->
+                                    <div class="position-absolute bottom-0 start-0 p-3">
+                                        <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                                class="bi bi-geo-alt me-2"></i>{{comer.camara}}</div>
+                                    </div>
+                                </div>
+    
+                                <!-- Card body -->
+                                <div class="card-body px-2 "
+                                    style="background-color: rgba(255, 255, 255, 0.281); backdrop-filter: blur(12px);">
+                                    <!-- Title -->
+                                    <h5 class="card-title"><a class="stretched-link">{{comer.cliente}}</a></h5>
+                                    <!-- Price and rating -->
+                                    <div class="d-flex justify-content-between align-items-center">
+    
+                                        <h6 class="mb-0">{{comer.estrellas}}<i
+                                                class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card END -->
+                        
+    
+    
+    
+                    </div>
+                    {% endfor %}
+    
+                </div>
+    
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        {% endif %}
+        
+
     </section>
 
-    <section style="position: relative; overflow: hidden;">
-        <div class=" d-xl-flex mitad d-none justify-content-center mb-5 top-0 end-0 start-0 z-4"
-            style="position: absolute; z-index: 2;">
-            <h1 class=" " style="font-size: 8rem;"> SIEMPRE EN VIVO</h1>
+    <section style="position: relative; overflow: hidden">
+        <div class="d-xl-flex mitad d-none justify-content-center mb-5 top-0 end-0 start-0 z-4"
+            style="position: absolute; z-index: 2">
+            <h1 class=" " style="font-size: 8rem">SIEMPRE EN VIVO</h1>
         </div>
-        <br>
+        <br />
 
-        <h1 class=" titulo-trans text-center d-xl-none  d-flex z-3" style="font-size: 9vh; z-index: 2;"> SIEMPRE EN VIVO
+        <h1 class="titulo-trans text-center d-xl-none d-flex z-3" style="font-size: 9vh; z-index: 2">
+            SIEMPRE EN VIVO
         </h1>
-        <video preload="none" class="end-0 " autoplay loop muted
-            style="border-radius: 10px !important; position: absolute; width: 90%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(0.85); ">
-            <source src="https://turixcam-images.b-cdn.net/videos/principal/videofestival.mp4" type="video/mp4">
+        <video preload="none" class="end-0" autoplay loop muted style="
+        border-radius: 10px !important;
+        position: absolute;
+        width: 90%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+        filter: brightness(0.85);
+      ">
+            <source src="https://turixcam-images.b-cdn.net/videos/principal/videofestival.mp4" type="video/mp4" />
         </video>
-        <div class="container-fluid mt-5 " style="position: relative; z-index: 2;">
-
-            <div class="row d-flex justify-content-start" style="margin-top: 10vh; margin-bottom: 10vh;">
-
+        <div class="container-fluid mt-5" style="position: relative; z-index: 2">
+            <div class="row d-flex justify-content-start" style="margin-top: 10vh; margin-bottom: 10vh">
                 <div class="col-xl-5 text-center">
                     <!-- Features START -->
                     <div class="row g-4">
                         <!-- Item -->
                         <div class="col-sm-6">
-                            <div class="card" style="background-color: rgba(255, 255, 255, 0.764);">
+                            <div class="card" style="background-color: rgba(255, 255, 255, 0.764)">
                                 <div class="card-body">
                                     <div class="icon-lg bg-primary bg-opacity-10 text-primary rounded-circle">
                                         <i class="fa-solid fa-utensils"></i>
-
                                     </div>
                                     <h5 class="mt-2">Eventos especiales</h5>
-                                    <p class="mb-0">Disfrutalos desde la comodidad de tu hogar.</p>
+                                    <p class="mb-0">
+                                        Disfrutalos desde la comodidad de tu hogar.
+                                    </p>
                                 </div>
-
                             </div>
-
                         </div>
                         <!-- Item -->
                         <div class="col-sm-6">
-                            <div class="card" style="background-color: rgba(255, 255, 255, 0.764);">
+                            <div class="card" style="background-color: rgba(255, 255, 255, 0.764)">
                                 <div class="card-body">
-                                    <div class="icon-lg bg-success bg-opacity-10 text-success rounded-circle"><i
-                                            class="fa-solid fa-utensils"></i></div>
+                                    <div class="icon-lg bg-success bg-opacity-10 text-success rounded-circle">
+                                        <i class="fa-solid fa-utensils"></i>
+                                    </div>
                                     <h5 class="mt-2">Pueblos mágicos</h5>
                                     <p class="mb-0">Conoce estos fantasticos lugares.</p>
                                 </div>
-
                             </div>
                         </div>
                         <!-- Item -->
                         <div class="col-sm-6">
-                            <div class="card" style="background-color: rgba(255, 255, 255, 0.764);">
+                            <div class="card" style="background-color: rgba(255, 255, 255, 0.764)">
                                 <div class="card-body">
-                                    <div class="icon-lg bg-warning bg-opacity-10 text-warning rounded-circle"><i
-                                            class="fa-solid fa-utensils"></i></div>
+                                    <div class="icon-lg bg-warning bg-opacity-10 text-warning rounded-circle">
+                                        <i class="fa-solid fa-utensils"></i>
+                                    </div>
                                     <h5 class="mt-2">Atractivos turisticos</h5>
                                     <p class="mb-0">Desde tu hogar.</p>
                                 </div>
-
                             </div>
                         </div>
                         <!-- Item -->
                         <div class="col-sm-6">
-                            <div class="card" style="background-color: rgba(255, 255, 255, 0.764);">
+                            <div class="card" style="background-color: rgba(255, 255, 255, 0.764)">
                                 <div class="card-body">
-                                    <div class="icon-lg bg-success bg-opacity-10 text-success rounded-circle"><i
-                                            class="fa-solid fa-utensils"></i></div>
+                                    <div class="icon-lg bg-success bg-opacity-10 text-success rounded-circle">
+                                        <i class="fa-solid fa-utensils"></i>
+                                    </div>
                                     <h5 class="mt-2">Alta tecnología</h5>
                                     <p class="mb-0">Para que te conectes desde donde quieras.</p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     <!-- Features END -->
                 </div>
-
             </div>
         </div>
     </section>
 
-    <section class="mt-5 pt-5 pt-md-8 pb-0 ">
-
-    </section>
-
+    <section class="mt-5 pt-5 pt-md-8 pb-0"></section>
 
     <section class="">
         <div class="container">
             <script async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
                 crossorigin="anonymous"></script>
-            <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed"
+            <ins class="adsbygoogle" style="display: block" data-ad-format="autorelaxed"
                 data-ad-client="ca-pub-5735730034243265" data-ad-slot="4227636885"></ins>
             <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
+                (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
             <div class="row g-4">
                 <!-- Help -->
                 <div class="col-md-6 col-xxl-4">
-                    <div class=" d-flex rounded-3 h-100 p-4" style="backdrop-filter:blur(12px)">
+                    <div class="d-flex rounded-3 h-100 p-4" style="backdrop-filter: blur(12px)">
                         <h3><i class="fa-solid text-light fa-hand-holding-heart"></i></h3>
                         <div class="ms-3">
                             <h5 class="text-light">24x7 Soporte</h5>
-                            <p class="mb-0 text-light">Si tienes algun problema, con gusto te ayudamos</p>
+                            <p class="mb-0 text-light">
+                                Si tienes algun problema, con gusto te ayudamos
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Trust -->
                 <div class="col-md-6 col-xxl-4">
-                    <div class="d-flex rounded-3 h-100 p-4" style="backdrop-filter:blur(12px)">
+                    <div class="d-flex rounded-3 h-100 p-4" style="backdrop-filter: blur(12px)">
                         <h3><i class="fa-solid text-light fa-hand-holding-usd"></i></h3>
                         <div class="ms-3">
                             <h5 class="text-light">Pagos confiables</h5>
-                            <p class="mb-0 text-light">Todos los metodos de pago eson 100% seguros</p>
+                            <p class="mb-0 text-light">
+                                Todos los metodos de pago eson 100% seguros
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Download app -->
-                <div class="col-lg-6 col-xl-5 col-xxl-3 ms-xxl-auto" style="backdrop-filter:blur(12px)">
+                <div class="col-lg-6 col-xl-5 col-xxl-3 ms-xxl-auto" style="backdrop-filter: blur(12px)">
                     <h5 class="mb-4 text-light">Descarga la app</h5>
                     <div class="row g-3">
                         <!-- Google play store button -->
                         <div class="col-6 col-sm-4 col-md-3 col-lg-6">
-                            <a href="#"> <img src="{% static 'login/assets/images/element/google-play.svg' %} " alt="">
+                            <a href="#">
+                                <img src="{% static 'login/assets/images/element/google-play.svg' %} " alt="" />
                             </a>
                         </div>
                         <!-- App store button -->
                         <div class="col-6 col-sm-4 col-md-3 col-lg-6">
-                            <a href="#"> <img src="{% static 'login/assets/images/element/app-store.svg' %} " alt="">
+                            <a href="#">
+                                <img src="{% static 'login/assets/images/element/app-store.svg' %} " alt="" />
                             </a>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
     <!-- =======================
 Download app END -->
-
 
     <!-- =======================
 Featured Hotels END -->
@@ -508,10 +646,59 @@ Featured Hotels END -->
             },
         });
 
-
         function to_camara(ref) {
-            window.location.href = '/camaras/buscar/' + ref;
+            window.location.href = "/camaras/buscar/" + ref;
         }
+        function to_comercio(ref) {
+            window.location.href = "/comercios/comercio/" + ref + '/';
+
+        }
+        // Obtén el elemento select y los elementos div con los estados
+        const selectEstado = document.getElementById("form-estado");
+        const elementosEstado = document.querySelectorAll("[data-crd-estado]");
+
+        // Manejador de eventos para el cambio en el select
+        selectEstado.addEventListener("change", () => {
+            const valorSeleccionado = selectEstado.value;
+
+            // Si se selecciona "Todos", elimina el enfoque de todos los elementos
+            if (valorSeleccionado === "todos") {
+                swiper.slideTo(0); // Vuelve al primer slide
+            } else {
+                // Encuentra el índice del slide correspondiente al estado seleccionado
+                const indiceSlide = Array.from(elementosEstado).findIndex(
+                    (elemento) => {
+                        return elemento.dataset.crdEstado === valorSeleccionado;
+                    }
+                );
+
+                if (indiceSlide !== -1) {
+                    swiper.slideTo(indiceSlide); // Enfoca el slide correspondiente
+                }
+            }
+        });
+
+        var comerciosSwipper = new Swiper(".comercioSwipper", {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            autoplay: {
+                delay: 3000, // Tiempo en milisegundos entre cada transición
+            },
+        });
     </script>
 
+
     {% endblock %}
+</main>

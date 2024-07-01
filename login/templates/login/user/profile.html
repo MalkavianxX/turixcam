@@ -134,17 +134,27 @@
   }
 
   .new {
-    
-    animation: colorChange 2s infinite alternate;
+    border-radius: 50%;
+    border: 7px solid #7f761a;
+    animation: colorChange 5s infinite alternate;
 }
 
 @keyframes colorChange {
     0% {
-        filter: drop-shadow(0 0 100px #00a800);
+        border: 7px solid #2c8789;
     }
+    25%{
+      border: 7px solid #1a7f25;
+    }
+    50%{
+      border: 7px solid #2c8968;
+    }
+    75%{
+      border: 7px solid #2c8930;
 
+    }
     100% {
-        filter: drop-shadow(0 0  10px #003402);
+      border: 7px solid #46892c;
     }
 
 }
@@ -176,7 +186,7 @@
           <img
             width="168px"
             height="168px"
-            style="border-radius: 50%;"
+            
             alt="perfil"
             {% if request.user.premium == "free" %}
             

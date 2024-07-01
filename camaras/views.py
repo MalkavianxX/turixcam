@@ -12,25 +12,38 @@ from comercios.models import Comercio
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
-
+from comercios.models import Comercio
 def camara_existe_byID(id):
     return Camara.objects.filter(pk=id).exists()
 
 
 # Create your views here.
 def view_init_page(request,id):
+    comercios = []
+    class comerciotemp():
+        def __init__(self,id,camara,titulo,portada) -> None:
+            self.id = id
+            self.camara = camara
+            self.cliente = titulo
+            self.portada = portada
     if id == 'None':
         estados = []
         camaras = Camara.objects.all().order_by('titulo')
+
+
 
             
         municipios = []
         estados = []
         for i in camaras:
             if i.municipio not in municipios:
-                municipios.append(i.municipio)
+                municipios.append(i.titulo)
             if i.estado not in estados:
-                
+                com = Comercio.objects.filter(camara = i.titulo)[:4]
+                for i in com:
+                    comercios.append(comerciotemp(
+                        i.id,i.camara,i.cliente,i.portada.url
+                    ))
                 estados.append(i.estado)
             
 
@@ -38,6 +51,7 @@ def view_init_page(request,id):
             'camaras':camaras,
             'municipios':municipios,
             'estados': estados, 
+            'comercios': comercios,
         }        
 
         return render(request, "camaras/view_init_page.html",context)
@@ -54,14 +68,20 @@ def view_init_page(request,id):
             if i.municipio not in municipios:
                 municipios.append(i.municipio)
             if i.estado not in estados:
-                
+
                 estados.append(i.estado)
-            
+        for i in lugares:
+            com = Comercio.objects.filter(camara = i.titulo)[:5]
+            for i in com:
+                comercios.append(comerciotemp(
+                    i.id,i.camara,i.cliente,i.portada.url
+                ))
 
         context = {
             'camaras':lugares,
             'municipios':municipios,
             'estados': estados, 
+            'comercios': comercios,
         }        
 
         return render(request, "camaras/view_init_page.html",context)

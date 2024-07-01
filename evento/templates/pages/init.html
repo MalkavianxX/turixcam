@@ -1,0 +1,48 @@
+{% extends 'login/base/base.html' %}{% load static %} {% block title %}
+<title>Turixcam - Camaras en vivo</title>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+{% endblock %} {% block description %}
+<!-- Meta Tags -->
+<meta charset="utf-8" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, shrink-to-fit=no"
+/>
+<meta name="author" content="turixcam.com" />
+<meta name="description" content="Se miembro premium" />
+{% endblock %} {% block content %}
+
+<style>
+  .navbar {
+    display: none !important;
+  }
+  body {
+    background-image: url("{% static 'login/assets/images/fondos/zacatlan.jpg' %}");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+</style>
+
+<main>
+    <div class="container">
+        <h1 style="margin-top: 30vh; " class="text-center">Hazte premium para ver esta sección </h1>
+        <a
+        href="#"
+        type="button"
+        style="margin-top: 5rem; font-weight: 700;margin-bottom: 35vh;"
+        class="btn btn-outline-warning w-100"
+        >Iniciar prueba gratuita</a
+    >
+    </div>
+</main>
+
+{% endblock %}

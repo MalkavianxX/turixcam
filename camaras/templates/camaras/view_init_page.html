@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Webestica.com">
 <meta name="description" content="Turixcam - Camras en vivo">
+
 {% endblock %}
 
 {% block content %}
@@ -79,12 +80,21 @@
 
     <section class="py-3 py-sm-0 sticky">
         <div class="container">
+            {% if request.user.premium == "free" %}
             <div class="d-lg-flex d-none">
                 <img src="https://images2.alphacoders.com/515/515958.jpg"
-                    style="margin-left: -39vh; width: 18vw; height: 100vh; margin-top: 20vh; position: absolute;" height="100%" alt="">
-                <!-- Search with offcanvas START -->
-                <div class="w-100">
-                    <div class="offcanvas-sm offcanvas-top" tabindex="-1" id="offcanvasEditsearch"
+                    style="margin-left: -39vh; width: 18vw; height: 100vh; margin-top: 20vh; position: absolute;"
+                    height="100%" alt="">
+
+                <img src="https://images2.alphacoders.com/515/515958.jpg"
+                    style="margin-left: 124vh; width: 18vw; height: 100vh; position: absolute; margin-top: 20vh;"
+                    height="100%" alt="">
+                <!-- Search with offcanvas END -->
+            </div>
+            {% endif %}
+            <!-- Search with offcanvas START -->
+            <div class="w-100">
+                <div class="offcanvas-sm offcanvas-top" tabindex="-1" id="offcanvasEditsearch"
                     aria-labelledby="offcanvasEditsearchLabel">
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title" id="offcanvasEditsearchLabel">Buscador de lugares</h5>
@@ -98,67 +108,25 @@
                                 style="background-color: rgba(0, 0, 0, 0.512) !important;">
                                 <div class="row g-4 align-items-center">
                                     <!-- Location -->
-                                    <div class="col-lg-4">
+                                    <div class="col-12">
                                         <div class="form-control-border form-control-transparent form-fs-md d-flex">
                                             <!-- Icon -->
                                             <i class="text-success bi bi-geo-alt fs-3 me-2 mt-2"></i>
                                             <!-- Select input -->
                                             <div class="flex-grow-1">
-                                                <label class="form-label">Estado</label>
-                                                <select id="form-estado" class="form-select js-choice"
-                                                    data-search-enabled="true">
-                                                    <option selected value="todos">Todos</option>
-                                                    {% for est in estados %}
-                                                    <option value="{{est}}">{{est}}</option>
-
-                                                    {% endfor %}
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Location -->
-                                    <div class="col-lg-4">
-                                        <div class="form-control-border form-control-transparent form-fs-md d-flex">
-                                            <!-- Icon -->
-                                            <i class="bi text-info bi-geo-alt fs-3 me-2 mt-2"></i>
-                                            <!-- Select input -->
-                                            <div class="flex-grow-1">
                                                 <label class="form-label">Municipio</label>
-                                                <select id="form-municipio" class="form-select js-choice "
-                                                    data-search-enabled="true">
-                                                    <option selected value="todos">Todos</option>
-                                                    {% for mun in municipios %}
-                                                    <option value="{{mun}}">{{mun}}</option>
-
-                                                    {% endfor %}
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Location -->
-                                    <div class="col-lg-4">
-                                        <div class="form-control-border form-control-transparent form-fs-md d-flex">
-                                            <!-- Icon -->
-                                            <i class="text-danger bi bi-geo-alt fs-3 me-2 mt-2"></i>
-                                            <!-- Select input -->
-                                            <div class="flex-grow-1">
-                                                <label class="form-label">Lugares</label>
-                                                <select id="form-lugar" class="form-select js-choice"
+                                                <select id="form-estado" class="form-select js-choice"
                                                     data-search-enabled="true">
                                                     <option selected value="todos">Todos</option>
                                                     {% for cam in camaras %}
                                                     <option value="{{cam.titulo}}">{{cam.titulo}}</option>
 
                                                     {% endfor %}
-
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
+      
                                 </div>
                                 <!-- Button -->
                                 <div class="btn-position-md-middle">
@@ -171,10 +139,6 @@
                         </div>
                     </div>
                 </div>
-                </div>
-                <img src="https://images2.alphacoders.com/515/515958.jpg"
-                style="margin-left: 124vh; width: 18vw; height: 100vh; position: absolute; margin-top: 20vh;" height="100%" alt="">
-                <!-- Search with offcanvas END -->
             </div>
             <!-- Offcanvas button for search -->
             <button class="btn btn-outline-light d-sm-none w-100 mb-0 text-light" type="button"
@@ -187,12 +151,12 @@
     <!-- =======================
 	Search END -->
 
-    <section class="pt-0 " style="">
+    <section class="pt-0 ">
         <div class="container">
             <div class="row ">
                 {% for camara in camaras %}
-                <div class="col-lg-6 col-md-6 col-12 mb-lg-4" data-crd-estado="{{camara.estado}}"
-                    data-crd-municipio="{{camara.municipio}}" data-crd-lugar="{{camar.titulo}}"
+                <div class="col-lg-6 col-md-6 col-12 mb-lg-4 estados-search" data-crd-estado="{{camara.titulo}}"
+                    
                     style="margin-bottom: 3vh !important;">
                     <div id="{{camara.id}}" onclick="to_detail(this.id);"
                         class="card card-img-scale overflow-hidden bg-transparent">
@@ -212,20 +176,32 @@
                         </div>
                     </div>
                 </div>
+                {% if request.user.premium == "free" %}
                 <div class="col-lg-6 col-md-6 col-12 mb-lg-4" style="margin-bottom: 3vh !important;">
-                    <div class="card card-img-scale overflow-hidden bg-transparent">
-                        <div class="card-img-scale-wrapper shadow" style="">
-                            <!-- Card Image -->
-                            <img class="img-fluid" loading="lazy" src="https://images2.alphacoders.com/515/515958.jpg"
-                                style="filter: brightness(0.80); height: 250px; width: 100%;" alt="">
-                            <!-- Overlay -->
 
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            {% for ins in estados %}
+                            <div class="swiper-slide">
+                                <img src="https://images2.alphacoders.com/515/515958.jpg" alt="">
+
+                            </div>
+                            {% endfor %}
                         </div>
+                        <div class="swiper-pagination"></div>
                     </div>
-                </div>
 
+
+
+
+
+
+                </div>
+                {% endif %}
 
                 {% endfor %}
+
+                {% if request.user.premium == "free" %}
                 <div class="col-12">
                     <script async
                         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
@@ -237,6 +213,65 @@
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                 </div>
+
+                {% else %}
+                <div class="container">
+                    <h1 class="ms-5 titulo-trans d-xl-flex d-none" style="font-size: 8rem">
+                        Visitia
+                    </h1>
+                    <h1 class="titulo-trans text-center d-xl-none d-flex" style="font-size: 9vh">
+                        Visita
+                    </h1>
+
+                    <div class="swiper comercioSwipper">
+                        <div class="swiper-wrapper">
+                            {% for comer in comercios %}
+                            <div class="swiper-slide" id="comer.id" onclick="(to_comercio({{comer.id}}))">
+
+
+                                <!-- Card START -->
+                                <div class="card card-img-scale overflow-hidden bg-transparent">
+                                    <!-- Image and overlay -->
+                                    <div class="card-img-scale-wrapper rounded-3">
+                                        <!-- Image -->
+                                        <img src="{{comer.portada}}"
+                                            style="width: 100vw !important; height: 25vh !important;" class="img-fluid"
+                                            alt="">
+                                        <!-- Badge -->
+                                        <div class="position-absolute bottom-0 start-0 p-3">
+                                            <div class="badge text-bg-dark fs-6 rounded-pill stretched-link"><i
+                                                    class="bi bi-geo-alt me-2"></i>{{comer.camara}}</div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Card body -->
+                                    <div class="card-body px-2 "
+                                        style="background-color: rgba(255, 255, 255, 0.281); backdrop-filter: blur(12px);">
+                                        <!-- Title -->
+                                        <h5 class="card-title"><a class="stretched-link">{{comer.cliente}}</a></h5>
+                                        <!-- Price and rating -->
+                                        <div class="d-flex justify-content-between align-items-center">
+
+                                            <h6 class="mb-0">{{comer.estrellas}}<i
+                                                    class="fa-solid fa-star text-warning ms-1"></i></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Card END -->
+
+
+
+
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                {% endif %}
+
 
             </div>
         </div>
@@ -255,62 +290,68 @@
 </script>
 <script>
 
-    $(document).ready(function () {
-        const selects = ['estado', 'municipio', 'lugar'];
-        const formIds = selects.map(id => `#form-${id}`);
-        const dataAttrs = selects.map(id => `data-crd-${id}`);
+const selectElement = document.getElementById('form-estado');
+    const divs = document.querySelectorAll('.estados-search');
 
-        formIds.forEach((formId, index) => {
-            $(formId).change(function () {
-                const selectedValue = $(this).val().toLowerCase();
-                const nextFormId = formIds[index + 1];
-                const nextDataAttr = dataAttrs[index + 1];
+    selectElement.addEventListener('change', function() {
+        const selectedValue = this.value;
 
-                if (nextFormId) {
-                    $(nextFormId).empty();
-                    let optionsAvailable = false;
-
-                    $(`div[${dataAttrs[index]}]`).each(function () {
-                        const divValue = $(this).attr(dataAttrs[index]).toLowerCase();
-                        if (selectedValue === "todos" || divValue.includes(selectedValue)) {
-                            const nextValue = $(this).attr(nextDataAttr);
-                            $(nextFormId).append(new Option(nextValue, nextValue));
-                            optionsAvailable = true;
-                        }
-                    });
-
-                    if (!optionsAvailable) {
-                        $(nextFormId).append(new Option("Ningún valor disponible", ""));
-                    }
-                }
-
-                $('div[data-crd-estado]').fadeOut();
-
-                if (selectedValue === "todos" && formId === '#form-estado') {
-                    $('div[data-crd-estado]').fadeIn();
-                    $('#form-municipio, #form-lugar').append(new Option("Seleccione una opción", ""));
-                } else {
-                    $('div[data-crd-estado]').each(function () {
-                        const match = selects.every((select, i) => {
-                            const value = $(`#form-${select}`).val().toLowerCase();
-                            const divValue = $(this).attr(`data-crd-${select}`).toLowerCase();
-                            return value === "todos" || divValue.includes(value);
-                        });
-
-                        if (match) {
-                            $(this).fadeIn();
-                        }
-                    });
-                }
-            });
+        divs.forEach(function(div) {
+            const estado = div.getAttribute('data-crd-estado');
+            if (selectedValue === 'todos' || estado === selectedValue) {
+                div.style.display = 'block'; // Mostrar el div
+            } else {
+                div.style.display = 'none'; // Ocultar el div
+            }
         });
-
-
     });
-
-
 </script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
     crossorigin="anonymous"></script>
+
+<script>
+    // Configuración común para todos los swipers
+    var swiperOptions = {
+        pagination: {
+            el: ".swiper-pagination",
+        },
+        spaceBetween: 30,
+
+        autoplay: {
+            delay: 3000, // Tiempo en milisegundos entre cada transición
+        },
+        // Tus opciones aquí (por ejemplo, slidesPerView, loop, etc.)
+    };
+
+    // Inicialización de los swipers
+    var swipers = document.querySelectorAll('.mySwiper');
+    swipers.forEach(function (swiperElement) {
+        new Swiper(swiperElement, swiperOptions);
+    });
+    function to_comercio(ref) {
+        window.location.href = "/comercios/comercio/" + ref + '/';
+
+    }
+    var comerciosSwipper = new Swiper(".comercioSwipper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+        },
+        autoplay: {
+            delay: 3000, // Tiempo en milisegundos entre cada transición
+        },
+    });
+</script>
 {% endblock %}

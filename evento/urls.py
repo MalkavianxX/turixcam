@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
     #vistas render
+    path('init_page_evento',views.init_page_evento, name='init_page_evento'),
 
 
 
