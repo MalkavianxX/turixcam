@@ -10,7 +10,7 @@ class Stream(models.Model):
     class Meta:
         verbose_name = 'Stream'
         verbose_name_plural = 'Streams' 
-
+ 
     def __str__(self): 
         return self.key
 
@@ -42,10 +42,10 @@ class Camara(models.Model):
     titulo = models.CharField(max_length=250)
     estado = models.CharField(max_length=250)
     municipio = models.CharField(max_length=250)
-    background =models.ImageField(storage=BunnyStorage(), upload_to=camara_background_path, null=True, blank=True)
-    background_dark =models.ImageField(storage=BunnyStorage(), upload_to=camara_background_dark_path, null=True, blank=True)
-    background_web =models.ImageField(storage=BunnyStorage(), upload_to=camara_background_path, null=True, blank=True)
-    background_dark_web =models.ImageField(storage=BunnyStorage(), upload_to=camara_background_dark_path, null=True, blank=True)
+    background =models.ImageField(storage=BunnyStorage(), upload_to=camara_background_path, null=True, blank=True, max_length=250)
+    background_dark =models.ImageField(storage=BunnyStorage(), upload_to=camara_background_dark_path, null=True, blank=True, max_length=250)
+    background_web =models.ImageField(storage=BunnyStorage(), upload_to=camara_background_path, null=True, blank=True, max_length=250)
+    background_dark_web =models.ImageField(storage=BunnyStorage(), upload_to=camara_background_dark_path, null=True, blank=True, max_length=250)
     camdisp = models.BooleanField(default=True)
     createdAt = models.IntegerField(default=0)
     descripcion = models.TextField()
@@ -53,11 +53,11 @@ class Camara(models.Model):
     etiquetados = models.TextField()
     etiquetatres = models.TextField()
     etiquetacuatro = models.TextField()
-    logo = models.ImageField(storage=BunnyStorage(), upload_to=camara_logo_path)
+    logo = models.ImageField(storage=BunnyStorage(), upload_to=camara_logo_path, max_length=250)
     latitude = models.CharField(max_length=250)
     longitude = models.CharField(max_length=250)
     likes = models.IntegerField(default=0)
-    pin = models.ImageField(storage=BunnyStorage(), upload_to=camara_background_path)
+    pin = models.ImageField(storage=BunnyStorage(), upload_to=camara_background_path, max_length=250)
     stream = models.ForeignKey(Stream, on_delete=models.CASCADE, related_name='streams', null=True, blank=True)
     views = models.IntegerField(default=0)
 
