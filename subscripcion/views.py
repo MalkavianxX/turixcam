@@ -17,7 +17,7 @@ class AppleMerchantIdView(View):
         return FileResponse(open(file_path, 'rb')) 
 
 
-stripe.api_key = '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'
+
 
 def get_user_by_id(user_id):
     # Obtén una referencia al documento que quieres
@@ -112,14 +112,14 @@ def createPaymentIntentFan(request,uid):
 
   session = stripe.checkout.Session.create(
     line_items=[{
-        'price': "price_1PLy8PKusDeFdtimmD8TtOEX",
+        'price': settings.STRIPE_PRICE,
         'quantity': 1,
     }],
     mode='payment',
-    payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
+    payment_method_configuration= settings.STRIPE_PMC,
 
-    success_url='https://turixcam.com/subscripcion/successFAN/'+uid+'/',
-    cancel_url='https://turixcam.com/subscripcion/failure/'+uid+'/',
+    success_url='https://turixcam-7f42d.ondigitalocean.app/subscripcion/successFAN/'+uid+'/',
+    cancel_url='https://turixcam-7f42d.ondigitalocean.app/subscripcion/failure/'+uid+'/',
   )
 
   return redirect(session.url, code=303)
@@ -131,14 +131,14 @@ def createPaymentIntentsup(request,uid):
 
   session = stripe.checkout.Session.create(
     line_items=[{
-        'price': "price_1PLyGKKusDeFdtimEdaIkV45",
+        'price': settings.STRIPE_PRICE,
         'quantity': 1,
     }],
     mode='payment',
-    payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
+    payment_method_configuration = settings.STRIPE_PMC,
 
-    success_url='https://turixcam.com/subscripcion/successPaymentsup/'+uid+'/',
-    cancel_url='https://turixcam.com/subscripcion/failure/'+uid+'/',
+    success_url='https://turixcam-7f42d.ondigitalocean.app/subscripcion/successPaymentsup/'+uid+'/',
+    cancel_url='https://turixcam-7f42d.ondigitalocean.app/subscripcion/failure/'+uid+'/',
   )
 
   return redirect(session.url, code=303)
@@ -160,14 +160,14 @@ def createPaymentIntent(request,uid):
 
   session = stripe.checkout.Session.create(
     line_items=[{
-        'price': "price_1PLWjZKusDeFdtimHAcVHkk7",
+        'price': settings.STRIPE_PRICE,
         'quantity': 1,
     }],
     mode='payment',
-    payment_method_configuration='pmc_1PLWr5KusDeFdtimWP2dHKoE',
+    payment_method_configuration = settings.STRIPE_PMC,
 
-    success_url='https://turixcam.com/subscripcion/success/'+uid+'/',
-    cancel_url='https://turixcam.com/subscripcion/failure/'+uid+'/',
+    success_url='https://turixcam-7f42d.ondigitalocean.app/subscripcion/success/'+uid+'/',
+    cancel_url='https://turixcam-7f42d.ondigitalocean.app/subscripcion/failure/'+uid+'/',
   )
 
   return redirect(session.url, code=303)

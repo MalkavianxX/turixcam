@@ -187,9 +187,11 @@ EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True  
 
 
+
 # Obtener el contenido del JSON desde la variable de entorno
 firebase_credentials = os.environ.get('FIREBASE_CREDENTIALS')
 json_data = json.loads(firebase_credentials)
+
 
 # Inicializar la aplicación de Firebase con las credenciales
 cred = credentials.Certificate(json_data)
@@ -203,6 +205,8 @@ DB = firestore.client()
 stripe.api_key = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_PMC = os.environ.get('STRIPE_PMC')
+STRIPE_PRICE = os.environ.get('STRIPE_PRICE')
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
