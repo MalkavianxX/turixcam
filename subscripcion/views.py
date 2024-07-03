@@ -48,7 +48,7 @@ def renderCheckout(request,uid):
         context = {
             'email': user.email,
             'usuario': user.display_name,
-            'foto':foto,
+            'foto':foto, 
             'uid': uid,
             'premium':info.get('premium'),
         }

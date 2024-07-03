@@ -36,10 +36,10 @@
     <div class="container">
         <h1 style="margin-top: 30vh; " class="text-center">Hazte premium para ver esta sección </h1>
         <a
-        href="{% url 'createPaymentIntentFan' uid %}"
+        href="{% url 'createPaymentIntentFan' request.user.id %}"
         type="button"
-        style="margin-top: 5rem; font-weight: 700;margin-bottom: 35vh;"
-        class="btn btn-outline-warning w-100"
+        style="margin-top: 4rem; font-weight: 700;margin-bottom: 35vh;"
+        class="btn btn-warning w-100"
         >Iniciar prueba gratuita</a
     >
     </div>
