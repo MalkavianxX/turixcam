@@ -1,48 +1,363 @@
 {% extends 'login/base/base.html' %}{% load static %} {% block title %}
 <title>Turixcam - Camaras en vivo</title>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 {% endblock %} {% block description %}
 <!-- Meta Tags -->
 <meta charset="utf-8" />
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1, shrink-to-fit=no"
-/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="author" content="turixcam.com" />
 <meta name="description" content="Se miembro premium" />
 {% endblock %} {% block content %}
 
 <style>
-  .navbar {
-    display: none !important;
+  header {
+    background-color: rgba(0, 0, 0, 0.164) !important;
   }
+
+  .nav-control-letra {
+    color: white !important;
+  }
+
+  .navbar-mobile-control {
+    background-color: rgba(0, 0, 0, 0.349) !important;
+    color: white !important;
+  }
+
   body {
     background-image: url("{% static 'login/assets/images/fondos/zacatlan.jpg' %}");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
   }
+
+  .banner {
+    position: relative;
+    width: 100vw !important;
+    height: 50vh !important;
+  }
+
+  .banner>.img-fondo-banner {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    left: 0;
+    filter: brightness(0.5);
+    height: 100%;
+    transition: opacity 1s ease; /* Efecto de fundido */
+
+  }
+
+  .banner>.title-banner {
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+    width: max-content;
+    height: max-content;
+  }
+
+  .banner>.sub-titulo {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    top: 30%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+    width: max-content;
+    height: max-content;
+    font-size: x-large;
+  }
+
+
+  /* Estilos para dispositivos grandes (por ejemplo, pantallas de escritorio) */
+  @media screen and (min-width: 768px) {
+    .banner {
+      height: 50vh !important;
+
+    }
+
+    .sub-titulo {
+      font-size: large !important;
+    }
+
+  }
+
+  /* Estilos para dispositivos pequeños o medianos (por ejemplo, teléfonos móviles o tablets) */
+  @media screen and (max-width: 767px) {
+    .banner {
+      height: 30vh !important;
+    }
+
+    .sub-titulo {
+      font-size: 1rem !important;
+    }
+  }
+
+  .logo-pueblo-magico {
+    width: 66px;
+    margin-right: 1rem;
+
+    animation: rotacion 5s ease-in-out;
+  }
+
+  /* Define los keyframes para la animación */
+  @keyframes rotacion {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .bread {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.512) !important;
+    right: 50%;
+    width: max-content;
+  }
+
+  .brandone {
+    position: absolute;
+    z-index: 3;
+    height: 2vh;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+  }
 </style>
 
 <main>
-    <div class="container">
-        <h1 style="margin-top: 30vh; " class="text-center">Hazte premium para ver esta sección </h1>
-        <a
-        href="{% url 'createPaymentIntentFan' request.user.id %}"
-        type="button"
-        style="margin-top: 4rem; font-weight: 700;margin-bottom: 35vh;"
-        class="btn btn-warning w-100"
-        >Iniciar prueba gratuita</a
-    >
+  <div class="container-fluid banner">
+    <img class="img-fondo-banner" src="https://neomexicanismos.com/wp-content/uploads/2018/07/guelaguetza.jpg"
+      id="banner_imagen" alt="">
+    <h1 class="title-banner">Eventos culturales</h1>
+    <div class="sub-titulo">
+      <p>Cubiertos por Turixcam.com</p>
     </div>
+  </div>
+
+
+
+  <section class="py-3 py-sm-0 sticky">
+    <div class="container ">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-8">
+          <div class=" w-100 offcanvas-sm offcanvas-top" tabindex="-1" id="offcanvasEditsearch"
+            aria-labelledby="offcanvasEditsearchLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasEditsearchLabel">Buscador de eventos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasEditsearch"
+                aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-2">
+              <div class=" p-4 rounded w-100">
+                <!-- Booking from START -->
+                <form class="card shadow rounded-3 position-relative p-4 pe-md-5 pb-5 pb-md-4 "
+                  style="background-color: rgba(0, 0, 0, 0.512) !important;">
+                  <div class="row g-4 align-items-center">
+                    <!-- Location -->
+                    <div class="col-12">
+                      <div class="form-control-border form-control-transparent form-fs-md d-flex">
+                        <!-- Icon -->
+                        <img
+                          src="https://escapadas.mexicodesconocido.com.mx/wp-content/themes/escapadas2024/img/icon_pueblo.svg"
+                          class="logo-pueblo-magico" alt="Pueblo Mágico">
+                        <!-- Select input -->
+                        <div class="flex-grow-1">
+                          <label class="form-label">Pueblos mágicos</label>
+                          <select id="form-estado" class="form-select js-choice" data-search-enabled="true">
+                            <option selected value="todos">Todos</option>
+                            {% for cam in camaras %}
+                            <option value="{{cam.titulo}}">{{cam.titulo}}</option>
+
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- Button -->
+                  <div class="btn-position-md-middle">
+                    <a data-bs-dismiss="offcanvas" data-bs-target="#offcanvasEditsearch" aria-label="Close"
+                      class="icon-lg btn btn-round btn-outline-light mb-0" href="#"><i
+                        class="text-light bi bi-search fa-fw"></i></a>
+                  </div>
+                </form>
+                <!-- Booking from END -->
+              </div>
+            </div>
+          </div>
+          <!-- Offcanvas button for search -->
+          <button class="btn btn-light d-sm-none w-100 mb-0 text-light" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasEditsearch" aria-controls="offcanvasEditsearch">
+            <!-- Icon -->
+            <img src="https://escapadas.mexicodesconocido.com.mx/wp-content/themes/escapadas2024/img/icon_pueblo.svg"
+              class="logo-pueblo-magico" style="width: 25px !important;" alt="Pueblo Mágico">
+            Abrir buscador
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="container">
+    <div class="row justify-content-center mt-3">
+      <div class="col-lg-12 mb-1 " style=" background-color: rgba(0, 0, 0, 0.512) !important;">
+        <div class="row">
+          <!--HORARIO-->
+          <div class="col-lg-2 col-md-2 col-3 d-flex justify-content-center">
+            <div class="fecha text-center align-self-center">
+              <h3 style="font-weight: 500;">JUL</h3>
+              <h3 style="margin-top: -0.5rem;">04</h3>
+            </div>
+
+          </div>
+          <!--INFORMACION-->
+          <div class="col-lg-8 col-md-8 col-9 position-relative">
+            <p style="margin-top: 1rem;">Jueves a las 9:00 pm </p>
+            <h4 style="">Desfile de fin de año</h4>
+            <a href="http://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003"
+              target="_blank">
+              <p> Tlaxcala, Val´Quirico, Privada 11 colonia norte <span> En el patio jaja </span></p>
+            </a>
+
+          </div>
+          <!--btonon-->
+          <div class="col-2 d-lg-flex d-md-flex d-none justify-content-center ">
+            <button class="btn btn-lg  btn-light align-self-center">Ver evento</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 mb-1 " style=" background-color: rgba(0, 0, 0, 0.512) !important;">
+        <div class="row">
+          <!--HORARIO-->
+          <div class="col-lg-2 col-md-2 col-3 d-flex justify-content-center">
+            <div class="fecha text-center align-self-center">
+              <h3 style="font-weight: 500;">JUL</h3>
+              <h3 style="margin-top: -0.5rem;">04</h3>
+            </div>
+
+          </div>
+          <!--INFORMACION-->
+          <div class="col-lg-8 col-md-8 col-9 position-relative">
+            <p style="margin-top: 1rem;">Jueves a las 9:00 pm </p>
+            <h4 style="">Desfile de fin de año</h4>
+            <a href="http://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003"
+              target="_blank">
+              <p> Tlaxcala, Val´Quirico, Privada 11 colonia norte <span> En el patio jaja </span></p>
+            </a>
+
+          </div>
+          <!--btonon-->
+          <div class="col-2 d-lg-flex d-md-flex d-none justify-content-center ">
+            <button class="btn btn-lg  btn-light align-self-center">Ver evento</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 mb-1 " style=" background-color: rgba(0, 0, 0, 0.512) !important;">
+        <div class="row">
+          <!--HORARIO-->
+          <div class="col-lg-2 col-md-2 col-3 d-flex justify-content-center">
+            <div class="fecha text-center align-self-center">
+              <h3 style="font-weight: 500;">JUL</h3>
+              <h3 style="margin-top: -0.5rem;">04</h3>
+            </div>
+
+          </div>
+          <!--INFORMACION-->
+          <div class="col-lg-8 col-md-8 col-9 position-relative">
+            <p style="margin-top: 1rem;">Jueves a las 9:00 pm </p>
+            <h4 style="">Desfile de fin de año</h4>
+            <a href="http://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003"
+              target="_blank">
+              <p> Tlaxcala, Val´Quirico, Privada 11 colonia norte <span> En el patio jaja </span></p>
+            </a>
+
+          </div>
+          <!--btonon-->
+          <div class="col-2 d-lg-flex d-md-flex d-none justify-content-center ">
+            <button class="btn btn-lg  btn-light align-self-center">Ver evento</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 mb-1 " style=" background-color: rgba(0, 0, 0, 0.512) !important;">
+        <div class="row">
+          <!--HORARIO-->
+          <div class="col-lg-2 col-md-2 col-3 d-flex justify-content-center">
+            <div class="fecha text-center align-self-center">
+              <h3 style="font-weight: 500;">JUL</h3>
+              <h3 style="margin-top: -0.5rem;">04</h3>
+            </div>
+
+          </div>
+          <!--INFORMACION-->
+          <div class="col-lg-8 col-md-8 col-9 position-relative">
+            <p style="margin-top: 1rem;">Jueves a las 9:00 pm </p>
+            <h4 style="">Desfile de fin de año</h4>
+            <a href="http://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003"
+              target="_blank">
+              <p> Tlaxcala, Val´Quirico, Privada 11 colonia norte <span> En el patio jaja </span></p>
+            </a>
+
+          </div>
+          <!--btonon-->
+          <div class="col-2 d-lg-flex d-md-flex d-none justify-content-center ">
+            <button class="btn btn-lg  btn-light align-self-center">Ver evento</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </main>
 
+
+<script>
+  const imagenes = [
+    'https://neomexicanismos.com/wp-content/uploads/2018/07/guelaguetza.jpg',
+    'https://magazine.velasresorts.com/wp-content/uploads/2020/05/jalisco-1-scaled.jpg',
+    'https://diariopuntual.com/sites/default/files/notas/2023-10/diademuertos.jpg'
+  ];
+
+  let indice = 0; // Índice actual de la imagen
+
+  function cambiarImagen() {
+    const imgElement = document.getElementById('banner_imagen');
+    imgElement.style.opacity = 0; // Ocultar la imagen actual
+
+    // Cambiar al siguiente índice
+    indice = (indice + 1) % imagenes.length;
+
+    // Actualizar el src de la imagen
+    imgElement.src = imagenes[indice];
+
+    // Mostrar la imagen con efecto de fundido
+    setTimeout(() => {
+      imgElement.style.opacity = 1;
+    }, 0); // 500 ms (0.5 segundos) para el efecto de fundido
+  }
+
+  // Cambiar la imagen cada 3 segundos
+  setInterval(cambiarImagen, 10000); // 3000 ms (3 segundos)
+</script>
 {% endblock %}
