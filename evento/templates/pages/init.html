@@ -149,17 +149,18 @@
 </style>
 
 <main>
-  <div class="container banner" style="border-radius: 15px;">
-    <img class="img-fondo-banner" src="https://staticurix.b-cdn.net/Recursos%20WEB/Banner%20Eventos/fondo2.jpg"
-      id="banner_imagen" alt="">
-    <h1 class="title-banner">Eventos culturales</h1>
-    <div class="sub-titulo">
-      <p>Cubiertos por Turixcam.com</p>
-    </div>
+
+
+{% if request.user.premium == "free" %}
+
+<div class="container banner" style="border-radius: 15px;">
+  <img class="img-fondo-banner" src="https://staticurix.b-cdn.net/Recursos%20WEB/Banner%20Eventos/fondo2.jpg"
+    id="banner_imagen" alt="">
+  <h1 class="title-banner">Eventos culturales</h1>
+  <div class="sub-titulo">
+    <p>Cubiertos por Turixcam.com</p>
   </div>
-
-
-
+</div>
   <section class="py-3 py-sm-0 sticky">
     <div class="container ">
       <div class="row justify-content-center">
@@ -270,6 +271,20 @@
 
     </div>
   </div>
+
+
+  {% else %}
+
+  <div class="container banner" style="border-radius: 15px;">
+    <img class="img-fondo-banner" src="https://staticurix.b-cdn.net/Recursos%20WEB/Banner%20Eventos/fondo2.jpg"
+      id="banner_imagen" alt="">
+    <h1 class="title-banner">Eventos culturales</h1>
+    <div class="sub-titulo">
+      <h5 style="color: yellow ;" class="fw-bold">SOLO PREMIUM</h5>
+    </div>
+  </div>
+
+  {% endif %}
 </main>
 
 
