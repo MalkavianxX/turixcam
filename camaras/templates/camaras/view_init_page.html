@@ -283,7 +283,7 @@ const selectElement = document.getElementById('form-estado');
     const divs = document.querySelectorAll('.estados-search');
 
     selectElement.addEventListener('change', function() {
-        const selectedValue = this.value;
+        const selectedValue = this.value; 
 
         divs.forEach(function(div) {
             const estado = div.getAttribute('data-crd-estado');

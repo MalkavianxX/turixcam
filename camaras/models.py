@@ -10,7 +10,7 @@ class Stream(models.Model):
     class Meta:
         verbose_name = 'Stream'
         verbose_name_plural = 'Streams' 
- 
+  
     def __str__(self): 
         return self.key
 
