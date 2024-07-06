@@ -2,10 +2,9 @@ from django.shortcuts import render
 from camaras.models import Camara
 from .models import EventoCultural
 import calendar
-import locale
-import datetime
 
-locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
+
+
 
 def init_page_evento(request):
         
