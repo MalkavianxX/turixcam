@@ -191,7 +191,6 @@ EMAIL_USE_TLS = True
 # Obtener el contenido del JSON desde la variable de entorno
 firebase_credentials = os.environ.get('FIREBASE_CREDENTIALS')
 json_data = json.loads(firebase_credentials)
-json_data = "C:/Users/Admin/Downloads/turixcamapp-firebase-adminsdk-idm6c-d948ded55e.json"
 
 
 
