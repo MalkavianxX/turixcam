@@ -98,13 +98,13 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'login/assets/css/style.css' %} ">
     <style>
-        .btn-orange{
-            background-color: #fd7d14bd !important; 
+        .btn-orange {
+            background-color: #fd7d14bd !important;
             color: white !important;
         }
     </style>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5735730034243265"
+        crossorigin="anonymous"></script>
 </head>
 
 <body class="has-navbar-mobile">
@@ -131,9 +131,9 @@
                 <a class="navbar-brand" href="{% url 'render_init_page' %}">
                     <img class="light-mode-item " width="80px" src="{% static 'login/assets/images/logox.png' %} "
                         alt="logo">
-                    <img class="dark-mode-item navbar-brand-item"
-                        src="{% static 'login/assets/images/logox.png' %} " alt="logo">
-                        <span class="fw-bold text-light">Inicio</span>
+                    <img class="dark-mode-item navbar-brand-item" src="{% static 'login/assets/images/logox.png' %} "
+                        alt="logo">
+                    <span class="fw-bold text-light">Inicio</span>
                 </a>
                 <!-- Logo END -->
 
@@ -147,11 +147,20 @@
                 <div class="navbar-collapse collapse" id="navbarCollapse">
                     <ul class="navbar-nav navbar-nav-scroll nav-pills-primary-soft text-center ms-auto p-2 p-xl-0">
                         <!-- Nav item Hotel -->
-             
+
 
                         <!-- Nav item Flight -->
-                        <li class="nav-item"> <a class="nav-link nav-control-letra" href="{% url 'view_init_page' None %}"><i
-                                    class="fa-solid fa-camera me-2"></i>Camaras</a> </li>
+                        <li class="nav-item"> <a class="nav-link nav-control-letra"
+                                href="{% url 'view_init_page' None %}"><i
+                                    class="fa-solid fa-camera me-2"></i>Camaras</a>
+                        </li>
+                        <!-- Nav item Account -->
+                        <li class="nav-item">
+                            <a class="nav-link  " id="nav_mobile_perfil" href="{% url 'init_page_evento' %}">
+                                <img src="{% static '/login/img/iconoEvento.png' %}" width="20.8px" alt="">
+                                Eventos
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- Nav category menu END -->
@@ -185,7 +194,7 @@
                                 <div class="card-body p-0">
                                     <ul class="list-group list-group-flush list-unstyled p-2">
                                         <!-- Notification item -->
-   
+
                                         <!-- Notification item -->
                                         <li>
                                             <a href="#"
@@ -223,12 +232,13 @@
                                     <!-- Avatar -->
                                     <a class="avatar me-3" href="{% url 'view_user_profile' %}">
                                         <img class="avatar-img rounded-circle shadow"
-                                            href="{% url 'view_user_profile' %}"
-                                            src="{{ request.user.foto_perfil }}" alt="avatar">
+                                            href="{% url 'view_user_profile' %}" src="{{ request.user.foto_perfil }}"
+                                            alt="avatar">
                                     </a>
                                     {% if request.user.is_authenticated %}
                                     <div>
-                                        <a class="h6 mt-2 mt-sm-0" href="{% url 'view_user_profile' %}">{{request.user.username}}</a>
+                                        <a class="h6 mt-2 mt-sm-0"
+                                            href="{% url 'view_user_profile' %}">{{request.user.username}}</a>
                                         <p class="small m-0">Turixta</p>
                                     </div>
                                     {% else %}
@@ -239,10 +249,14 @@
 
                                 </div>
                             </li>
-                            <li> <hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{% url 'view_user_profile' %}"><i class="bi bi-heart fa-fw me-2"></i>Favoritos</a></li>
-                            <li><a class="dropdown-item bg-danger-soft-hover" href="{% url 'function_logout' %}"><i class="bi bi-power fa-fw me-2"></i>Cerrar sesión</a></li>
-                            
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'view_user_profile' %}"><i
+                                        class="bi bi-heart fa-fw me-2"></i>Favoritos</a></li>
+                            <li><a class="dropdown-item bg-danger-soft-hover" href="{% url 'function_logout' %}"><i
+                                        class="bi bi-power fa-fw me-2"></i>Cerrar sesión</a></li>
+
 
                         </ul>
                     </li>
@@ -277,23 +291,26 @@ Footer START -->
                     </a>
                     <p class="my-3 text-body-secondary">Enterate de los lugares más visitados en todo México con camaras
                         en vivo.</p>
-                 
-                    <p class="mb-0"><a href="mailto:soporte@turixcam.com" class="text-body-secondary text-primary-hover"><i
+
+                    <p class="mb-0"><a href="mailto:soporte@turixcam.com"
+                            class="text-body-secondary text-primary-hover"><i
                                 class="bi bi-envelope me-2"></i>soporte@turixcam.com</a></p>
                 </div>
                 <!-- Widget 1 END -->
 
                 <!-- Widget 2 START -->
                 <div class="col-lg-3 ">
-                    
-                        
+
+
                     <h5 style="margin-bottom: 1.8rem;">Contrataciones</h5>
-                    <p class="my-3 text-body-secondary">Haz crecer tus ganancias con nosotros. Envianos un correo y nos pondremos en contacto contigo.</p>
-                    <p class="mb-0"><a href="mailto:contrataciones@turixcam.com" class="text-body-secondary text-primary-hover"><i
-                        class="bi bi-envelope me-2"></i>contrataciones@turixcam.com</a></p>
-                         
-                        
-                   
+                    <p class="my-3 text-body-secondary">Haz crecer tus ganancias con nosotros. Envianos un correo y nos
+                        pondremos en contacto contigo.</p>
+                    <p class="mb-0"><a href="mailto:contrataciones@turixcam.com"
+                            class="text-body-secondary text-primary-hover"><i
+                                class="bi bi-envelope me-2"></i>contrataciones@turixcam.com</a></p>
+
+
+
                 </div>
                 <!-- Widget 2 END -->
 
@@ -329,7 +346,7 @@ Footer START -->
                     <ul class="list-inline mb-0 mt-3">
                         <li class="list-inline-item"> <a class="btn btn-sm px-2 bg-facebook mb-0" href="#"><i
                                     class="fab fa-fw fa-facebook-f"></i></a> </li>
-  
+
                     </ul>
                 </div>
             </div>
@@ -365,7 +382,8 @@ Footer END -->
     <div class="back-top"></div>
 
     <!-- Navbar mobile START -->
-    <div class="navbar navbar-mobile navbar-mobile-control" id="navbar-mobile" style="background-color: rgba(255, 255, 255, 0.807);">
+    <div class="navbar navbar-mobile navbar-mobile-control" id="navbar-mobile"
+        style="background-color: rgba(255, 255, 255, 0.807);">
         <ul class="navbar-nav">
             <!-- Nav item Home -->
             <li class="nav-item">
@@ -384,13 +402,14 @@ Footer END -->
             <!-- Nav item Account -->
             <li class="nav-item">
                 <a class="nav-link " id="nav_mobile_perfil" href="{% url 'init_page_evento' %}">
-                <img src="{% static '/login/img/iconoEvento.png' %}" width="20.8px" alt="">
+                    <img src="{% static '/login/img/iconoEvento.png' %}" width="20.8px" alt="">
                 </a>
             </li>
 
             <!-- Nav item Account -->
             <li class="nav-item">
-                <a class="nav-link " id="nav_mobile_perfil" href="{% url 'view_user_profile' %}"><i class="bi bi-person-circle fa-fw"></i>
+                <a class="nav-link " id="nav_mobile_perfil" href="{% url 'view_user_profile' %}"><i
+                        class="bi bi-person-circle fa-fw"></i>
                 </a>
             </li>
         </ul>

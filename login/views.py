@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Importaciones de modelos
-from login.models import CustomUser, Favorito, Guardado, ImagenesDefault
+from login.models import CustomUser, Favorito, Guardado, ImagenesDefault, Comentario
 from allauth.socialaccount.models import SocialAccount
 from camaras.models import Camara 
 from comercios.models import Comercio
@@ -56,7 +56,7 @@ def render_init_page(request):
     camaras = Camara.objects.all()
     comercios = Comercio.objects.filter(estrellas = 5).order_by('importancia')[:5]
     estados = []
-    
+    comentarios = Comentario.objects.filter(puntuacion = 5).order_by('id')
     filter_camaras = []
     for cam in camaras:
         if cam.estado not in estados:
@@ -67,6 +67,7 @@ def render_init_page(request):
         'camaras':filter_camaras,
         'estados':estados,
         'comercios':comercios,
+        'comentarios':comentarios
     } 
     
     return render(request, 'login/init/inicio.html', context)

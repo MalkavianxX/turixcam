@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -47,6 +46,7 @@ INSTALLED_APPS = [
     'legal',
     'comercios',
     'firebase_admin',
+    'django.contrib.contenttypes',
 
 
 
@@ -191,6 +191,8 @@ EMAIL_USE_TLS = True
 # Obtener el contenido del JSON desde la variable de entorno
 firebase_credentials = os.environ.get('FIREBASE_CREDENTIALS')
 json_data = json.loads(firebase_credentials)
+json_data = "C:/Users/Admin/Downloads/turixcamapp-firebase-adminsdk-idm6c-d948ded55e.json"
+
 
 
 # Inicializar la aplicación de Firebase con las credenciales

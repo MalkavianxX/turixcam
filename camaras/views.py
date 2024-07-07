@@ -13,6 +13,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from comercios.models import Comercio
+from evento.models import EventoCultural
 def camara_existe_byID(id):
     return Camara.objects.filter(pk=id).exists()
 
@@ -99,7 +100,7 @@ def get_user_icon_profile(user):
   
     return avatar_url  
 
-
+ 
 def get_all_coments(obj):
     obj_content_type = ContentType.objects.get_for_model(obj)
     comentarios = Comentario.objects.filter(content_type=obj_content_type, object_id=obj.id, status=True).order_by('-fecha')
@@ -263,20 +264,22 @@ def addComentario(request):
     if request.method == "POST":
         user = request.user
         object_id = request.POST.get("object_id")
-        object_type = request.POST.get("object_type")  # este campo debe contener el nombre del modelo, por ejemplo 'camara' o 'comercio'
+        object_type = request.POST.get("object_type")
         text = request.POST.get("text")
         puntuacion = request.POST.get("puntuacion")
         app_label = request.POST.get("app_label")
-        print(object_type)
-        print(object_id)
         print(app_label)
+        print(object_id)
+        print(object_type)
         if not text or not puntuacion:
             return JsonResponse({"message": "El comentario y la puntuación son obligatorios."}, status=400)
 
         try:
             content_type = ContentType.objects.get(app_label=app_label, model=object_type)
-            obj = content_type.get_object_for_this_type(pk=object_id)
+            model_class = content_type.model_class()
+            obj = model_class.objects.get(pk=object_id)
         except ContentType.DoesNotExist:
+            
             return JsonResponse({"message": "El tipo de objeto no existe."}, status=400)
         except ObjectDoesNotExist:
             return JsonResponse({"message": "El objeto no existe."}, status=400)
@@ -289,13 +292,13 @@ def addComentario(request):
                 'username': comentario.user.username,
                 'puntuacion': comentario.puntuacion,
                 'text': comentario.text,
-                'fecha': comentario.fecha.strftime('%d-%m-%Y'),  # Formatea la fecha como una cadena
+                'fecha': comentario.fecha.strftime('%d-%m-%Y'),
                 'avatar_url': comentario.user.foto_perfil,
             }
         }, status=200)
-
     else:
         return JsonResponse({"message": "Fallo de método, se esperaba una solicitud POST."}, status=405)
+
 
 
 @login_required

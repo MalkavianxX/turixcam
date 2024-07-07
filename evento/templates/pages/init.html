@@ -28,7 +28,7 @@
   }
 
   body {
-    background-image: url("https://staticurix.b-cdn.net/Recursos%20WEB/Banner%20Eventos/fondoprincipalr.jpg");
+    background-image: url("https://staticurix.b-cdn.net/Recursos%20WEB/Backgrounds/fondotent1.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -248,39 +248,34 @@
     <div class="container" style="margin-bottom: 10vh;">
       <div class="row justify-content-center mt-3">
         {% for item in eventos %}
-        <div class="col-lg-12 mb-1 estados-search" style=" background-color: #fffefee3 !important; border-radius: 10px;" data-crd-estado="{{item.estado}}"> 
+        <div class="col-lg-12 mb-3 estados-search"  data-crd-estado="{{item.estado}}"> 
           <div class="row">
             <!--HORARIO-->
-            <div class="col-lg-2 col-md-2 col-3 d-flex justify-content-center">
+            <div class="col-lg-1 col-md-2 col-2 d-flex justify-content-center" style=" background-color: #fffefee3 !important; border-radius: 10px; margin-right: 2vw; border: 7px solid transparent; border-top-color: red;">
               <div class="fecha text-center align-self-center">
-                <h4 style="font-weight: 500;color: black;">{{item.mes}}</h4>
-                <h4 style="margin-top: -0.5rem;color: #231f1f;">{{item.dia}}</h4>
+                <h4 style="font-weight: 500;color: #4b4141;">{{item.mes}}</h4>
+                <h4 style="margin-top: -0.5rem;color: #4b4141;">{{item.dia}}</h4>
               </div>
   
             </div>
             <!--INFORMACION-->
-            <div class="col-lg-8 col-md-8 col-9 position-relative">
-              <p style="margin-top: 1rem;color: #1c1c1c;">{{item.fecha_inicio}} </p>
-              <h5 style="color: rgb(33, 30, 30); margin-top: -1rem;">{{item.titulo}}</h5>
+            <div class="col-lg-10 col-md-9 col-9 position-relative" id="{{item.id}}" onclick="go_detail(this.id)" style=" background-color: #fffefee3 !important; border-radius: 10px;border: 7px solid transparent; border-left-color: rgb(34, 177, 243);">
+              <div class="w-100 d-lg-flex d-md-flex d-block justify-content-between">
+                
+                <h5 style="margin-top: 1rem; color: #4d4e4f !important; font-weight: 500 !important;">{{item.titulo}}</h5>
+                <p style="margin-top: 0px;" class="text-secondary d-lg-block d-md-block d-block">{{item.fecha_inicio}} </p>
+
+              </div>
+
               <a href="http://maps.google.com/?q={{item.direccion}}"
                 target="_blank">
-                <p style="color: #1a1a1a; margin-top: -5px !important;"> {{item.direccion}}
-                  <span class="fw-bold"> {{item.municipio}}</span>
+                <p style="color: #4d4e4f; margin-top: 1vh !important;"> {{item.direccion}}
+                  <span class="fw-bolder"> {{item.municipio}}</span>
                 </p>
               </a>
   
             </div>
-            <!--btonon-->
-            <div class="col-2 d-lg-flex d-md-flex d-none justify-content-center ">
-              <button class="btn btn-lg  btn-light align-self-center"
-                style="background-color: white !important; color: #1c1a1a !important; border-color: #7f7c7c;">
-                {% if item.cobertura == "Si" %}
-                Ver evento
-                {% else %}
-                Ver detalles
-                {% endif %}
-              </button>
-            </div>
+
           </div>
         </div>
         {% endfor %}
@@ -341,5 +336,12 @@
               }
           });
       });
+  </script>
+
+  <script>
+    function go_detail(id) {
+      
+      window.location.href = '/evento/view_detail_evento/' + id + '/';
+    }
   </script>
 {% endblock %}
