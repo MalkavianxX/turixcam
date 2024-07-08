@@ -179,19 +179,19 @@ BUNNY_REGION = os.environ.get('BUNNY_REGION')
 BUNNY_HOSTNAME =  os.environ.get('BUNNY_HOSTNAME')
 
 
-
-EMAIL_HOST = os.environ.get('EMAIL_HOST')  
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND')
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = True  
+EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_HOST_PASSWORD') 
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 
 # Obtener el contenido del JSON desde la variable de entorno
 firebase_credentials = os.environ.get('FIREBASE_CREDENTIALS')
 json_data = json.loads(firebase_credentials)
-
 
 
 # Inicializar la aplicación de Firebase con las credenciales

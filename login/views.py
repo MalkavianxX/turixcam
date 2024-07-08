@@ -11,10 +11,11 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Importaciones de modelos
-from login.models import CustomUser, Favorito, Guardado, ImagenesDefault, Comentario
+from login.models import CustomUser, Favorito, Guardado, ImagenesDefault, Comentario, Contacto
 from allauth.socialaccount.models import SocialAccount
 from camaras.models import Camara 
 from comercios.models import Comercio
+from evento.models import EventoCultural
 # Otras importaciones
 from subscripcion.FireUser import FireUser
 import requests
@@ -386,4 +387,26 @@ def function_signup(request):
     except Exception as e:
         # Manejo de errores generales
         return JsonResponse({'error': True, 'message': 'Error al crear el usuario: {}'.format(str(e))}, status=500)
+
+
+@csrf_exempt  
+def send_email_init_page(request):
+    if request.method == "POST":
+        correo = request.POST.get("correo_cliente")
+        contacto = Contacto(
+            correo_cliente = correo,
+            asunto = 'Contacto Turixcam ',
+            mensaje = 'Gracias por ponerte en contacto con nosotros, en breve, un asesor se comunicará.'
+        )
+        contacto.save()
+        estado, mensaje = contacto.enviar_correo()
+        if not estado:
+            return JsonResponse({"message": mensaje , 'status':'error'}, status=405)
+           
+        else:
+            return JsonResponse({'message':'Correo enviado','status':'success'},status = 200)
+
+        
+    else:
+        return JsonResponse({"message": "Fallo de método, se esperaba una solicitud POST.",'status':'error'}, status=405)
 

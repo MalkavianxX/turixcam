@@ -22,6 +22,7 @@ urlpatterns = [
     path('fun_login',views.function_login, name="function_login"),
     path('fun_signup',views.function_signup, name="function_signup"),
     path('fun_recovery',views.function_send_recovery_mail, name="function_send_recovery_mail"),
+    path('send_email_init_page',views.send_email_init_page, name="send_email_init_page"),
 
     
 ]

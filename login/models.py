@@ -6,7 +6,7 @@ from django_bunny.storage import BunnyStorage
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 import os
-
+from django.conf import settings
 class CustomUser(AbstractUser):
 
     foto_portada = models.URLField(default='https://staticurix.b-cdn.net/Default/Portada/portada_1.jpg')
@@ -91,3 +91,21 @@ class ImagenesDefault(models.Model):
     acceso = models.CharField(max_length=50, default='free')
     def __str__(self) -> str:
         return str(self.tipo +' '+self.imagen.name)
+
+from django.core.mail import send_mail
+
+
+class Contacto(models.Model):
+    correo_cliente = models.CharField(max_length=250)
+    asunto = models.CharField(max_length=500)
+    estado = models.BooleanField(default=False)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    responsable = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    mensaje = models.TextField()
+
+    def enviar_correo(self):
+        try:
+            send_mail(self.asunto, self.mensaje, settings.EMAIL_HOST_USER, [self.correo_cliente])
+            return True, 'success'
+        except Exception as e:
+            return False, str(e)
