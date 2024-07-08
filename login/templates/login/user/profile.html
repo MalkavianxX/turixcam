@@ -3,32 +3,18 @@
 {% endblock %} {% block description %}
 <!-- Meta Tags -->
 <meta charset="utf-8" />
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1, shrink-to-fit=no"
-/>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="author" content="Webestica.com" />
 <meta name="description" content="Turixcam - Camras en vivo" />
 {% endblock %} {% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/aos/aos.css' %} " />
+<link rel="stylesheet" type="text/css" href="{% static 'login/assets/vendor/choices/css/choices.min.css' %} " />
+<link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" />
 <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
 />
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'login/assets/vendor/aos/aos.css' %} "
-/>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'login/assets/vendor/choices/css/choices.min.css' %} "
-/>
-<link
-  href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
-  rel="stylesheet"
-/>
-
 <style>
   header {
     background-color: rgba(0, 0, 0, 0.164) !important;
@@ -137,29 +123,34 @@
     border-radius: 50%;
     border: 7px solid #7f761a;
     animation: colorChange 5s infinite alternate;
-}
+  }
 
-@keyframes colorChange {
+  @keyframes colorChange {
     0% {
-        border: 7px solid #2c8789;
+      border: 7px solid #2c8789;
     }
-    25%{
+
+    25% {
       border: 7px solid #1a7f25;
     }
-    50%{
+
+    50% {
       border: 7px solid #2c8968;
     }
-    75%{
+
+    75% {
       border: 7px solid #2c8930;
 
     }
+
     100% {
       border: 7px solid #46892c;
     }
 
-}
-
-
+  }
+  .cursor-p{
+    cursor: pointer;
+  }
 </style>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
@@ -168,46 +159,25 @@
 <main class="bg-imge">
   <section>
     <div class="container" style="backdrop-filter: blur(15px)">
-      <img
-        src="{{request.user.foto_portada}}"
-        style="
+      <img src="{{request.user.foto_portada}}" style="
           object-fit: cover;
           max-height: 48vh;
           width: 100vw;
           border-radius: 0 0 15px 15px;
-        "
-        class="img-fluid"
-        alt=""
-      />
+        " class="img-fluid" alt="" />
       <div class="row rowperfil">
-        <div
-          class="col-lg-2 col-md-6 d-flex justify-content-lg-end justify-content-md-center justify-content-center"
-        >
-          <img
-            width="168px"
-            height="168px"
-            
-            alt="perfil"
-            {% if request.user.premium == "free" %}
-            
-            src="{{request.user.foto_perfil}}"
-            
-            {% else %}
-              class="new"
-              src="{{request.user.foto_perfil}}"
-             
-          {% endif %}
-          />
- 
+        <div class="col-lg-2 col-md-6 d-flex justify-content-lg-end justify-content-md-center justify-content-center">
+          <img width="168px" height="168px" alt="perfil" {% if request.user.premium == "free" %}
+            src="{{request.user.foto_perfil}}" {% else %} class="new" src="{{request.user.foto_perfil}}" {% endif %} />
+
         </div>
-        <div
-          class="col-lg-6 col-md-6 col-12 align-self-center text-center text-lg-start text-md-center mt-lg-0 mt-3"
-        >
+        <div class="col-lg-6 col-md-6 col-12 align-self-center text-center text-lg-start text-md-center mt-lg-0 mt-3">
           <h3 style="color: white">
             {{request.user.first_name}} {{request.user.last_name}}
           </h3>
           <p style="color: white"><small>@{{request.user.username}}</small></p>
-          <div class="">
+
+          <div class=" " id="contenedor-insignias">
             <img
               src="https://media.vidaenyucatan.com/wp-content/uploads/2019/11/11093354/barbara-zandoval-lPUD8oldJvE-unsplash-scaled.jpg"
               style="
@@ -216,9 +186,8 @@
                 width: 32px;
                 border-radius: 50%;
                 border: 2px solid #ffffffe7;
-              "
-              alt=""
-            />
+              " alt="" 
+              class="insignia" />
             <img
               src="https://media.vidaenyucatan.com/wp-content/uploads/2019/11/11093354/barbara-zandoval-lPUD8oldJvE-unsplash-scaled.jpg"
               style="
@@ -227,9 +196,8 @@
                 width: 32px;
                 border-radius: 50%;
                 border: 2px solid #ffffffe7;
-              "
-              alt=""
-            />
+              " alt="" 
+              class=" insignia" />
             <img
               src="https://media.vidaenyucatan.com/wp-content/uploads/2019/11/11093354/barbara-zandoval-lPUD8oldJvE-unsplash-scaled.jpg"
               style="
@@ -238,9 +206,8 @@
                 width: 32px;
                 border-radius: 50%;
                 border: 2px solid #ffffffe7;
-              "
-              alt=""
-            />
+              " alt="" 
+              class=" insignia" />
             <img
               src="https://media.vidaenyucatan.com/wp-content/uploads/2019/11/11093354/barbara-zandoval-lPUD8oldJvE-unsplash-scaled.jpg"
               style="
@@ -249,9 +216,8 @@
                 width: 32px;
                 border-radius: 50%;
                 border: 2px solid #ffffffe7;
-              "
-              alt=""
-            />
+              " alt="" 
+              class="insignia" />
             <img
               src="https://media.vidaenyucatan.com/wp-content/uploads/2019/11/11093354/barbara-zandoval-lPUD8oldJvE-unsplash-scaled.jpg"
               style="
@@ -260,148 +226,92 @@
                 width: 32px;
                 border-radius: 50%;
                 border: 2px solid #ffffffe7;
-              "
-              alt=""
-            />
+              " alt="" 
+              class=" insignia" />
           </div>
         </div>
         <div
-          class="col-lg-4 col-md-12 col-12 d-flex align-self-end justify-content-lg-end justify-content-md-end justify-content-center mt-lg-0 mt-md-4 mt-3 mb-lg-4 mb-4"
-        >
-          <button
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#profile_data"
-            class="btn btn-outline-light"
-          >
+          class="col-lg-4 col-md-12 col-12 d-flex align-self-end justify-content-lg-end justify-content-md-end justify-content-center mt-lg-0 mt-md-4 mt-3 mb-lg-4 mb-4">
+          <button type="button" data-bs-toggle="modal" data-bs-target="#profile_data" class="btn btn-outline-light">
             &nbsp;<i class="bi bi-pencil-fill"></i> &nbsp;Editar perfil &nbsp;
           </button>
           {% if request.user.premium == "free" %}
-          <a
-            type="button"
-            href="{% url 'checkout' request.user.id %}"
-            class="btn btn-light"
-          >
-            <i class="bi bi-stars text-warning"></i> Hazte premium </a
-          >
+          <a type="button" href="{% url 'checkout' request.user.id %}" class="btn btn-light">
+            <i class="bi bi-stars text-warning"></i> Hazte premium </a>
           {% else %}
-          <a
-            type="button"
-            href="{% url 'checkout' request.user.id %}"
-            class="btn btn-outline-warning"
-          >
-            <i class="bi bi-stars text-warning"></i> Miembro Premium </a
-          >
+          <a type="button" href="{% url 'checkout' request.user.id %}" class="btn btn-outline-warning">
+            <i class="bi bi-stars text-warning"></i> Miembro Premium </a>
           {% endif %}
         </div>
       </div>
     </div>
 
-    <div
-      class="container mt-5"
-      style="backdrop-filter: blur(15px); margin-bottom: 15vh"
-    >
-      <ul
-        class="nav nav-tabs justify-content-between"
-        id="myTab"
-        role="tablist"
-      >
+    <div class="container mt-5" style="backdrop-filter: blur(15px); margin-bottom: 15vh">
+      <ul class="nav nav-tabs justify-content-between" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button
-            class="nav-link active"
-            id="home-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#home-tab-pane"
-            type="button"
-            role="tab"
-            aria-controls="home-tab-pane"
-            aria-selected="true"
-          >
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+            type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
             <i class="bi bi-heart-fill text-danger"></i> Favoritos
           </button>
         </li>
         <li class="nav-item" role="presentation">
-          <button
-            class="nav-link"
-            id="profile-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#profile-tab-pane"
-            type="button"
-            role="tab"
-            aria-controls="profile-tab-pane"
-            aria-selected="false"
-          >
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+            type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
             <i class="bi bi-bookmark-fill text-info"> </i> Guardados
           </button>
         </li>
         <li class="nav-item" role="presentation"></li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div
-          class="tab-pane fade show active"
-          id="home-tab-pane"
-          role="tabpanel"
-          aria-labelledby="home-tab" 
-          tabindex="0"
-        >
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+          tabindex="0">
           <div class="swiper mySwiper">
             <div class="swiper-wrapper">
- 
 
-            {% if favoritos %}
-                {% for fav in favoritos %}
-                    <div class="swiper-slide" id="{{fav.camara.id}}" onclick="to_camara(this.id)">
-                        <!-- Card START -->
-                        <div class="card card-img-scale overflow-hidden bg-transparent">
-                        <!-- Image and overlay -->
-                        <div class="card-img-scale-wrapper">
-                            <!-- Image -->
-                            <img
-                            src="{{fav.camara.logo.url}}"
-                            class="card-img border-top"
-                            style="height: 500px"
-                            alt="{{fav.camara.titulo}}"
-                            />
-                            <!-- Badge -->
-                            <div class="position-absolute bottom-0 start-0 p-3">
-                            <div
-                                class="badge text-bg-dark fs-6 rounded-pill stretched-link"
-                            >
-                                <i class="bi bi-geo-alt me-2"></i> {{fav.camara.estado}}
-                            </div>
-                            </div>
-                        </div>
 
-                        <!-- Card body -->
-                        <div
-                            class="card-body px-2 border-bottom"
-                            style="backdrop-filter: blur(12px) !important"
-                        >
-                            <!-- Title -->
-                            <h5 class="card-title">
-                            <a href="#" class="stretched-link">{{fav.camara.titulo}}</a>
-                            </h5>
-                            <!-- Price and rating -->
-                            <div
-                            class="d-flex justify-content-between align-items-center"
-                            >
-                            <h6 class="text-success mb-0">
-                                $0 <small class="fw-light">/ vista gratuita</small>
-                            </h6>
-                            <h6 class="mb-0">
-                                0<i class="fa-solid fa-star text-warning ms-1"></i>
-                            </h6>
-                            </div>
-                        </div>
-                        </div>
-                        <!-- Card END -->
+              {% if favoritos %}
+              {% for fav in favoritos %}
+              <div class="swiper-slide" id="{{fav.camara.id}}" onclick="to_camara(this.id)">
+                <!-- Card START -->
+                <div class="card card-img-scale overflow-hidden bg-transparent">
+                  <!-- Image and overlay -->
+                  <div class="card-img-scale-wrapper">
+                    <!-- Image -->
+                    <img src="{{fav.camara.logo.url}}" class="card-img border-top" style="height: 500px"
+                      alt="{{fav.camara.titulo}}" />
+                    <!-- Badge -->
+                    <div class="position-absolute bottom-0 start-0 p-3">
+                      <div class="badge text-bg-dark fs-6 rounded-pill stretched-link">
+                        <i class="bi bi-geo-alt me-2"></i> {{fav.camara.estado}}
+                      </div>
                     </div>
-                {% endfor %}
-            {% else %}
-            <div class="swiper-slide">
+                  </div>
+
+                  <!-- Card body -->
+                  <div class="card-body px-2 border-bottom" style="backdrop-filter: blur(12px) !important">
+                    <!-- Title -->
+                    <h5 class="card-title">
+                      <a href="#" class="stretched-link">{{fav.camara.titulo}}</a>
+                    </h5>
+                    <!-- Price and rating -->
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h6 class="text-success mb-0">
+                        $0 <small class="fw-light">/ vista gratuita</small>
+                      </h6>
+                      <h6 class="mb-0">
+                        0<i class="fa-solid fa-star text-warning ms-1"></i>
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card END -->
+              </div>
+              {% endfor %}
+              {% else %}
+              <div class="swiper-slide">
                 <h3 class="text-secondary text-center mt-5 mb-5">Sin información</h3>
-            </div>
-            {% endif %}
+              </div>
+              {% endif %}
 
             </div>
             <div class="swiper-pagination"></div>
@@ -412,157 +322,76 @@
   </section>
 
   <!-- Modal -->
-  <div
-    class="modal fade"
-    id="profile_data"
-    tabindex="-1"
-    aria-labelledby="profile_data"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="profile_data" tabindex="-1" aria-labelledby="profile_data" aria-hidden="true">
     <div class="modal-dialog" style="backdrop-filter: blur(15px) !important">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5 text-light" id="profile_dataLabel">
             Mi perfil
           </h1>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            style="background-color: white"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" style="background-color: white"
+            aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <ul
             class="nav nav-tabs nav-bottom-line nav-justified nav-responsive rounded-top z-index-9 position-relative pt-2 pb-0 px-4"
-            role="tablist"
-          >
+            role="tablist">
             <li class="nav-item" role="presentation">
-              <a
-                class="nav-link mb-0 fs-5 active"
-                data-bs-toggle="tab"
-                href="#profile_info"
-                aria-selected="false"
-                role="tab"
-                tabindex="-1"
-                ><i class="bi bi-person-fill"></i
-              ></a>
+              <a class="nav-link mb-0 fs-5 active" data-bs-toggle="tab" href="#profile_info" aria-selected="false"
+                role="tab" tabindex="-1"><i class="bi bi-person-fill"></i></a>
             </li>
             <li class="nav-item" role="presentation">
-              <a
-                class="nav-link mb-0 fs-5"
-                data-bs-toggle="tab"
-                href="#security"
-                aria-selected="false"
-                role="tab"
-                tabindex="-1"
-                ><i class="bi bi-key-fill"></i
-              ></a>
+              <a class="nav-link mb-0 fs-5" data-bs-toggle="tab" href="#security" aria-selected="false" role="tab"
+                tabindex="-1"><i class="bi bi-key-fill"></i></a>
             </li>
             <li class="nav-item" role="presentation">
-              <a
-                class="nav-link mb-0 fs-5"
-                data-bs-toggle="tab"
-                href="#contact"
-                aria-selected="false"
-                role="tab"
-                tabindex="-1"
-              >
-                <i class="bi bi-info-lg"></i
-              ></a>
+              <a class="nav-link mb-0 fs-5" data-bs-toggle="tab" href="#contact" aria-selected="false" role="tab"
+                tabindex="-1">
+                <i class="bi bi-info-lg"></i></a>
             </li>
           </ul>
           <div class="tab-content" id="nav-tabContent">
-            <div
-              class="tab-pane fade active show"
-              id="profile_info"
-              role="tabpanel"
-            >
+            <div class="tab-pane fade active show" id="profile_info" role="tabpanel">
               <form id="form-userinfo" class="needs-validation" novalidate>
                 <div class="mb-3 me-3 mt-3">
-                  <label
-                    for="exampleInputEmail1"
-                    class="form-label text-light fw-bolder"
-                    >Nombre de usuario</label
-                  >
-                  <input
-                    type="text"
-                    required
-                    value="{{request.user.username}}"
-                    class="form-control"
-                    id="userinfo-nameuser"
-                    style="
+                  <label for="exampleInputEmail1" class="form-label text-light fw-bolder">Nombre de usuario</label>
+                  <input type="text" required value="{{request.user.username}}" class="form-control"
+                    id="userinfo-nameuser" style="
                       background-color: #ffffff00;
                       color: white;
                       border: var(--bs-border-width) solid #dee2e621 !important;
-                    "
-                    aria-describedby="emailHelp"
-                  />
+                    " aria-describedby="emailHelp" />
                 </div>
                 <div class="valid-feedback">Campo completado</div>
                 <div class="invalid-feedback">Verifica este campo.</div>
 
                 <div class="mb-3">
-                  <label
-                    for="exampleInputPassword1"
-                    class="form-label text-light fw-bolder"
-                    >Nombre</label
-                  >
-                  <input
-                    required
-                    type="text"
-                    style="
+                  <label for="exampleInputPassword1" class="form-label text-light fw-bolder">Nombre</label>
+                  <input required type="text" style="
                       background-color: #ffffff00;
                       color: white;
                       border: var(--bs-border-width) solid #dee2e621 !important;
-                    "
-                    value="{{request.user.first_name}}"
-                    class="form-control"
-                    id="userinfo-name"
-                  />
+                    " value="{{request.user.first_name}}" class="form-control" id="userinfo-name" />
                   <div class="valid-feedback">Campo completado</div>
                   <div class="invalid-feedback">Verifica este campo.</div>
                 </div>
                 <div class="mb-3">
-                  <label
-                    for="exampleInputPassword1"
-                    class="form-label text-light fw-bolder"
-                    >Apellidos</label
-                  >
-                  <input
-                    required
-                    type="text"
-                    style="
+                  <label for="exampleInputPassword1" class="form-label text-light fw-bolder">Apellidos</label>
+                  <input required type="text" style="
                       background-color: #ffffff00;
                       color: white;
                       border: var(--bs-border-width) solid #dee2e621 !important;
-                    "
-                    value="{{request.user.last_name}}"
-                    class="form-control"
-                    id="userinfo-lastname"
-                  />
+                    " value="{{request.user.last_name}}" class="form-control" id="userinfo-lastname" />
                   <div class="valid-feedback">Campo completado</div>
                   <div class="invalid-feedback">Verifica este campo.</div>
                 </div>
                 <div class="mb-5">
-                  <label
-                    for="exampleInputPassword1"
-                    class="form-label text-light fw-bolder"
-                    >Correo</label
-                  >
-                  <input
-                    required
-                    type="email"
-                    style="
+                  <label for="exampleInputPassword1" class="form-label text-light fw-bolder">Correo</label>
+                  <input required type="email" style="
                       background-color: #ffffff00;
                       color: white;
                       border: var(--bs-border-width) solid #dee2e621 !important;
-                    "
-                    value="{{request.user.email}}"
-                    class="form-control"
-                    id="userinfo-email"
-                  />
+                    " value="{{request.user.email}}" class="form-control" id="userinfo-email" />
                   <div class="valid-feedback">Campo completado</div>
                   <div class="invalid-feedback">Verifica este campo.</div>
                 </div>
@@ -579,72 +408,35 @@
             <div class="tab-pane fade" id="security" role="tabpanel">
               <form id="form-pass " class="needs-validation" novalidate>
                 <div class="mb-3 mt-3">
-                  <label for="exampleInputEmail1" class="form-label text-light"
-                    >Contraseña</label
-                  >
-                  <input
-                    type="text"
-                    value="********"
-                    style="
+                  <label for="exampleInputEmail1" class="form-label text-light">Contraseña</label>
+                  <input type="text" value="********" style="
                       background-color: #ffffff00;
                       color: white;
                       border: var(--bs-border-width) solid #dee2e621 !important;
-                    "
-                    readonly
-                    class="form-control text-secondary is-valid"
-                    aria-describedby="emailHelp"
-                  />
-                  <div
-                    id="emailHelp"
-                    class="form-text"
-                    style="font-size: 0.6em; color: white"
-                  >
+                    " readonly class="form-control text-secondary is-valid" aria-describedby="emailHelp" />
+                  <div id="emailHelp" class="form-text" style="font-size: 0.6em; color: white">
                     Nosotros no tenemos acceso a tu contraseña.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label
-                    for="exampleInputPassword1"
-                    class="form-label text-light"
-                    >Nueva contraseña</label
-                  >
-                  <input
-                    type="password"
-                    value=""
-                    style="
+                  <label for="exampleInputPassword1" class="form-label text-light">Nueva contraseña</label>
+                  <input type="password" value="" style="
                       background-color: #ffffff00;
                       color: white;
                       border: var(--bs-border-width) solid #dee2e621 !important;
-                    "
-                    class="form-control"
-                    id="pass-firstpass"
-                    required
-                    minlength="8"
-                  />
+                    " class="form-control" id="pass-firstpass" required minlength="8" />
                   <div class="valid-feedback">Contraseña válida.</div>
                   <div class="invalid-feedback">
                     La contraseña debe tener al menos 8 caracteres.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label
-                    for="exampleInputPassword1"
-                    class="form-label text-light"
-                    >Repite contraseña</label
-                  >
-                  <input
-                    type="password"
-                    value=""
-                    style="
+                  <label for="exampleInputPassword1" class="form-label text-light">Repite contraseña</label>
+                  <input type="password" value="" style="
                       background-color: #ffffff00;
                       color: white;
                       border: var(--bs-border-width) solid #dee2e621 !important;
-                    "
-                    class="form-control"
-                    id="pass-secondpass"
-                    required
-                    minlength="8"
-                  />
+                    " class="form-control" id="pass-secondpass" required minlength="8" />
                   <div class="valid-feedback">Contraseña válida.</div>
                   <div class="invalid-feedback">
                     La contraseña debe tener al menos 8 caracteres.
@@ -667,15 +459,11 @@
                   <div class="swiper mySwiperimages">
                     <div class="swiper-wrapper">
                       {% for imgper in perfiles %}
-                      <div class="swiper-slide"  id="{{imgper.id}}">
-                        <img
-                          style="
+                      <div class="swiper-slide" id="{{imgper.id}}">
+                        <img style="
                             width: 200px !important;
                             height: 200px !important;
-                          "
-                          src="{{imgper.imagen.url}}"
-                          alt=""
-                        />
+                          " src="{{imgper.imagen.url}}" alt="" />
                       </div>
                       {% endfor %}
                     </div>
@@ -689,14 +477,10 @@
                     <div class="swiper-wrapper">
                       {% for imgpor in portadas %}
                       <div class="swiper-slide" id="{{imgpor.id}}">
-                        <img
-                          style="
+                        <img style="
                             width: 200px !important;
                             height: 200px !important;
-                          "
-                          src="{{imgpor.imagen.url}}"
-                          alt=""
-                        />
+                          " src="{{imgpor.imagen.url}}" alt="" />
                       </div>
                       {% endfor %}
                     </div>
@@ -897,4 +681,51 @@
 </script>
 
 <script src="{% static 'login/assets/js/profilevalidate.js' %}  "></script>
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+  const contenedor_insignias = document.getElementById('contenedor-insignias');
+  const insignias = contenedor_insignias.querySelectorAll('.insignia');
+
+  contenedor_insignias.addEventListener('click', function () {
+    const tieneEvenly = contenedor_insignias.classList.contains('justify-content-evenly');
+
+    if (tieneEvenly) {
+      contenedor_insignias.classList.remove('d-flex');
+      contenedor_insignias.classList.remove('justify-content-evenly');
+      
+      insignias.forEach((insignia) => {
+        insignia.classList.add('animate__bounceIn');
+      });
+    } else {
+      contenedor_insignias.classList.add('d-flex');
+
+      contenedor_insignias.classList.add('justify-content-evenly');
+      insignias.forEach((insignia) => {
+        insignia.classList.remove('animate__bounceIn');
+      });
+      insignias.forEach((insignia) => {
+        
+    insignia.addEventListener('mouseenter', function () {
+      insignia.style.transform = 'scale(2.0)';
+      insignia.classList.add('cursor-p');
+      insignia.style.border = 0;
+      
+    });
+
+    insignia.addEventListener('mouseleave', function () {
+      insignia.style.transform = 'scale(1)';
+      insignia.classList.remove('cursor-p');
+      insignia.style.border = '2px solid rgba(255, 255, 255, 0.906)';
+    });
+  });
+    }
+  });
+
+
+});
+
+
+
+</script>
 {% endblock %}
