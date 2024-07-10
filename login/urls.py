@@ -14,6 +14,7 @@ urlpatterns = [
     path('signup', views.view_user_signup, name="view_user_signup"),
     path('recovery_password',views.view_user_recovery_password, name="view_user_recovery_password"), 
     path('logout',views.function_logout, name="function_logout"),
+    path('view_form', views.view_form, name="view_form"),
 
     #funciones
     path('up_images',views.function_update_profile_images, name="function_update_profile_images"),
@@ -23,6 +24,8 @@ urlpatterns = [
     path('fun_signup',views.function_signup, name="function_signup"),
     path('fun_recovery',views.function_send_recovery_mail, name="function_send_recovery_mail"),
     path('send_email_init_page',views.send_email_init_page, name="send_email_init_page"),
+    path('capturar_atencion',views.capturar_atencion, name="capturar_atencion"),
+
 
     
 ]

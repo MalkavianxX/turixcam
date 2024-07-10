@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Importaciones de modelos
-from login.models import CustomUser, Favorito, Guardado, ImagenesDefault, Comentario, Contacto
+from login.models import Atencion,CustomUser, Favorito, Guardado, ImagenesDefault, Comentario, Contacto
 from allauth.socialaccount.models import SocialAccount
 from camaras.models import Camara 
 from comercios.models import Comercio
@@ -400,7 +400,9 @@ def send_email_init_page(request):
         )
         contacto.save()
         estado, mensaje = contacto.enviar_correo()
+        print(contacto.correo_cliente)
         if not estado:
+         
             return JsonResponse({"message": mensaje , 'status':'error'}, status=405)
            
         else:
@@ -410,3 +412,34 @@ def send_email_init_page(request):
     else:
         return JsonResponse({"message": "Fallo de método, se esperaba una solicitud POST.",'status':'error'}, status=405)
 
+def view_form(request):
+    
+    return render(request, 'login/contacto/form.html')
+
+@csrf_exempt  
+def capturar_atencion(request):
+    if request.method == 'POST':
+        try:
+            # Extrae los datos del cuerpo de la solicitud
+            nombres = request.POST.get('nombres')
+            apellidos = request.POST.get('apellidos')
+            telefono = request.POST.get('telefono')
+            mensaje = request.POST.get('contenido')
+            motivo = request.POST.get('motivo')
+            estado = request.POST.get('estado')
+
+            # Crea una instancia del modelo Atencion y guárdala en la base de datos
+            atencion = Atencion.objects.create(
+                nombres=nombres,
+                apellidos=apellidos,
+                telefono=telefono,
+                mensaje=mensaje,
+                motivo=motivo,
+                estado=estado
+            )
+            atencion.save()
+            return JsonResponse({'message': 'Pronto nos pondremos en contacto','ok':'ok'})
+        except Exception as e:
+            return JsonResponse({'error': f'Error al guardar los datos: {str(e)}'})
+    else:
+        return JsonResponse({'error': 'Método no permitido'})

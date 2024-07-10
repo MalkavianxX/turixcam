@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser, Favorito, Guardado, Idea, Comentario, ImagenesDefault, Contacto
+from .models import Atencion,CustomUser, Favorito, Guardado, Idea, Comentario, ImagenesDefault, Contacto
 
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ['id','username', 'first_name', 'last_name', 'foto_perfil', 'foto_portada', 'premium','creditos']
@@ -22,6 +22,9 @@ class ImagenesDefaultAdmin(admin.ModelAdmin):
     
 class ContactoAdmin(admin.ModelAdmin):
     list_display = ['id','correo_cliente','estado','fecha_creacion',]
+    
+class AntecionAdmin(admin.ModelAdmin):
+    list_display = ['fecha','nombres','telefono','motivo']
 # Registra tus modelos aquí
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Favorito, FavoritoAdmin)
@@ -30,3 +33,4 @@ admin.site.register(Idea, IdeaAdmin)
 admin.site.register(Comentario, ComentariosAdmin)
 admin.site.register(ImagenesDefault, ImagenesDefaultAdmin)
 admin.site.register(Contacto, ContactoAdmin)
+admin.site.register(Atencion, AntecionAdmin)

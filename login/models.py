@@ -7,6 +7,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 import os
 from django.conf import settings
+from django.template.loader import render_to_string
+
 class CustomUser(AbstractUser):
 
     foto_portada = models.URLField(default='https://staticurix.b-cdn.net/Default/Portada/portada_1.jpg')
@@ -102,10 +104,31 @@ class Contacto(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     responsable = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
     mensaje = models.TextField()
-
+        
     def enviar_correo(self):
         try:
-            send_mail(self.asunto, self.mensaje, settings.EMAIL_HOST_USER, [self.correo_cliente])
+            # Renderiza la plantilla HTML con los datos específicos
+            context = {'nombre': 'Juan', 'mensaje_personalizado': '¡Hola!'}
+            html_message = render_to_string('login/contacto/plantilla_envio.html', context)
+
+            # Envía el correo con la plantilla HTML
+            send_mail(self.asunto, '', settings.EMAIL_HOST_USER, [self.correo_cliente], html_message=html_message)
             return True, 'success'
         except Exception as e:
             return False, str(e)
+        
+        
+        
+class Atencion(models.Model):
+    fecha = models.DateTimeField(auto_now_add=True)
+    nombres = models.CharField(max_length=250)
+    apellidos = models.CharField(max_length=250)
+    telefono = models.CharField(max_length=250)
+    mensaje = models.TextField()
+    motivo = models.CharField(max_length=250)
+    estado = models.CharField(max_length=250)
+    
+    def __str__(self) -> str:
+        return self.nombres
+    
+    
