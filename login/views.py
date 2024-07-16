@@ -427,7 +427,7 @@ def capturar_atencion(request):
             mensaje = request.POST.get('contenido')
             motivo = request.POST.get('motivo')
             estado = request.POST.get('estado')
-
+            empresa = request.POST.get("empresa")
             # Crea una instancia del modelo Atencion y guárdala en la base de datos
             atencion = Atencion.objects.create(
                 nombres=nombres,
@@ -435,7 +435,8 @@ def capturar_atencion(request):
                 telefono=telefono,
                 mensaje=mensaje,
                 motivo=motivo,
-                estado=estado
+                estado=estado,
+                empresa = empresa
             )
             atencion.save()
             return JsonResponse({'message': 'Pronto nos pondremos en contacto','ok':'ok'})

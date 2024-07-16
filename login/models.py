@@ -127,7 +127,7 @@ class Atencion(models.Model):
     mensaje = models.TextField()
     motivo = models.CharField(max_length=250)
     estado = models.CharField(max_length=250)
-    
+    empresa = models.CharField(max_length=250, null=True, blank=True)
     def __str__(self) -> str:
         return self.nombres
     
