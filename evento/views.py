@@ -4,6 +4,7 @@ from .models import EventoCultural
 from camaras.views import get_all_coments, get_comercios, get_puntuaciones, get_clase_favorito, need_Adversiment, get_clase_guardado
 import calendar
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 def calcular_diferencia(fecha_inicio):
     ahora = timezone.now()
@@ -23,7 +24,7 @@ def calcular_diferencia(fecha_inicio):
         return horas, "hora" if horas == 1 else "horas"
  
 
-
+@login_required
 def init_page_evento(request):
         
     camaras = Camara.objects.all().order_by('titulo')

@@ -8,22 +8,33 @@ from django.contrib.contenttypes.models import ContentType
 import os
 from django.conf import settings
 from django.template.loader import render_to_string
+import secrets
+
 
 class CustomUser(AbstractUser):
 
     foto_portada = models.URLField(default='https://staticurix.b-cdn.net/Default/Portada/portada_1.jpg')
     foto_perfil = models.URLField(default='https://staticurix.b-cdn.net/Default/Perfil/huasca.jpg')
     creditos = models.IntegerField(default= 0)
-    
     fecha = models.DateField(auto_now_add=True)
     premium = models.CharField(max_length=250, default='free')
- 
+    token = models.CharField(max_length=250, blank=True, null=True)
     class Meta:
         verbose_name = 'Usuario'
         verbose_name_plural = 'Usuarios' 
 
     def __str__(self):
         return self.username
+
+
+class Jwt(models.Model):
+    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    creacion = models.DateTimeField(auto_now_add=True)
+    ultimo_cambio = models.DateTimeField(null=True, blank=True)
+    token = models.CharField(max_length=250)
+    
+    def __str__(self) -> str:
+        return str(self.creacion)
 
 class Favorito(models.Model):
     usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='favoritos')

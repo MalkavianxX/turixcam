@@ -17,8 +17,7 @@ from evento.models import EventoCultural
 def camara_existe_byID(id):
     return Camara.objects.filter(pk=id).exists()
 
-
-# Create your views here.
+@login_required
 def view_init_page(request,id):
     comercios = []
     class comerciotemp():

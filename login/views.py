@@ -52,7 +52,7 @@ def is_social_auth(user):
         # El usuario inició sesión directamente en tu aplicación
         return False, None
 # Create your views here.
-
+@login_required
 def render_init_page(request):
     camaras = Camara.objects.all()
     comercios = Comercio.objects.filter(estrellas = 5).order_by('importancia')[:5]
@@ -70,7 +70,8 @@ def render_init_page(request):
         'comercios':comercios,
         'comentarios':comentarios
     } 
-    
+    # Obtener la session_key
+
     return render(request, 'login/init/inicio.html', context)
 
 
@@ -100,12 +101,15 @@ def view_user_profile(request):
     else:
         context['portadas'] = ImagenesDefault.objects.filter(tipo = 'Portada')
         context['perfiles'] = ImagenesDefault.objects.filter(tipo = 'Perfil')
-
+    
+    session_key = request.session.session_key
+    print("Session key: ", session_key)
     return render(request, 'login/user/profile.html',context)
 
  
 def view_user_login(request):
     
+ 
     return render(request, 'login/user/login.html')
 
 
@@ -239,6 +243,8 @@ def get_user_by_id(user_id):
     else:
         # Si el documento no existe, devuelve None
         return None
+from django.contrib.sessions.models import Session
+from django.contrib.sessions.backends.db import SessionStore
 
 def function_login(request):
     # Solo se permite el método POST para esta vista
@@ -260,7 +266,38 @@ def function_login(request):
 
             if user is not None:
                 # Iniciar sesión y devolver un mensaje de éxito
-                login(request, user)
+                
+   
+                
+                
+                
+                usuario = CustomUser.objects.get(username = email)
+                print("token usuario registrao: ",usuario.token)
+                print("token usuario intento sesion: ", request.session.session_key)
+                if request.session.session_key != usuario.token:
+
+                    
+                    try:
+                        sesion = Session.objects.get(pk=usuario.token)
+                        
+                    except Session.DoesNotExist:
+                        print("no se encontro la sesion anterior, se actualizara al actual")
+                        login(request, user)
+                        usuario.token = request.session.session_key
+                        usuario.save()
+                        return JsonResponse({'message': 'Usuario creado e inició sesión exitosamente.','status':'200'}, status=200)
+                    
+                    print("se encontro la sesion anterior")
+                    sesion.delete()
+                    print("se elimino la session correctamente")
+
+                      
+                    login(request, user)
+                    usuario.token = request.session.session_key
+                    usuario.save()
+                    print("se actualizo el token")
+                else:
+                    login(request, user)
                 return JsonResponse({'message': 'Usuario creado e inició sesión exitosamente.','status':'200'}, status=200)
             else:
                 # Las credenciales son inválidas
@@ -357,29 +394,33 @@ def function_signup(request):
         user.save()
         user.set_password(password)
         user.save()
-        # Verificar si el usuario existe en Firebase
-        firebase_user = FireUser.get_by_email(email)
-        if firebase_user is None:
-            # Crear el usuario en Firebase
-            firebase_user = FireUser(email=user.email, password=password)
-            firebase_user.save()
-            user_data = {
-                'correo':user.email,
-                'creditos':0,
-                'f1': [],
-                'image':user.foto_perfil,
-                'nombre': 'Turixta',
-                'portada':user.foto_portada,
-                'premium':'free',
-            }
-            create_user_document(user.email,user_data)
 
+            
         # Autenticar al usuario en Django
         django_user = authenticate(request, username=email, password=password)
         if django_user is not None:
             backend = 'django.contrib.auth.backends.ModelBackend'
             django_user.backend = backend
             login(request, django_user)
+            user.token = request.session.session_key
+            user.save()
+                # Verificar si el usuario existe en Firebase
+            firebase_user = FireUser.get_by_email(email)
+            if firebase_user is None:
+                # Crear el usuario en Firebase
+                firebase_user = FireUser(email=user.email, password=password)
+                firebase_user.save()
+                user_data = {
+                    'correo':user.email,
+                    'creditos':0,
+                    'f1': [],
+                    'image':user.foto_perfil,
+                    'nombre': 'Turixta',
+                    'portada':user.foto_portada,
+                    'premium':'free',
+                    'token': request.session.session_key,
+                }
+                create_user_document(user.email,user_data)
             return JsonResponse({'message': 'Usuario creado e inició sesión exitosamente.','status':'200'}, status=200)
 
 
